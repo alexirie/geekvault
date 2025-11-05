@@ -30,7 +30,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">Catálogo de Figuras</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Catálogo dee Figuras</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
         {figures.map(f => <FigureCard key={f.id} figure={f} />)}
       </div>
