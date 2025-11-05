@@ -1,26 +1,37 @@
 // src/pages/HomePage.js
-import React, { useEffect, useState } from 'react';
-import FigureCard from '../componentes/FigureCard';
-import { getFigures } from '../services/api';
+import React, { useEffect, useState } from "react";
+import FigureCard from "../componentes/FigureCard";
+import { getFigures } from "../services/api";
+import HorizontalScroller from "../componentes/HorizontalScroller";
+
 
 const HomePage = () => {
-  const [figures, setFigures] = useState([]);
+  const [figuresByBrand, setFiguresByBrand] = useState({});
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getFigures()
       .then((data) => {
-        const enriched = data.map(f => ({
-            ...f,
-            brandName: f.brandId, // si el backend ya devuelve el nombre de la marca
-            stockPrice: f.price,    // directamente del DTO
-            inStock: f.inStock,     // booleano directamente
-            imageUrl: f.imageUrl || null
-            }));
-            setFigures(enriched);
-            setLoading(false);
-        })
-      .catch(err => {
+        const enriched = data.map((f) => ({
+          ...f,
+          brandName: f.brandName || f.brandId,
+          stockPrice: f.price,
+          inStock: f.inStock,
+          imageUrl: f.imageUrl || null,
+        }));
+
+        // Agrupar por marca
+        const grouped = enriched.reduce((acc, fig) => {
+          if (!acc[fig.brandName]) acc[fig.brandName] = [];
+          acc[fig.brandName].push(fig);
+          return acc;
+        }, {});
+
+        setFiguresByBrand(grouped);
+        setLoading(false);
+      })
+      .catch((err) => {
         console.error(err);
         setLoading(false);
       });
@@ -30,10 +41,41 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">Catálogo de Figuras</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-        {figures.map(f => <FigureCard key={f.id} figure={f} />)}
-      </div>
+      
+      {/* 🔎 BUSCADOR */}
+      <div className="w-full flex justify-center mb-6">
+  <input
+    type="text"
+    placeholder="Buscar figuras..."
+    className="w-full max-w-md p-3 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+</div>
+
+
+      {/* 🔥 CATEGORÍAS */}
+      {Object.keys(figuresByBrand).map((brand) => {
+        const items = figuresByBrand[brand].filter((fig) =>
+          fig.name.toLowerCase().includes(search.toLowerCase())
+        );
+
+        if (items.length === 0) return null;
+
+        return (
+          <section key={brand} className="mb-10">
+            <h2 className="text-2xl font-bold mb-4 ml-2">{brand}</h2>
+
+            <HorizontalScroller>
+              {items.map((fig) => (
+                <div key={fig.id} className="snap-center min-w-[260px]">
+                  <FigureCard figure={fig} />
+                </div>
+              ))}
+            </HorizontalScroller>
+          </section>
+        );
+      })}
     </div>
   );
 };
