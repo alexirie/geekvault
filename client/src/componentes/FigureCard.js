@@ -1,42 +1,37 @@
 // src/components/FigureCard.js
 import React from 'react';
 
-
-
 const FigureCard = ({ figure }) => {
   return (
-    <div className="w-full max-w-xs bg-white rounded-xl overflow-hidden transform transition-all duration-300 
-                    hover:scale-105 hover:-translate-y-2 shadow-md hover:shadow-2xl hover:ring-2 hover:ring-gray-300 
-                    cursor-pointer relative">
-      
-      {/* Imagen */}
-      <div className="w-full h-64 bg-white flex items-center justify-center overflow-hidden relative">
-        <img
-          src={figure.imageUrl || 'https://via.placeholder.com/300x300.png?text=Figure'}
-          alt={figure.name}
-          className="w-full h-full object-contain"
-        />
+    <div className="mt-2 w-full max-w-xs cursor-pointer transform transition-all duration-300 hover:scale-105">
+
+      {/* Card con la imagen */}
+      <div className="w-full h-64 bg-gray-100 rounded-xl overflow-hidden shadow-md relative flex items-center justify-center">
+  <img
+    src={figure.imageUrl || 'https://via.placeholder.com/300x300.png?text=Figure'}
+    alt={figure.name}
+    className="max-h-full max-w-full object-contain"
+  />
 
         {/* Overlay "En stock" */}
         {figure.inStock && (
-          <div className="absolute bottom-0 left-0 w-full bg-green-600 bg-opacity-60 text-white text-center py-2 font-semibold">
+          <div className="absolute top-2 left-2 bg-green-600 bg-opacity-80 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
             EN STOCK
           </div>
         )}
       </div>
 
-      {/* Información */}
-      <div className="p-4 bg-white">
-        <h2 className="text-xl font-bold text-gray-800">{figure.name}</h2>
-        <p className="text-gray-500">Marca: {figure.brandName}</p>
+      {/* Información “fuera” de la card */}
+      <div className="mt-0 rounded-xl p-3">
+        <h2 className="text-lg font-bold text-gray-500 truncate font-sans">{figure.name}</h2>
         {figure.stockPrice && (
-          <p className="text-green-600 font-semibold mt-1">Precio: ${figure.stockPrice}</p>
+          <p className="text-gray-800 font-bold mt-1 font-sans">{figure.stockPrice} €</p>
         )}
+        <p className="text-gray-500 text-sm mt-1 font-sans">Marca: {figure.brandId}</p>
       </div>
+
     </div>
   );
 };
 
 export default FigureCard;
-
-
