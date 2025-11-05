@@ -1,5 +1,10 @@
 // src/services/api.js
-const BASE_URL = 'http://localhost:8080/api';
+
+//pc 
+//const BASE_URL = 'http://localhost:8080/api';
+
+//movil
+const BASE_URL = 'http://192.168.0.131:8080/api';
 
 export const getFigures = async () => {
   const res = await fetch(`${BASE_URL}/figures`);
