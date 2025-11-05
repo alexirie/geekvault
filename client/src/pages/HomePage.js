@@ -41,17 +41,17 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
-      
+
       {/* 🔎 BUSCADOR */}
       <div className="w-full flex justify-center mb-6">
-  <input
-    type="text"
-    placeholder="Buscar figuras..."
-    className="w-full max-w-md p-3 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none"
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-  />
-</div>
+        <input
+          type="text"
+          placeholder="Buscar figuras..."
+          className="w-full max-w-md p-3 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
 
       {/* 🔥 CATEGORÍAS */}
