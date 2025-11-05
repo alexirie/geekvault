@@ -5,6 +5,7 @@ import com.example.server.model.Figure;
 import com.example.server.repository.FigureRepository;
 import com.example.server.repository.BrandRepository;
 import org.springframework.stereotype.Service;
+import com.example.server.util.Constantes;
 
 import java.net.URI;
 import java.nio.file.Paths;
@@ -74,7 +75,7 @@ public class FigureService {
         dto.setName(figure.getName());
         dto.setBrandId(figure.getBrand().getId());
         if (figure.getImageUrl() != null) {
-        dto.setImageUrl("http://localhost:8080/uploads/" + figure.getImageUrl());
+        dto.setImageUrl(Constantes.IMAGES_URL + figure.getImageUrl());
     }
         dto.setInStock(figure.getInStock()); 
         dto.setPrice(figure.getPrice());

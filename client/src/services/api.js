@@ -1,5 +1,5 @@
 // src/services/api.js
-const BASE_URL = 'https://freak-project-production.up.railway.app/api';
+import { BASE_URL } from '../constantes';
 
 export const getFigures = async () => {
   const res = await fetch(`${BASE_URL}/figures`);
