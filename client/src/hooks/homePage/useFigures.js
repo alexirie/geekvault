@@ -16,6 +16,7 @@ export default function useFigures() {
             stockPrice: f.price,
             inStock: f.inStock,
             imageUrl: f.imageUrl || null,
+            anime: f.anime,
           }))
         );
       })

@@ -17,10 +17,15 @@ const HomePage = () => {
 
   // Agrupar según filtro activo
   const grouped = figures.reduce((acc, fig) => {
-    const key =
-      activeFilter === "collection"
-        ? fig.collection || "Sin colección"
-        : fig.brandName;
+    let key;
+
+    if (activeFilter === "collection") {
+      key = fig.collection || "Sin colección";
+    } else if (activeFilter === "anime") {
+      key = fig.anime || "Sin anime";
+    } else {
+      key = fig.brandName || "Sin marca";
+    }
 
     if (!acc[key]) acc[key] = [];
     acc[key].push(fig);

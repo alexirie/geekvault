@@ -33,6 +33,12 @@ export default function FilterPills({ activeFilter, setActiveFilter }) {
         active={activeFilter === "collection"}
         onClick={() => toggleFilter("collection")}
       />
+
+      <Pill
+        label="Anime"
+        active={activeFilter === "anime"}
+        onClick={() => toggleFilter("anime")}
+      />
     </div>
   );
 }
