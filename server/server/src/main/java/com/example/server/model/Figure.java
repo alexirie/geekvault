@@ -3,6 +3,7 @@ package com.example.server.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -31,6 +32,8 @@ public class Figure {
     private BigDecimal price;
 
     private Boolean inStock;
+
+    private LocalDate year;
 
     private LocalDateTime lastUpdate;
 }
