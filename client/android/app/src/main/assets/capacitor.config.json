@@ -1,5 +1,5 @@
 {
-	"appId": "com.freak.app",
-	"appName": "Freak Project",
+	"appId": "com.example.app",
+	"appName": "freak-project",
 	"webDir": "build"
 }
