@@ -22,4 +22,6 @@ public class FigureDTO {
     private BigDecimal price; 
 
     private Boolean inStock;
+
+    private String brandName;
 }

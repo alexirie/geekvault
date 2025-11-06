@@ -63,9 +63,9 @@ public class FigureService {
                 .orElseThrow(() -> new IllegalArgumentException("Brand no encontrada con id: " + dto.getBrandId())));
 
         if (dto.getImageUrl() != null) {
-        String fileName = Paths.get(URI.create(dto.getImageUrl())).getFileName().toString();
-        figure.setImageUrl(fileName);
-    }
+            String fileName = Paths.get(URI.create(dto.getImageUrl())).getFileName().toString();
+            figure.setImageUrl(fileName);
+        }
         return figure;
     }
 
@@ -74,10 +74,13 @@ public class FigureService {
         dto.setId(figure.getId());
         dto.setName(figure.getName());
         dto.setBrandId(figure.getBrand().getId());
+        dto.setBrandName(figure.getBrand().getName());
+
         if (figure.getImageUrl() != null) {
-        dto.setImageUrl(Constantes.IMAGES_URL + figure.getImageUrl());
-    }
-        dto.setInStock(figure.getInStock()); 
+            dto.setImageUrl(Constantes.IMAGES_URL + figure.getImageUrl());
+        }
+
+        dto.setInStock(figure.getInStock());
         dto.setPrice(figure.getPrice());
         return dto;
     }
