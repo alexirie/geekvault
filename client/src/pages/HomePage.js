@@ -4,93 +4,80 @@ import FigureCard from "../componentes/FigureCard";
 import { getFigures } from "../services/api";
 import HorizontalScroller from "../componentes/HorizontalScroller";
 import { MagnifyingGlass } from "phosphor-react";
-
+import useFigures from "../hooks/homePage/useFigures";
+import SearchBar from "../componentes/SearchBar";
+import FilterPills from "../componentes/homePage/FilterPills";
 
 const HomePage = () => {
-  const [figuresByBrand, setFiguresByBrand] = useState({});
+  const { figures, loading } = useFigures();
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getFigures()
-      .then((data) => {
-        const enriched = data.map((f) => ({
-          ...f,
-          brandName: f.brandName || f.brandName,
-          stockPrice: f.price,
-          inStock: f.inStock,
-          imageUrl: f.imageUrl || null,
-        }));
-
-        // Agrupar por marca
-        const grouped = enriched.reduce((acc, fig) => {
-          if (!acc[fig.brandName]) acc[fig.brandName] = [];
-          acc[fig.brandName].push(fig);
-          return acc;
-        }, {});
-
-        setFiguresByBrand(grouped);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
+  const [activeFilter, setActiveFilter] = useState("brand"); // "brand" | "collection"
 
   if (loading) return <div className="text-center mt-20">Cargando figuras...</div>;
 
-  return (
-  <div className="min-h-screen bg-gray-100 p-0 sm:px-8">
+  // Agrupar según filtro activo
+  const grouped = figures.reduce((acc, fig) => {
+    const key =
+      activeFilter === "collection"
+        ? fig.collection || "Sin colección"
+        : fig.brandName;
 
-    {/* 🔎 BUSCADOR + SEPARADOR STICKY */}
-    <div className="sticky top-0 z-30 bg-gray-100 ">
-      
-      <div className="w-full flex justify-center mb-3 ">
-        <div className="relative w-full max-w-md">
-          <MagnifyingGlass
-            size={22}
-            weight="bold"
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 mt-1.5" 
-          />
-          <input
-            type="text"
-            placeholder="Buscar figuras..."
-            className="w-full p-3 pl-10 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none mt-3"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(fig);
+    return acc;
+  }, {});
+
+
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-0 sm:px-8">
+
+
+      <div className="sticky top-0 z-30 bg-gray-100">
+
+        {/* 🔎 BUSCADOR */}
+        <SearchBar search={search} setSearch={setSearch} />
+
+
+
+        <div className="w-full h-px bg-gray-200 shadow-sm" />
+      </div>
+      {/* ✅ filtros */}
+      <div className="mt-3 flex justify-center flex-wrap">
+        <FilterPills activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       </div>
 
-      <div className="w-full h-px bg-gray-200 shadow-sm" />
+
+      {/* 🔥 CATEGORÍAS */}
+      {Object.keys(grouped).map((categoryName) => {
+        let items = grouped[categoryName];
+
+        // ✅ Filtro por búsqueda
+        items = items.filter((fig) =>
+          fig.name.toLowerCase().includes(search.toLowerCase())
+        );
+
+        if (items.length === 0) return null;
+
+        return (
+          <section key={categoryName} className="mb-10">
+            <h2 className="text-2xl font-bold mb-4 ml-2 mt-3">
+
+              {categoryName}
+            </h2>
+
+            <HorizontalScroller>
+              {items.map((fig) => (
+                <div key={fig.id} className="snap-center min-w-[260px]">
+                  <FigureCard figure={fig} />
+                </div>
+              ))}
+            </HorizontalScroller>
+          </section>
+        );
+      })}
     </div>
-
-    {/* 🔥 CATEGORÍAS */}
-    {Object.keys(figuresByBrand).map((brand) => {
-      const items = figuresByBrand[brand].filter((fig) =>
-        fig.name.toLowerCase().includes(search.toLowerCase())
-      );
-
-      if (items.length === 0) return null;
-
-      return (
-        <section key={brand} className="mb-10">
-          <h2 className="text-2xl font-bold mb-4 ml-2 mt-3">{brand}</h2>
-
-          <HorizontalScroller>
-            {items.map((fig) => (
-              <div key={fig.id} className="snap-center min-w-[260px]">
-                <FigureCard figure={fig} />
-              </div>
-            ))}
-          </HorizontalScroller>
-        </section>
-      );
-    })}
-  </div>
-);
-
+  );
 };
 
 export default HomePage;
