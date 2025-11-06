@@ -19,6 +19,8 @@ public class FigureDTO {
 
     private String imageUrl;
 
+    private String collection;
+
     private BigDecimal price; 
 
     private Boolean inStock;

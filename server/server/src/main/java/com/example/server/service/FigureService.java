@@ -55,33 +55,48 @@ public class FigureService {
     // Conversión DTO ↔ entidad
     // --------------------
 
+    /**
+     * Convierte un FigureDTO recibido desde el frontend en una entidad Figure lista para BD.
+    */
     public Figure fromDTO(FigureDTO dto) {
         Figure figure = new Figure();
         figure.setId(dto.getId());
         figure.setName(dto.getName());
+
+        // Buscar la marca por ID y asignarla
+        // Si no existe, lanzar error
         figure.setBrand(brandRepository.findById(dto.getBrandId())
                 .orElseThrow(() -> new IllegalArgumentException("Brand no encontrada con id: " + dto.getBrandId())));
 
+        // Si viene una URL completa de la imagen, extrae únicamente el filename
         if (dto.getImageUrl() != null) {
             String fileName = Paths.get(URI.create(dto.getImageUrl())).getFileName().toString();
             figure.setImageUrl(fileName);
         }
+        figure.setCollection(dto.getCollection());
         return figure;
     }
 
+    /**
+     * Convierte una entidad Figure (BD) en un FigureDTO para enviar al frontend.
+    */
     public FigureDTO toDTO(Figure figure) {
         FigureDTO dto = new FigureDTO();
         dto.setId(figure.getId());
         dto.setName(figure.getName());
         dto.setBrandId(figure.getBrand().getId());
-        dto.setBrandName(figure.getBrand().getName()); //Convierte el id al nombre
 
+        //Convierte el id al nombre
+        dto.setBrandName(figure.getBrand().getName()); 
+
+        // Si hay imagen guardada, convertir filename → URL completa para mostrarla
         if (figure.getImageUrl() != null) {
             dto.setImageUrl(Constantes.IMAGES_URL + figure.getImageUrl());
         }
 
         dto.setInStock(figure.getInStock());
         dto.setPrice(figure.getPrice());
+        dto.setCollection(figure.getCollection());
         return dto;
     }
 }

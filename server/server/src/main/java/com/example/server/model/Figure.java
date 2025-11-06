@@ -24,6 +24,8 @@ public class Figure {
     @Column(name = "image_url", length=500)
     private String imageUrl;
 
+    private String collection;
+
     private BigDecimal price;
 
     private Boolean inStock;
