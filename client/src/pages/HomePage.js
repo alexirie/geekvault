@@ -16,7 +16,7 @@ const HomePage = () => {
       .then((data) => {
         const enriched = data.map((f) => ({
           ...f,
-          brandName: f.brandName || f.brandId,
+          brandName: f.brandName || f.brandName,
           stockPrice: f.price,
           inStock: f.inStock,
           imageUrl: f.imageUrl || null,

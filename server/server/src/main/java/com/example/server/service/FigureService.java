@@ -74,7 +74,7 @@ public class FigureService {
         dto.setId(figure.getId());
         dto.setName(figure.getName());
         dto.setBrandId(figure.getBrand().getId());
-        dto.setBrandName(figure.getBrand().getName());
+        dto.setBrandName(figure.getBrand().getName()); //Convierte el id al nombre
 
         if (figure.getImageUrl() != null) {
             dto.setImageUrl(Constantes.IMAGES_URL + figure.getImageUrl());
