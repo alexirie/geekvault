@@ -19,7 +19,7 @@ public class FigureDTO {
 
     private String imageUrl;
 
-    private BigDecimal price; // <- opcional
+    private BigDecimal price; 
 
     private Boolean inStock;
 }

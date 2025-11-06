@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import FigureCard from "../componentes/FigureCard";
 import { getFigures } from "../services/api";
 import HorizontalScroller from "../componentes/HorizontalScroller";
+import { MagnifyingGlass } from "phosphor-react";
 
 
 const HomePage = () => {
@@ -41,17 +42,26 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
-      
+
       {/* 🔎 BUSCADOR */}
       <div className="w-full flex justify-center mb-6">
-  <input
-    type="text"
-    placeholder="Buscar figuras..."
-    className="w-full max-w-md p-3 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none"
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-  />
-</div>
+        <div className="relative w-full max-w-md">
+          <MagnifyingGlass
+            size={22}
+            weight="bold"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+          />
+          <input
+            type="text"
+            placeholder="Buscar figuras..."
+            className="w-full p-3 pl-10 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="w-full h-px bg-gray-200 shadow-sm my-4" />
+
 
 
       {/* 🔥 CATEGORÍAS */}
