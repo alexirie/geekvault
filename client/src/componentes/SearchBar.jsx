@@ -1,8 +1,8 @@
 import { MagnifyingGlass } from "phosphor-react";
 
 const SearchBar = ({ search, setSearch }) => (
-  <div className="w-full flex justify-center mb-3">
-    <div className="relative w-full max-w-md">
+  <div className="w-full flex justify-center mb-3 px-4 sm:px-8">
+    <div className="relative w-full max-w-sm"> {/* max-w-sm en vez de max-w-md */}
       <MagnifyingGlass
         size={22}
         weight="bold"
@@ -18,5 +18,6 @@ const SearchBar = ({ search, setSearch }) => (
     </div>
   </div>
 );
+
 
 export default SearchBar;
