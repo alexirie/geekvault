@@ -26,6 +26,8 @@ public class Figure {
 
     private String collection;
 
+    private String anime;
+
     private BigDecimal price;
 
     private Boolean inStock;

@@ -31,18 +31,16 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-0 sm:px-8">
-
-
+      {/* 🔎 NAV */}
       <div className="sticky top-0 z-30 bg-gray-100">
-
         {/* 🔎 BUSCADOR */}
         <SearchBar search={search} setSearch={setSearch} />
 
-
-
+        {/* 🔎 SEPARADOR */}
         <div className="w-full h-px bg-gray-200 shadow-sm" />
       </div>
-      {/* ✅ filtros */}
+
+      {/* ✅ FILTROS */}
       <div className="mt-3 flex justify-center flex-wrap">
         <FilterPills activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       </div>

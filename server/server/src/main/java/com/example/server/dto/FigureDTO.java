@@ -26,4 +26,6 @@ public class FigureDTO {
     private Boolean inStock;
 
     private String brandName;
+
+    private String anime;
 }

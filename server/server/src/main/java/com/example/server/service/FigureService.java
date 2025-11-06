@@ -74,6 +74,7 @@ public class FigureService {
             figure.setImageUrl(fileName);
         }
         figure.setCollection(dto.getCollection());
+        figure.setAnime(dto.getAnime());
         return figure;
     }
 
@@ -97,6 +98,7 @@ public class FigureService {
         dto.setInStock(figure.getInStock());
         dto.setPrice(figure.getPrice());
         dto.setCollection(figure.getCollection());
+        dto.setAnime(figure.getAnime());
         return dto;
     }
 }
