@@ -41,53 +41,56 @@ const HomePage = () => {
   if (loading) return <div className="text-center mt-20">Cargando figuras...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
+  <div className="min-h-screen bg-gray-100 p-0 sm:px-8">
 
-      {/* 🔎 BUSCADOR */}
-      <div className="w-full flex justify-center mb-6">
+    {/* 🔎 BUSCADOR + SEPARADOR STICKY */}
+    <div className="sticky top-0 z-30 bg-gray-100 ">
+      
+      <div className="w-full flex justify-center mb-3 ">
         <div className="relative w-full max-w-md">
           <MagnifyingGlass
             size={22}
             weight="bold"
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 mt-1.5" 
           />
           <input
             type="text"
             placeholder="Buscar figuras..."
-            className="w-full p-3 pl-10 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none"
+            className="w-full p-3 pl-10 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none mt-3"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
-      <div className="w-full h-px bg-gray-200 shadow-sm my-4" />
 
-
-
-      {/* 🔥 CATEGORÍAS */}
-      {Object.keys(figuresByBrand).map((brand) => {
-        const items = figuresByBrand[brand].filter((fig) =>
-          fig.name.toLowerCase().includes(search.toLowerCase())
-        );
-
-        if (items.length === 0) return null;
-
-        return (
-          <section key={brand} className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 ml-2">{brand}</h2>
-
-            <HorizontalScroller>
-              {items.map((fig) => (
-                <div key={fig.id} className="snap-center min-w-[260px]">
-                  <FigureCard figure={fig} />
-                </div>
-              ))}
-            </HorizontalScroller>
-          </section>
-        );
-      })}
+      <div className="w-full h-px bg-gray-200 shadow-sm" />
     </div>
-  );
+
+    {/* 🔥 CATEGORÍAS */}
+    {Object.keys(figuresByBrand).map((brand) => {
+      const items = figuresByBrand[brand].filter((fig) =>
+        fig.name.toLowerCase().includes(search.toLowerCase())
+      );
+
+      if (items.length === 0) return null;
+
+      return (
+        <section key={brand} className="mb-10">
+          <h2 className="text-2xl font-bold mb-4 ml-2 mt-3">{brand}</h2>
+
+          <HorizontalScroller>
+            {items.map((fig) => (
+              <div key={fig.id} className="snap-center min-w-[260px]">
+                <FigureCard figure={fig} />
+              </div>
+            ))}
+          </HorizontalScroller>
+        </section>
+      );
+    })}
+  </div>
+);
+
 };
 
 export default HomePage;

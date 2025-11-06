@@ -37,7 +37,7 @@ const FigureCard = ({ figure }) => {
           )}
 
           <p className="text-gray-500 text-sm mt-1 font-sans">
-            Marca: {figure.brandName}
+            {figure.brandName}
           </p>
         </div>
 
