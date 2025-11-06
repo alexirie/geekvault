@@ -1,9 +1,7 @@
 // src/pages/HomePage.js
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FigureCard from "../componentes/FigureCard";
-import { getFigures } from "../services/api";
 import HorizontalScroller from "../componentes/HorizontalScroller";
-import { MagnifyingGlass } from "phosphor-react";
 import useFigures from "../hooks/homePage/useFigures";
 import SearchBar from "../componentes/SearchBar";
 import FilterPills from "../componentes/homePage/FilterPills";

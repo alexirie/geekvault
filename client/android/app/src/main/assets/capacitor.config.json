@@ -1,5 +1,11 @@
 {
 	"appId": "com.example.app",
 	"appName": "freak-project",
-	"webDir": "build"
+	"webDir": "build",
+	"server": {
+		"cleartext": false,
+		"allowNavigation": [
+			"*"
+		]
+	}
 }
