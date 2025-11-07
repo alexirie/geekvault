@@ -5,8 +5,8 @@ const config: CapacitorConfig = {
   appName: 'freak-project',
   webDir: 'build',
   server: {
-    cleartext: false,           // solo HTTP deshabilitado
-    allowNavigation: ['*'],     // permite navegación a cualquier dominio
+    url: "https://freak-project-production.up.railway.app/",
+    allowNavigation: ["freak-project-production.up.railway.app"],
   }
 };
 

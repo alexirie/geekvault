@@ -3,9 +3,9 @@
 	"appName": "freak-project",
 	"webDir": "build",
 	"server": {
-		"cleartext": false,
+		"url": "https://freak-project-production.up.railway.app/",
 		"allowNavigation": [
-			"*"
+			"freak-project-production.up.railway.app"
 		]
 	}
 }
