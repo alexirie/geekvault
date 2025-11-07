@@ -66,7 +66,7 @@ const HorizontalScroller = ({ children }) => {
           flex gap-4 overflow-x-auto 
           no-scrollbar select-none
           snap-x snap-mandatory
-          touch-pan-y
+          touch-pan
           px-8
         "
       >

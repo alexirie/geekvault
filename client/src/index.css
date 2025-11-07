@@ -52,8 +52,9 @@ code {
   touch-action: pan-x;
 }
 
-.touch-pan-y {
-  touch-action: pan-y;
+.touch-pan {
+  touch-action: auto;
 }
+
 
 
