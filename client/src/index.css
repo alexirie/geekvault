@@ -33,11 +33,12 @@ code {
 }
 
 .bottom-nav {
-  padding-bottom: calc(var(--safe-area-bottom) - 10px);
+  padding-bottom: calc(var(--safe-area-bottom) - 15px);
+  height: 80px; /* h-20 */
 }
 
-.horizontal-scroller {
-  overflow-x: auto;
+.horizontal-scroll {
   overscroll-behavior-x: contain;
+  touch-action: pan-x;
 }
 
