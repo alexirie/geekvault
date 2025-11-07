@@ -34,7 +34,7 @@ const HomePage = () => {
 
 
   return (
-    <div className="bg-gray-100 p-0 sm:px-8">
+    <div className="bg-gray-100 p-0 sm:px-8 pb-24">
       {/* 🔎 NAV */}
       <div className="sticky top-0 z-30 bg-gray-100">
         {/* 🔎 BUSCADOR */}
