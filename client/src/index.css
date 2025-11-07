@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/*safe area de moviles*/
 :root {
   padding-top: env(safe-area-inset-top);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
