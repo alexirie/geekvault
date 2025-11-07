@@ -5,6 +5,7 @@ import HorizontalScroller from "../componentes/HorizontalScroller";
 import useFigures from "../hooks/homePage/useFigures";
 import SearchBar from "../componentes/SearchBar";
 import FilterPills from "../componentes/homePage/FilterPills";
+import BottomNav from "../componentes/BottomNav";
 
 const HomePage = () => {
   const { figures, loading } = useFigures();
@@ -77,6 +78,7 @@ const HomePage = () => {
           </section>
         );
       })}
+      <BottomNav></BottomNav>
     </div>
   );
 };
