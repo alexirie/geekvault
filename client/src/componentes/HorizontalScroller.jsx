@@ -64,7 +64,7 @@ const HorizontalScroller = ({ children }) => {
         ref={ref}
         className="horizontal-scroll 
           flex gap-4 overflow-x-auto 
-          scrollbar-hide select-none
+          no-scrollbar select-none
           snap-x snap-mandatory
           px-8
         "

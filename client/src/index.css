@@ -15,6 +15,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-x: none;
+}
+
+html, body {
+  overflow-x: clip;
 }
 
 code {
@@ -23,8 +28,13 @@ code {
 }
 
 /* Oculta scrollbars horizontales */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;            /* Chrome/Safari/Android */
 }
 
 .scrollbar-hide {
