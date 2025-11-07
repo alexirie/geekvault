@@ -12,32 +12,6 @@ export default function BottomNav() {
     { id: "perfil", label: "Perfil", icon: User },
   ];
 
-  useEffect(() => {
-    function applyDynamicSafeArea() {
-      const nav = document.querySelector(".bottom-nav");
-      if (!nav) return;
-
-      const heightDifference =
-        window.innerHeight - document.documentElement.clientHeight;
-
-      if (heightDifference > 0) {
-        nav.style.setProperty(
-          "padding-bottom",
-          `calc(var(--safe-area-bottom) + ${heightDifference}px)`
-        );
-      }
-    }
-
-    applyDynamicSafeArea();
-
-    window.addEventListener("resize", applyDynamicSafeArea);
-    window.addEventListener("orientationchange", applyDynamicSafeArea);
-
-    return () => {
-      window.removeEventListener("resize", applyDynamicSafeArea);
-      window.removeEventListener("orientationchange", applyDynamicSafeArea);
-    };
-  }, []);
 
   return (
     <nav className="bottom-nav md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-md h-20 flex justify-around items-center z-50">
