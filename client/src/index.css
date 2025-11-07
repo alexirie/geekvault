@@ -36,3 +36,8 @@ code {
   padding-bottom: calc(var(--safe-area-bottom) - 10px);
 }
 
+.horizontal-scroller {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
