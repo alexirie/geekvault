@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --safe-area-top: env(safe-area-inset-top, 0px);
+  padding-top: env(safe-area-inset-top);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
@@ -32,6 +32,6 @@ code {
 }
 
 .bottom-nav {
-  padding-bottom: calc(var(--safe-area-bottom) + 12px);
+  padding-bottom: calc(var(--safe-area-bottom));
 }
 
