@@ -14,7 +14,7 @@ export default function BottomNav() {
 
 
   return (
-    <nav className="bottom-nav md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-md h-20 flex justify-around items-center z-50">
+    <nav className="bottom-nav md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-md h-16 flex justify-around items-center z-50">
       {tabs.map((tab) => {
         const Icon = tab.icon;
         return (
