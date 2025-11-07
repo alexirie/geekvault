@@ -33,6 +33,6 @@ code {
 }
 
 .bottom-nav {
-  padding-bottom: calc(var(--safe-area-bottom));
+  padding-bottom: calc(var(--safe-area-bottom) + 4px);
 }
 
