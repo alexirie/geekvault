@@ -16,7 +16,7 @@ function App() {
         if (window.location.pathname === "/") {
           CapacitorApp.exitApp(); // salir de la app
         } else {
-          window.history.back(); // navegar atrás
+          window.history.back(); // navegar atrásxfdsfd
         }
       });
     }, [navigate]);
