@@ -8,7 +8,7 @@ const FigureCard = ({ figure, onClick }) => {
 
   return (
     <div className="mt-2 w-full max-w-xs cursor-pointer group relative" onClick={onClick}>
-      
+
       {/* Sombra exterior que aparece en hover */}
       <div className="rounded-xl transition-all duration-300 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.2)] group-hover:bg-gray-200 p-1">
 
@@ -42,6 +42,11 @@ const FigureCard = ({ figure, onClick }) => {
               {favorite ? <FaHeart /> : <FaRegHeart />}
             </motion.button>
           </div>
+
+          {/* ✨ Precio en banda negra inferior */}
+          <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white text-lg font-bold text-center py-1">
+            {figure.stockPrice ? `${figure.stockPrice} €` : `${figure.price} €`}
+          </div>
         </div>
 
         {/* Información */}
@@ -49,12 +54,6 @@ const FigureCard = ({ figure, onClick }) => {
           <h2 className="text-lg font-bold text-gray-500 truncate font-sans">
             {figure.name}
           </h2>
-
-          {figure.stockPrice && (
-            <p className="text-gray-800 font-bold mt-1 font-sans">
-              {figure.stockPrice} €
-            </p>
-          )}
 
           <p className="text-gray-500 text-sm mt-1 font-sans">
             {figure.brandName}

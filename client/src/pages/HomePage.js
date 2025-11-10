@@ -30,6 +30,7 @@ const HomePage = () => {
     } else {
       key = fig.brandName || "Sin marca";
     }
+    fig.inStock = true; //PRUEBA PARA VER COMO QUEDA STOCK
 
     if (!acc[key]) acc[key] = [];
     acc[key].push(fig);
@@ -62,10 +63,12 @@ const HomePage = () => {
         // ✅ Filtro por búsqueda
         items = items.filter((fig) =>
           fig.name.toLowerCase().includes(search.toLowerCase())
+          
         );
 
         if (items.length === 0) return null;
 
+      
         return (
           <section key={categoryName} className="mb-10">
             <h2 className="text-2xl font-bold mb-4 ml-2 mt-3">
@@ -75,6 +78,7 @@ const HomePage = () => {
 
             <HorizontalScroller>
               {items.map((fig) => (
+                
                 <div key={fig.id} className="snap-center min-w-[260px]">
                   <FigureCard figure={fig} onClick={() => navigate(`/figure/${fig.id}`)} />
                 </div>
