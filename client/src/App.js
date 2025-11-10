@@ -16,7 +16,7 @@ function App() {
         if (window.location.pathname === "/") {
           CapacitorApp.exitApp(); // salir de la app
         } else {
-          navigate(-1); // navegar atrás
+          window.history.back(); // navegar atrás
         }
       });
     }, [navigate]);
@@ -28,7 +28,7 @@ function App() {
     <Router>
       {/* Manejador del botón atrás dentro del Router */}
       <BackButtonHandler />
-      
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         {/* Otras rutas */}
