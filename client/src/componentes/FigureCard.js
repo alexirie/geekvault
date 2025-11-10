@@ -13,7 +13,7 @@ const FigureCard = ({ figure }) => {
       <div className="rounded-xl transition-all duration-300 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.2)] group-hover:bg-gray-200 p-1">
 
         {/* Card con la imagen */}
-        <div className="w-full h-64 bg-gray-100 rounded-xl overflow-hidden shadow-md relative flex items-center justify-center">
+        <div className="w-full h-64 bg-gray-100 bg-white rounded-xl overflow-hidden shadow-md relative flex items-center justify-center">
           <img
             src={figure.imageUrl || 'https://via.placeholder.com/300x300.png?text=Figure'}
             alt={figure.name}

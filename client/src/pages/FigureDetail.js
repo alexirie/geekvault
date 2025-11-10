@@ -69,7 +69,7 @@ function FigureDetail() {
         >
           ← Volver
         </button>
-        <h1 className="text-xl font-semibold">Detalle figura</h1>
+        
       </div>
 
       {/* 🔥 CONTENIDO PRINCIPAL */}
