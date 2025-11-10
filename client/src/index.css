@@ -43,7 +43,7 @@ code {
 }
 
 .bottom-nav {
-  padding-bottom: calc(var(--safe-area-bottom) - 15px);
+  padding-bottom: calc(var(--safe-area-bottom) - 20px);
   height: 80px; /* h-20 */
 }
 

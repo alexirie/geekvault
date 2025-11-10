@@ -1,9 +1,13 @@
 // src/components/FigureCard.js
-import React from 'react';
+import React, { useState } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const FigureCard = ({ figure }) => {
+  const [favorite, setFavorite] = useState(false);
+
   return (
-    <div className="mt-2 w-full max-w-xs cursor-pointer group">
+    <div className="mt-2 w-full max-w-xs cursor-pointer group relative">
       
       {/* Sombra exterior que aparece en hover */}
       <div className="rounded-xl transition-all duration-300 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.2)] group-hover:bg-gray-200 p-1">
@@ -22,6 +26,22 @@ const FigureCard = ({ figure }) => {
               EN STOCK
             </div>
           )}
+
+          {/* Botón favorito en la esquina superior derecha */}
+          <div className="absolute top-2 right-2">
+            <motion.button
+              onClick={(e) => {
+                e.stopPropagation(); // evita que se active el click de la card
+                setFavorite(!favorite);
+              }}
+              className="text-blue-500 text-2xl"
+              whileTap={{ scale: 1.3 }} // efecto “pop” al pulsar
+              animate={{ scale: favorite ? 1.2 : 1 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+            >
+              {favorite ? <FaHeart /> : <FaRegHeart />}
+            </motion.button>
+          </div>
         </div>
 
         {/* Información */}
