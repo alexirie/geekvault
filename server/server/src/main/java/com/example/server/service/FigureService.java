@@ -76,6 +76,7 @@ public class FigureService {
         figure.setCollection(dto.getCollection());
         figure.setAnime(dto.getAnime());
         figure.setYear(dto.getYear());
+        figure.setDescription(dto.getDescription());
         return figure;
     }
 
@@ -101,6 +102,7 @@ public class FigureService {
         dto.setCollection(figure.getCollection());
         dto.setAnime(figure.getAnime());
         dto.setYear(figure.getYear());
+        dto.setDescription(figure.getDescription());
         return dto;
     }
 }

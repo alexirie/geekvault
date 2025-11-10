@@ -35,5 +35,7 @@ public class Figure {
 
     private LocalDate year;
 
+    private String description;
+
     private LocalDateTime lastUpdate;
 }

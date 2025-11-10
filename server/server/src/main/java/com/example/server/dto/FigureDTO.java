@@ -30,5 +30,7 @@ public class FigureDTO {
 
     private String anime;
 
+    private String description;
+
     private LocalDate year;
 }

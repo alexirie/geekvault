@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-const FigureCard = ({ figure }) => {
+const FigureCard = ({ figure, onClick }) => {
   const [favorite, setFavorite] = useState(false);
 
   return (
-    <div className="mt-2 w-full max-w-xs cursor-pointer group relative">
+    <div className="mt-2 w-full max-w-xs cursor-pointer group relative" onClick={onClick}>
       
       {/* Sombra exterior que aparece en hover */}
       <div className="rounded-xl transition-all duration-300 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.2)] group-hover:bg-gray-200 p-1">
