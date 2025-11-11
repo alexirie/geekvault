@@ -22,6 +22,7 @@ public class AuthController {
     private final JwtUtils jwtUtils;
     private final UserRepository userRepository;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // -----------------------------
     // ✅ LOGIN
@@ -30,8 +31,7 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest request) {
 
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        );
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("No existe el usuario"));
@@ -42,8 +42,7 @@ public class AuthController {
 
         return ResponseEntity.ok(new AuthResponse(
                 accessToken,
-                refresh.getToken()
-        ));
+                refresh.getToken()));
     }
 
     private RefreshToken createRefreshToken(User user) {
@@ -86,5 +85,41 @@ public class AuthController {
                 .ifPresent(refreshTokenRepository::delete);
 
         return ResponseEntity.ok("Logout correcto");
+    }
+
+    // Register
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest request) {
+
+        // ✅ Validaciones básicas
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("El email ya está registrado");
+        }
+
+        if (userRepository.existsByUsername(request.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("El username ya está en uso");
+        }
+
+        // ✅ Crear usuario
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setUsername(request.getUsername());
+
+        // Hashear la contraseña
+        user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
+
+        // Roles por defecto
+        user.setRoles(Set.of("ROLE_USER"));
+
+        user.setEnabled(true);
+        user.setFailedLoginAttempts(0);
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Usuario registrado correctamente");
     }
 }
