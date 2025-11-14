@@ -4,4 +4,6 @@
 //local
 export const BASE_URL = 'https://freak-project-production.up.railway.app/api';
 
+export const BASE_URL_L = 'https://freak-project-production.up.railway.app';
+
 export const IMAGES_URL = 'https://freak-project-production.up.railway.app/uploads/';

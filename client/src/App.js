@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import FigureDetail from './pages/FigureDetail';
 import { App as CapacitorApp } from "@capacitor/app";
 import SplashScreen from "./pages/SplashScreen";
+import LoginPage from './pages/LoginPage';
 
 function App() {
 
@@ -36,7 +37,7 @@ function App() {
       <BackButtonHandler />
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<LoginPage />} />
         {/* Otras rutas */}
         <Route path="/figure/:id" element={<FigureDetail />} />
       </Routes>
