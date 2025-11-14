@@ -8,6 +8,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // Ruta /uploads/** en la URL → carpeta uploads en el filesystem
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:uploads/");
+    }
+
+    @Override
     public void addCorsMappings(CorsRegistry registry) {
         // Configuración CORS para aceptar todas las peticiones
         registry.addMapping("/**")
