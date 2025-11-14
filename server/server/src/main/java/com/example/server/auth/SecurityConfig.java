@@ -33,6 +33,8 @@ public class SecurityConfig {
                                 "/index.html",
                                 "/static/**",
                                 "/favicon.ico",
+                                "/manifest.json",
+                                "/api/**",
                                 "/auth/**")
                         .permitAll()
                         .anyRequest().authenticated())
