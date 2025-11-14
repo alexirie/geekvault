@@ -26,17 +26,12 @@ export const login = async (email, password) => {
     credentials: "include"
   });
 
-  console.log("Status:", res.status);
-  console.log("Headers:", [...res.headers]);
-  const text = await res.text();
-  console.log("Body:", text);
-
+ 
   if (!res.ok) {
     const errorText = await res.text(); // leer error del backend
     throw new Error(errorText || "Usuario o contraseña invalidos");
   }
-
-  return res.json(); // { accessToken, refreshToken }
+  return res.json(); 
 };
 
 // ---------------------

@@ -1,8 +1,10 @@
 // src/pages/LoginPage.js
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Envelope, Lock } from "phosphor-react";
 import { login } from "../services/api";
+import { AuthContext } from "../context/AuthContext";
+
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -10,6 +12,9 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { setIsLogged } = useContext(AuthContext);
+    const authContext = useContext(AuthContext);
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -20,9 +25,8 @@ export default function LoginPage() {
             const res = await login(email, password);
 
             // Guardar tokens
-            localStorage.setItem("accessToken", res.accessToken);
-            localStorage.setItem("refreshToken", res.refreshToken);
-
+            authContext.login(res.user, res.accessToken);
+           
             // Redirigir a HomePage
             navigate("/");
         } catch (err) {

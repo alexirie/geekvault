@@ -6,6 +6,7 @@ import FigureDetail from './pages/FigureDetail';
 import { App as CapacitorApp } from "@capacitor/app";
 import SplashScreen from "./pages/SplashScreen";
 import LoginPage from './pages/LoginPage';
+import { Home } from 'lucide-react';
 
 function App() {
 
@@ -37,9 +38,10 @@ function App() {
       <BackButtonHandler />
 
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
         {/* Otras rutas */}
         <Route path="/figure/:id" element={<FigureDetail />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   );
