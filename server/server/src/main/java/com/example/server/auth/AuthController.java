@@ -1,5 +1,6 @@
 package com.example.server.auth;
 
+import com.example.server.dto.UserDTO;
 import com.example.server.model.User;
 import com.example.server.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import java.util.Set;
+
 
 import java.time.Instant;
 import java.util.Optional;
@@ -89,7 +92,7 @@ public class AuthController {
 
     // Register
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest request) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO request) {
 
         // ✅ Validaciones básicas
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -110,7 +113,7 @@ public class AuthController {
         user.setUsername(request.getUsername());
 
         // Hashear la contraseña
-        user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         // Roles por defecto
         user.setRoles(Set.of("ROLE_USER"));
