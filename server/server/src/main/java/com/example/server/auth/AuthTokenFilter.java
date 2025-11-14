@@ -25,23 +25,31 @@ public class AuthTokenFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
 
-    System.out.println("AuthTokenFilter: path = " + request.getServletPath());
-    filterChain.doFilter(request, response);
-    String path = request.getRequestURI();
+    String path = request.getServletPath();
+    System.out.println("AuthTokenFilter: path = " + path);
+
+    // Permitir login y register sin JWT
     if (path.startsWith("/auth/")) {
-      filterChain.doFilter(request, response); // no hacer nada
+      filterChain.doFilter(request, response);
       return;
     }
 
+    // Procesar JWT
     String jwt = parseJwt(request);
+
     if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
       String username = jwtUtils.getUserNameFromJwtToken(jwt);
       UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
       UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-          userDetails, null, userDetails.getAuthorities());
+          userDetails,
+          null,
+          userDetails.getAuthorities());
+
       SecurityContextHolder.getContext().setAuthentication(auth);
     }
-    filterChain.doFilter(request, response);
+
+    filterChain.doFilter(request, response); // ÚNICA llamada
   }
 
   private String parseJwt(HttpServletRequest request) {
