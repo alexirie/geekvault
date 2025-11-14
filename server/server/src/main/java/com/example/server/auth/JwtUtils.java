@@ -8,6 +8,17 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
+/**
+ * Clase utilitaria para generar y validar JWTs (JSON Web Tokens).
+ * 
+ * Funciona como un helper que encapsula toda la lógica de creación y verificación
+ * de tokens JWT para la autenticación de usuarios.
+ *
+ * Quién la llama:
+ * - AuthTokenFilter: valida el token que llega en cada request y carga al usuario en SecurityContext.
+ * - AuthController (o cualquier servicio de autenticación): genera un token al hacer login.
+*/
+
 @Component
 public class JwtUtils {
 

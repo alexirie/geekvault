@@ -9,6 +9,19 @@ import lombok.RequiredArgsConstructor;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+/**
+ * SecurityUser es un adaptador que convierte la entidad User de la aplicación
+ * a un UserDetails de Spring Security.
+ * 
+ * Propósito:
+ * - Spring Security trabaja con UserDetails para realizar autenticación y autorización.
+ * - Esta clase mapea los datos del usuario (email, contraseña, roles, estado) al formato que espera Spring Security.
+ *
+ * Quién la llama:
+ * - CustomUserDetailsService.loadUserByUsername() devuelve un SecurityUser cuando se autentica un usuario.
+ * - Spring Security utiliza esta clase internamente para verificar credenciales y permisos.
+*/
+
 @RequiredArgsConstructor
 public class SecurityUser implements UserDetails {
 

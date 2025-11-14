@@ -15,6 +15,28 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
+/**
+ * Configuración de seguridad de Spring Security para la aplicación.
+ * 
+ * Propósito:
+ * - Configura la autenticación y autorización de endpoints.
+ * - Añade filtros para validar JWT en cada petición.
+ * - Define CORS para permitir llamadas desde el frontend.
+ * - Configura el PasswordEncoder para encriptar contraseñas.
+ *
+ * Componentes importantes:
+ * - authTokenFilter(): filtro que intercepta todas las solicitudes y valida el JWT.
+ * - filterChain(HttpSecurity): define qué endpoints son públicos y cuáles requieren autenticación.
+ * - authenticationManager(): expone el AuthenticationManager de Spring para autenticación manual.
+ * - passwordEncoder(): define cómo se encriptan y verifican las contraseñas (BCrypt).
+ * - corsConfigurationSource(): configura los orígenes permitidos y cabeceras CORS.
+ *
+ * Uso:
+ * - Spring Security llama automáticamente a filterChain para cada petición.
+ * - AuthTokenFilter se ejecuta antes de UsernamePasswordAuthenticationFilter.
+ * - Los controladores pueden asumir que el usuario está autenticado si llega a ellos.
+ */
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -28,6 +50,10 @@ public class SecurityConfig {
         return new AuthTokenFilter(jwtUtils, userDetailsService);
     }
 
+    /**
+     * Configuración principal de la seguridad HTTP.
+     * Define endpoints públicos, autenticados, CORS y añade filtros.
+    */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
