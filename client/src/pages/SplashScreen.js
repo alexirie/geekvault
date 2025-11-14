@@ -11,19 +11,19 @@ const SplashScreen = ({ onFinish }) => {
   }, [onFinish]);
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-gray-100">
-      <AnimatePresence>
-        <motion.img
-          src="/logo.jpg" // reemplaza con tu logo
-          alt="Logo"
-          className="w-80 h-80 object-contain sm:w-96 sm:h-96"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.2 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        />
-      </AnimatePresence>
-    </div>
+    <div className="w-screen h-screen flex flex-col items-center justify-start pt-20 bg-gray-100">
+  <AnimatePresence>
+    <motion.img
+      src="/logo.jpg"
+      alt="Logo"
+      className="w-80 h-80 object-contain sm:w-96 sm:h-96"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 1.2 }}
+      transition={{ duration: 1.5, ease: "easeOut" }}
+    />
+  </AnimatePresence>
+</div>
   );
 };
 
