@@ -11,12 +11,12 @@ const SplashScreen = ({ onFinish }) => {
   }, [onFinish]);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-start pt-20 bg-gray-100">
+    <div className="w-screen h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
   <AnimatePresence>
     <motion.img
       src="/logo.jpg"
       alt="Logo"
-      className="w-80 h-80 object-contain sm:w-96 sm:h-96"
+      className="w-96 h-96 sm:w-96 sm:h-96 object-contain mb-40"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.2 }}
