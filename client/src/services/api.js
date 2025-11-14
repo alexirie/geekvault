@@ -23,7 +23,13 @@ export const login = async (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
+    credentials: "include"
   });
+
+  console.log("Status:", res.status);
+  console.log("Headers:", [...res.headers]);
+  const text = await res.text();
+  console.log("Body:", text);
 
   if (!res.ok) {
     const errorText = await res.text(); // leer error del backend

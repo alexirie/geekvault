@@ -25,6 +25,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
 
+    System.out.println("AuthTokenFilter: path = " + request.getServletPath());
+    filterChain.doFilter(request, response);
     String path = request.getRequestURI();
     if (path.startsWith("/auth/")) {
       filterChain.doFilter(request, response); // no hacer nada
