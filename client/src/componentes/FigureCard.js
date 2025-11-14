@@ -1,10 +1,14 @@
 // src/components/FigureCard.js
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../context/AuthContext';
 
 const FigureCard = ({ figure, onClick }) => {
   const [favorite, setFavorite] = useState(false);
+  const { isLogged } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <div className="mt-2 w-full max-w-xs cursor-pointer group relative" onClick={onClick}>
@@ -31,8 +35,14 @@ const FigureCard = ({ figure, onClick }) => {
           <div className="absolute top-2 right-2">
             <motion.button
               onClick={(e) => {
-                e.stopPropagation(); // evita que se active el click de la card
-                setFavorite(!favorite);
+                if (isLogged){
+                  e.stopPropagation(); // evita que se active el click de la card
+                  setFavorite(!favorite);
+                } else{
+                  e.stopPropagation(); // evita que se active el click de la card
+                  navigate('/login');
+                }
+                
               }}
               className="text-blue-500 text-2xl"
               whileTap={{ scale: 1.3 }} // efecto “pop” al pulsar
