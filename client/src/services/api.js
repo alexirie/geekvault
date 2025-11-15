@@ -14,7 +14,7 @@ export const getFigureById = async (id) => {
 };
 
 // ---------------------
-// ✅ LOGIN
+// LOGIN
 // ---------------------
 export const login = async (email, password) => {
   const res = await fetch(`${BASE_URL_L}/auth/login`, {
@@ -26,16 +26,16 @@ export const login = async (email, password) => {
     credentials: "include"
   });
 
- 
+
   if (!res.ok) {
     const errorText = await res.text(); // leer error del backend
     throw new Error(errorText || "Usuario o contraseña invalidos");
   }
-  return res.json(); 
+  return res.json();
 };
 
 // ---------------------
-// ✅ REGISTER
+// REGISTER
 // ---------------------
 export const register = async (username, email, password) => {
   const res = await fetch(`${BASE_URL}/auth/register`, {
@@ -53,3 +53,34 @@ export const register = async (username, email, password) => {
 
   return res.json(); // si tu backend devuelve algo
 };
+
+// ---------------------
+// CREATE FIGURE
+// ---------------------
+export const createFigure = async (name, brandId, price, inStock, imageUrl, anime, collection, description) => {
+
+  const res = await fetch(`${BASE_URL}/figures`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify({
+      name,
+      brandId,
+      price: parseFloat(price),
+      inStock,
+      imageUrl,
+      anime,
+      collection,
+      description,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(errorText || "Error al crear la figura");
+  }
+
+  return res.json();
+}

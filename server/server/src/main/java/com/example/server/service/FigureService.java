@@ -56,8 +56,9 @@ public class FigureService {
     // --------------------
 
     /**
-     * Convierte un FigureDTO recibido desde el frontend en una entidad Figure lista para BD.
-    */
+     * Convierte un FigureDTO recibido desde el frontend en una entidad Figure lista
+     * para BD.
+     */
     public Figure fromDTO(FigureDTO dto) {
         Figure figure = new Figure();
         figure.setId(dto.getId());
@@ -69,10 +70,25 @@ public class FigureService {
                 .orElseThrow(() -> new IllegalArgumentException("Brand no encontrada con id: " + dto.getBrandId())));
 
         // Si viene una URL completa de la imagen, extrae únicamente el filename
-        if (dto.getImageUrl() != null) {
-            String fileName = Paths.get(URI.create(dto.getImageUrl())).getFileName().toString();
-            figure.setImageUrl(fileName);
+        // Procesar imageUrl solo si viene y no está vacía
+        if (dto.getImageUrl() != null && !dto.getImageUrl().isBlank()) {
+            try {
+                URI uri = URI.create(dto.getImageUrl()); // puede lanzar excepción si no es una URL válida
+                String fileName = Paths.get(uri.getPath()).getFileName().toString();
+
+                // Si no se pudo sacar filename, deja null
+                figure.setImageUrl(fileName.isBlank() ? null : fileName);
+
+            } catch (Exception e) {
+                // Si falla (URL inválida, no tiene esquema, etc.), guarda null
+                figure.setImageUrl(null);
+            }
+
+        } else {
+            // Si viene vacío o null → guardamos null
+            figure.setImageUrl(null);
         }
+
         figure.setCollection(dto.getCollection());
         figure.setAnime(dto.getAnime());
         figure.setYear(dto.getYear());
@@ -82,15 +98,15 @@ public class FigureService {
 
     /**
      * Convierte una entidad Figure (BD) en un FigureDTO para enviar al frontend.
-    */
+     */
     public FigureDTO toDTO(Figure figure) {
         FigureDTO dto = new FigureDTO();
         dto.setId(figure.getId());
         dto.setName(figure.getName());
         dto.setBrandId(figure.getBrand().getId());
 
-        //Convierte el id al nombre
-        dto.setBrandName(figure.getBrand().getName()); 
+        // Convierte el id al nombre
+        dto.setBrandName(figure.getBrand().getName());
 
         // Si hay imagen guardada, convertir filename → URL completa para mostrarla
         if (figure.getImageUrl() != null) {

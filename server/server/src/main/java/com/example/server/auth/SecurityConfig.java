@@ -69,6 +69,7 @@ public class SecurityConfig {
                                 "/manifest.json",
                                 "/uploads/**",
                                 "/api/**",
+                                "/figures/**",
                                 "/auth/**")
                         .permitAll()
                         .anyRequest().authenticated())
