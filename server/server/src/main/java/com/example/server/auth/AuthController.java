@@ -42,12 +42,12 @@ public class AuthController {
         String accessToken = jwtUtils.generateJwtToken(user.getEmail());
         RefreshToken refresh = createRefreshToken(user);
 
-        UserResponse userResponse = new UserResponse(user); 
+        UserResponse userResponse = new UserResponse(user);
 
         return ResponseEntity.ok(new AuthResponse(
                 accessToken,
                 refresh.getToken(),
-                userResponse //ahora incluimos el usuario
+                userResponse // ahora incluimos el usuario
         ));
     }
 
@@ -78,7 +78,13 @@ public class AuthController {
 
         String newAccessToken = jwtUtils.generateJwtToken(user.getEmail());
 
-        return ResponseEntity.ok(new AuthResponse(newAccessToken, req.getRefreshToken()));
+        UserResponse userResponse = new UserResponse(user);
+
+        return ResponseEntity.ok(
+                new AuthResponse(
+                        newAccessToken,
+                        req.getRefreshToken(),
+                        userResponse));
     }
 
     // -----------------------------
