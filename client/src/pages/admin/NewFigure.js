@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createFigure } from "../../services/api";
 
+
 export default function NewFigure() {
     const [name, setName] = useState("");
     const [brandId, setBrand] = useState("");
@@ -47,77 +48,135 @@ export default function NewFigure() {
 
 
     return (
-        <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Nueva Figura</h1>
-            {error && <p className="text-red-500 mb-4">{error}</p>}
-            <form className="flex flex-col gap-4 max-w-lg" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Nombre"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    className="input"
-                />
-                <input
-                    type="text"
-                    placeholder="Marca"
-                    value={brandId}
-                    onChange={(e) => setBrand(e.target.value)}
-                    required
-                    className="input"
-                />
-                <input
-                    type="number"
-                    placeholder="Precio"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                    className="input"
-                />
-                <label className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        checked={inStock}
-                        onChange={(e) => setInStock(e.target.checked)}
-                    />
-                    En stock
-                </label>
-                <input
-                    type="text"
-                    placeholder="URL de la imagen"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                    className="input"
-                />
-                <input
-                    type="text"
-                    placeholder="Anime"
-                    value={anime}
-                    onChange={(e) => setAnime(e.target.value)}
-                    className="input"
-                />
-                <input
-                    type="text"
-                    placeholder="Colección"
-                    value={collection}
-                    onChange={(e) => setCollection(e.target.value)}
-                    className="input"
-                />
-                <textarea
-                    placeholder="Descripción"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="input"
-                />
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                >
-                    {loading ? "Creando..." : "Crear Figura"}
-                </button>
-            </form>
+        <div className="w-full flex justify-center py-10">
+            <div className="w-full max-w-2xl bg-white shadow-lg rounded-2xl p-8 border border-gray-200">
+                <h1 className="text-3xl font-bold mb-6 text-gray-800">
+                    Nueva Figura
+                </h1>
+
+                {error && (
+                    <p className="text-red-500 mb-4 bg-red-100 p-2 rounded">
+                        {error}
+                    </p>
+                )}
+
+                <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+                    {/* NOMBRE */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700">
+                            Nombre
+                        </label>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        />
+                    </div>
+
+                    {/* MARCA */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700">
+                            ID Marca
+                        </label>
+                        <input
+                            type="text"
+                            value={brandId}
+                            onChange={(e) => setBrand(e.target.value)}
+                            required
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        />
+                    </div>
+
+                    {/* PRECIO */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700">
+                            Precio (€)
+                        </label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            required
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        />
+                    </div>
+
+                    {/* EN STOCK */}
+                    <label className="flex items-center gap-2 text-gray-700">
+                        <input
+                            type="checkbox"
+                            checked={inStock}
+                            onChange={(e) => setInStock(e.target.checked)}
+                            className="w-5 h-5 accent-blue-500"
+                        />
+                        En stock
+                    </label>
+
+                    {/* URL IMAGEN */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700">
+                            URL de la Imagen (opcional)
+                        </label>
+                        <input
+                            type="text"
+                            value={imageUrl}
+                            onChange={(e) => setImageUrl(e.target.value)}
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        />
+                    </div>
+
+                    {/* ANIME */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700">
+                            Anime
+                        </label>
+                        <input
+                            type="text"
+                            value={anime}
+                            onChange={(e) => setAnime(e.target.value)}
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        />
+                    </div>
+
+                    {/* COLECCIÓN */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700">
+                            Colección
+                        </label>
+                        <input
+                            type="text"
+                            value={collection}
+                            onChange={(e) => setCollection(e.target.value)}
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        />
+                    </div>
+
+                    {/* DESCRIPCIÓN */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700">
+                            Descripción
+                        </label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            rows="4"
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        />
+                    </div>
+
+                    {/* BOTÓN */}
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="bg-blue-600 text-white py-3 px-5 rounded-xl text-lg font-semibold hover:bg-blue-700 transition disabled:bg-blue-300"
+                    >
+                        {loading ? "Creando..." : "Crear Figura"}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

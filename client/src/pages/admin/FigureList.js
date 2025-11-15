@@ -13,10 +13,11 @@ export default function FiguresList() {
     { id: "in_stock", header: "Stock", accessorKey: "inStock" },
     { id: "price", header: "Precio", accessorKey: "price" },
     { id: "brandName", header: "Marca", accessorKey: "brandName" },
-    { id: "image_url", header: "Foto", accessorKey: "image_url" },
+    { id: "image_url", header: "Foto", accessorKey: "imageUrl" },
     { id: "anime", header: "Anime", accessorKey: "anime" },
     { id: "collection", header: "Colección", accessorKey: "collection" },
     { id: "description", header: "Descripción", accessorKey: "description" },
+    { id: "lastUpdate", header: "Último cambio", accessorKey: "lastUpdate" },
     {
       id: "actions",
       header: "Acciones",
@@ -41,7 +42,7 @@ export default function FiguresList() {
   []
 );
 
-
+    
 
   if (loading) return <p>Cargando figuras...</p>;
 
