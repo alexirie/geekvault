@@ -13,9 +13,9 @@ export default function NewFigure() {
     const [anime, setAnime] = useState("");
     const [collection, setCollection] = useState("");
     const [description, setDescription] = useState("");
-
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [imageFile, setImageFile] = useState(null);
 
     const navigate = useNavigate();
 
@@ -44,6 +44,10 @@ export default function NewFigure() {
         }
 
         setLoading(false);
+    };
+
+    const handleFileChange = (e) => {
+        setImageFile(e.target.files[0]);
     };
 
 
@@ -118,15 +122,16 @@ export default function NewFigure() {
                     {/* URL IMAGEN */}
                     <div>
                         <label className="block text-sm font-medium mb-1 text-gray-700">
-                            URL de la Imagen (opcional)
+                            Imagen
                         </label>
                         <input
-                            type="text"
-                            value={imageUrl}
-                            onChange={(e) => setImageUrl(e.target.value)}
-                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            className="w-full p-3 border rounded-lg"
                         />
                     </div>
+
 
                     {/* ANIME */}
                     <div>
