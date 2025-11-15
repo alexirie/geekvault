@@ -67,7 +67,7 @@ public class FigureController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/figures/upload")
+    @PostMapping("/upload")
     public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) {
         try {
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();

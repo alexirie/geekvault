@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createFigure } from "../../services/api";
+import { BASE_URL } from '../../constantes';
 
 
 export default function NewFigure() {
@@ -24,6 +25,20 @@ export default function NewFigure() {
         setLoading(true);
         setError("");
 
+        let finalImageUrl = "";
+
+        if (imageFile) {
+            const formData = new FormData();
+            formData.append("image", imageFile);
+
+            const res = await fetch(`${BASE_URL}/figures/upload`, {
+                method: "POST",
+                body: formData,
+            });
+
+            finalImageUrl = await res.text();
+        }
+
         try {
             // Llamamos a la función del API con los campos que espera el backend
             await createFigure(
@@ -31,7 +46,7 @@ export default function NewFigure() {
                 brandId,
                 parseFloat(price),
                 inStock,
-                imageUrl,
+                finalImageUrl,
                 anime,
                 collection,
                 description
