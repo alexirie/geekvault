@@ -22,7 +22,7 @@ public class Figure {
     @ManyToOne
     private Brand brand;
 
-    @Column(name = "image_url", length=500)
+    @Column(name = "image_url", length = 500)
     private String imageUrl;
 
     private String collection;
@@ -40,4 +40,14 @@ public class Figure {
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.lastUpdate = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.lastUpdate = LocalDateTime.now();
+    }
 }
