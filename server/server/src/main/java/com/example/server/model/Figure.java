@@ -31,11 +31,13 @@ public class Figure {
 
     private BigDecimal price;
 
+    @Column(name = "in_stock")
     private Boolean inStock;
 
     private LocalDate year;
 
     private String description;
 
+    @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 }
