@@ -1,9 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import useFigures from "../../hooks/homePage/useFigures";
+import Table from "../../componentes/Table";
 
 export default function FiguresList() {
 
  const { figures, loading } = useFigures();
+
+ const columns = useMemo(
+  () => [
+    { id: "id", header: "ID", accessorKey: "id" },
+    { id: "name", header: "Nombre", accessorKey: "name" },
+    { id: "in_stock", header: "Stock", accessorKey: "in_stock" },
+    { id: "price", header: "Precio", accessorKey: "price" },
+    { id: "brandName", header: "Marca", accessorKey: "brandName" },
+    { id: "image_url", header: "Foto", accessorKey: "image_url" },
+    { id: "anime", header: "Anime", accessorKey: "anime" },
+    { id: "collection", header: "Colección", accessorKey: "collection" },
+    { id: "description", header: "Descripción", accessorKey: "description" },
+    {
+      id: "actions",
+      header: "Acciones",
+      cell: ({ row }) => (
+        <div className="flex gap-2">
+          <button
+            className="text-blue-500 hover:underline"
+            onClick={() => alert("Editar figura " + row.original.id)}
+          >
+            Editar
+          </button>
+          <button
+            className="text-red-500 hover:underline"
+            onClick={() => alert("Eliminar figura " + row.original.id)}
+          >
+            Eliminar
+          </button>
+        </div>
+      ),
+    },
+  ],
+  []
+);
 
 
 
@@ -12,31 +48,7 @@ export default function FiguresList() {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Lista de Figuras</h1>
-      <table className="w-full table-auto border border-gray-300 rounded">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border px-4 py-2">ID</th>
-            <th className="border px-4 py-2">Nombre</th>
-            <th className="border px-4 py-2">Categoría</th>
-            <th className="border px-4 py-2">Precio</th>
-            <th className="border px-4 py-2">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {figures.map((fig) => (
-            <tr key={fig.id}>
-              <td className="border px-4 py-2">{fig.id}</td>
-              <td className="border px-4 py-2">{fig.name}</td>
-              <td className="border px-4 py-2">{fig.category}</td>
-              <td className="border px-4 py-2">${fig.price}</td>
-              <td className="border px-4 py-2">
-                <button className="text-blue-500 hover:underline mr-2">Editar</button>
-                <button className="text-red-500 hover:underline">Eliminar</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        <Table columns={columns} data={figures}/>
     </div>
   );
 }
