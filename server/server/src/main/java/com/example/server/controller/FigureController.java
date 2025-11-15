@@ -39,6 +39,7 @@ public class FigureController {
     public ResponseEntity<FigureDTO> create(@Valid @RequestBody FigureDTO dto) {
         Figure figure = figureService.fromDTO(dto);
         Figure saved = figureService.save(figure);
+        System.out.println("DTO recibido: " + dto);
         return ResponseEntity.ok(figureService.toDTO(saved));
     }
 
