@@ -10,7 +10,7 @@ export default function FiguresList() {
   () => [
     { id: "id", header: "ID", accessorKey: "id" },
     { id: "name", header: "Nombre", accessorKey: "name" },
-    { id: "in_stock", header: "Stock", accessorKey: "in_stock" },
+    { id: "in_stock", header: "Stock", accessorKey: "inStock" },
     { id: "price", header: "Precio", accessorKey: "price" },
     { id: "brandName", header: "Marca", accessorKey: "brandName" },
     { id: "image_url", header: "Foto", accessorKey: "image_url" },
