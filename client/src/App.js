@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import AdminLayout from "./componentes/AdminLayout";
 import ProtectedRoute from "./componentes/ProtectedRoute";
 import Dashboard from './pages/admin/Dashboard';
+import PublicRoute from './componentes/PublicRoute';
 
 function App() {
 
@@ -43,7 +44,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         {/* Otras rutas */}
         <Route path="/figure/:id" element={<FigureDetail />} />
-        <Route path="/login" element={<LoginPage />} />
+
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
 
         {/* Rutas admin protegidas */}
         <Route element={<ProtectedRoute />}>
