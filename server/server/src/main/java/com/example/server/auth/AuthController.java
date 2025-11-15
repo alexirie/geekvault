@@ -7,10 +7,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.Set;
-
 
 import java.time.Instant;
 import java.util.Optional;
@@ -40,12 +40,15 @@ public class AuthController {
                 .orElseThrow(() -> new RuntimeException("No existe el usuario"));
 
         String accessToken = jwtUtils.generateJwtToken(user.getEmail());
-
         RefreshToken refresh = createRefreshToken(user);
+
+        UserResponse userResponse = new UserResponse(user); 
 
         return ResponseEntity.ok(new AuthResponse(
                 accessToken,
-                refresh.getToken()));
+                refresh.getToken(),
+                userResponse //ahora incluimos el usuario
+        ));
     }
 
     private RefreshToken createRefreshToken(User user) {
@@ -124,5 +127,18 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok("Usuario registrado correctamente");
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(Authentication authentication) {
+        if (authentication == null) {
+            return ResponseEntity.status(401).body("No autenticado");
+        }
+
+        String email = authentication.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return ResponseEntity.ok(new UserResponse(user));
     }
 }

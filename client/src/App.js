@@ -6,7 +6,8 @@ import FigureDetail from './pages/FigureDetail';
 import { App as CapacitorApp } from "@capacitor/app";
 import SplashScreen from "./pages/SplashScreen";
 import LoginPage from './pages/LoginPage';
-import { Home } from 'lucide-react';
+import AdminLayout from "./componentes/AdminLayout";
+import ProtectedRoute from "./componentes/ProtectedRoute";
 
 function App() {
 
@@ -42,6 +43,14 @@ function App() {
         {/* Otras rutas */}
         <Route path="/figure/:id" element={<FigureDetail />} />
         <Route path="/login" element={<LoginPage />} />
+
+        {/* Rutas admin protegidas */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin" element={<AdminLayout />}>
+         
+            {/* más rutas admin hijas aquí */}
+          </Route>
+        </Route>
       </Routes>
     </Router>
   );

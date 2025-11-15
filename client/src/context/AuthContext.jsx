@@ -9,18 +9,41 @@ export const AuthProvider = ({ children }) => {
 
   // opcional: escuchar cambios en localStorage
   useEffect(() => {
-    const handleStorage = () => {
+    // 🔹 Función segura para cargar el usuario desde localStorage
+    const loadUserFromStorage = () => {
       const token = localStorage.getItem("token");
-      setIsLogged(!!token);
-      if (!token) setUser(null);
+      const storedUser = localStorage.getItem("user");
+      let parsedUser = null;
+
+      try {
+        parsedUser = storedUser ? JSON.parse(storedUser) : null;
+      } catch (err) {
+        console.warn("Error parsing user from localStorage:", err);
+        parsedUser = null;
+      }
+
+      if (token && parsedUser) {
+        setIsLogged(true);
+        setUser(parsedUser);
+      } else {
+        setIsLogged(false);
+        setUser(null);
+      }
     };
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
+
+    // 🔹 Inicializar al cargar la app
+    loadUserFromStorage();
+
+    // 🔹 Escuchar cambios en localStorage (otras pestañas o logout)
+    window.addEventListener("storage", loadUserFromStorage);
+    return () => window.removeEventListener("storage", loadUserFromStorage);
   }, []);
+
 
   // función para loguear
   const login = (userData, token) => {
     localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(userData)); // guardar user
     setUser(userData);
     setIsLogged(true);
   };
@@ -28,6 +51,7 @@ export const AuthProvider = ({ children }) => {
   // función para desloguear
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
     setIsLogged(false);
   };

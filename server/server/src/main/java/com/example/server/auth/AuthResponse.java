@@ -30,4 +30,6 @@ public class AuthResponse {
      * Token que permite renovar el accessToken sin reautenticar.
     */
     private String refreshToken;
+
+    private UserResponse user;
 }
