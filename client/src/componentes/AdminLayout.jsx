@@ -17,17 +17,9 @@ export default function AdminLayout() {
         </nav>
       </aside>
 
-      {/* Main content */}
-      <main className="flex-1 p-4">
-        {/* Topbar móvil */}
-        <div className="md:hidden mb-4">
-          <h2 className="text-lg font-semibold">Admin</h2>
-        </div>
-
-        {/* Outlet renderiza la ruta hija */}
-        <div className="bg-white rounded-xl p-4 shadow-sm">
-          <Outlet />
-        </div>
+           {/* Contenido */}
+      <main className="flex-1 p-6">
+        <Outlet /> {/* Aquí se renderiza Dashboard o las demás rutas hijas */}
       </main>
     </div>
   );

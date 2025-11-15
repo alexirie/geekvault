@@ -12,7 +12,7 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const { setIsLogged } = useContext(AuthContext);
+    const { setIsLogged, setUser  } = useContext(AuthContext);
     const authContext = useContext(AuthContext);
 
 
@@ -26,6 +26,9 @@ export default function LoginPage() {
 
             // Guardar tokens
             authContext.login(res.user, res.accessToken);
+            localStorage.setItem("refreshToken", res.refreshToken);
+            localStorage.setItem("user", JSON.stringify(res.user));
+
            
             // Redirigir a HomePage
             navigate("/");

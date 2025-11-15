@@ -8,6 +8,7 @@ import SplashScreen from "./pages/SplashScreen";
 import LoginPage from './pages/LoginPage';
 import AdminLayout from "./componentes/AdminLayout";
 import ProtectedRoute from "./componentes/ProtectedRoute";
+import Dashboard from './pages/admin/Dashboard';
 
 function App() {
 
@@ -47,7 +48,7 @@ function App() {
         {/* Rutas admin protegidas */}
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<AdminLayout />}>
-         
+            <Route index element={<Dashboard />} /> {/* Esta es la página por defecto */}
             {/* más rutas admin hijas aquí */}
           </Route>
         </Route>
