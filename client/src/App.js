@@ -10,6 +10,7 @@ import AdminLayout from "./componentes/AdminLayout";
 import ProtectedRoute from "./componentes/ProtectedRoute";
 import Dashboard from './pages/admin/Dashboard';
 import PublicRoute from './componentes/PublicRoute';
+import FiguresList from './pages/admin/FigureList';
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} /> {/* Esta es la página por defecto */}
+            <Route path="figuras" element={<FiguresList />} />
             {/* más rutas admin hijas aquí */}
           </Route>
         </Route>
