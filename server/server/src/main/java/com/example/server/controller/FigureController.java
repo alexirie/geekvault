@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,6 +28,9 @@ import java.io.IOException;
 public class FigureController {
 
     private final FigureService figureService;
+
+    @Autowired
+    private R2Service r2Service;
 
     public FigureController(FigureService figureService) {
         this.figureService = figureService;
@@ -70,25 +75,13 @@ public class FigureController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) {
         try {
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            String url = r2Service.uploadFile(file);
+            return ResponseEntity.ok(url);
 
-            Path uploadPath = Paths.get("uploads");
-
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-            // Devuelves la URL accesible (puedes ajustarla a tu hosting)
-            String fileUrl = "/uploads/" + fileName;
-
-            return ResponseEntity.ok(fileUrl);
-
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al subir la imagen");
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al subir la imagen: " + e.getMessage());
         }
     }
 
