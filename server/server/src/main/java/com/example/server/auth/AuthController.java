@@ -2,6 +2,7 @@ package com.example.server.auth;
 
 import com.example.server.dto.UserDTO;
 import com.example.server.model.User;
+import com.example.server.model.UserRole;
 import com.example.server.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.Set;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -42,7 +44,18 @@ public class AuthController {
         String accessToken = jwtUtils.generateJwtToken(user.getEmail());
         RefreshToken refresh = createRefreshToken(user);
 
-        UserResponse userResponse = new UserResponse(user);
+        // 5️⃣ Convertir Set<UserRole> -> Set<String> para UserResponse
+        Set<String> roleNames = user.getRoles()
+                .stream()
+                .map(UserRole::getRole)
+                .collect(Collectors.toSet());
+
+        // 6️⃣ Construir UserResponse
+        UserResponse userResponse = new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                roleNames);
 
         return ResponseEntity.ok(new AuthResponse(
                 accessToken,
@@ -125,7 +138,10 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         // Roles por defecto
-        user.setRoles(Set.of("ROLE_USER"));
+        UserRole role = new UserRole();
+        role.setRole("ROLE_USER");
+        role.setUser(user);
+        user.setRoles(Set.of(role));
 
         user.setEnabled(true);
         user.setFailedLoginAttempts(0);

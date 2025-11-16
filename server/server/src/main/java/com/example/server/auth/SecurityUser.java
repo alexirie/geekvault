@@ -1,6 +1,8 @@
 package com.example.server.auth;
 
 import com.example.server.model.User;
+import com.example.server.model.UserRole;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +32,7 @@ public class SecurityUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles().stream()
+                .map(UserRole::getRole)   
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
     }
