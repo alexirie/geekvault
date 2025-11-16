@@ -1,4 +1,4 @@
-package com.freakproject.service; // <-- cambia esto a tu paquete
+package com.example.server.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

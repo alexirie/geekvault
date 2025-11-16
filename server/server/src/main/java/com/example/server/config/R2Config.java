@@ -1,4 +1,4 @@
-package com.freakproject.config; // <-- cambia esto a tu paquete
+package com.example.server.config; // <-- cambia esto a tu paquete
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
