@@ -17,13 +17,17 @@ import java.util.List;
  * a un UserDetails de Spring Security.
  * 
  * Propósito:
- * - Spring Security trabaja con UserDetails para realizar autenticación y autorización.
- * - Esta clase mapea los datos del usuario (email, contraseña, roles, estado) al formato que espera Spring Security.
+ * - Spring Security trabaja con UserDetails para realizar autenticación y
+ * autorización.
+ * - Esta clase mapea los datos del usuario (email, contraseña, roles, estado)
+ * al formato que espera Spring Security.
  *
  * Quién la llama:
- * - CustomUserDetailsService.loadUserByUsername() devuelve un SecurityUser cuando se autentica un usuario.
- * - Spring Security utiliza esta clase internamente para verificar credenciales y permisos.
-*/
+ * - CustomUserDetailsService.loadUserByUsername() devuelve un SecurityUser
+ * cuando se autentica un usuario.
+ * - Spring Security utiliza esta clase internamente para verificar credenciales
+ * y permisos.
+ */
 
 @RequiredArgsConstructor
 public class SecurityUser implements UserDetails {
@@ -32,14 +36,27 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-    if (user.getRoles() == null) return List.of(); // nunca null
+        System.out.println("SecurityUser: generando authorities para user = " + user.getEmail());
 
-    return user.getRoles().stream()
-               .map(UserRole::getRole)
-               .filter(r -> r != null && !r.isBlank())
-               .map(SimpleGrantedAuthority::new)
-               .collect(Collectors.toList());
-}
+        if (user.getRoles() == null) {
+            System.out.println("SecurityUser: roles es null");
+            return List.of(); // colección vacía segura
+        }
+
+        user.getRoles().forEach(r -> System.out.println("SecurityUser: role = " + r));
+
+        List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
+                .map(UserRole::getRole)
+                .peek(r -> System.out.println("SecurityUser: role string = " + r))
+                .filter(r -> r != null && !r.isBlank())
+                .map(SimpleGrantedAuthority::new)
+                .peek(a -> System.out.println("SecurityUser: authority creada = " + a))
+                .collect(Collectors.toList());
+
+        System.out.println("SecurityUser: authorities finales = " + authorities);
+
+        return authorities;
+    }
 
     @Override
     public String getPassword() {
@@ -48,7 +65,7 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail(); 
+        return user.getEmail();
     }
 
     @Override
@@ -58,7 +75,8 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        if (user.getLockUntil() == null) return true;
+        if (user.getLockUntil() == null)
+            return true;
         return user.getLockUntil().isBefore(java.time.Instant.now());
     }
 

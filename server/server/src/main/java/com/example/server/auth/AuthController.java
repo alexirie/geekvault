@@ -41,8 +41,13 @@ public class AuthController {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
+        System.out.println("AuthController: login exitoso, cargando usuario...");
+
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("No existe el usuario"));
+
+        System.out.println("AuthController: usuario = " + user);
+        System.out.println("AuthController: roles = " + user.getRoles());
 
         String accessToken = jwtUtils.generateJwtToken(user.getEmail());
         RefreshToken refresh = createRefreshToken(user);
