@@ -47,13 +47,13 @@ public class SecurityUser implements UserDetails {
 
         List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
                 .map(UserRole::getRole)
-                .peek(r -> System.out.println("SecurityUser: role string = " + r))
                 .filter(r -> r != null && !r.isBlank())
                 .map(SimpleGrantedAuthority::new)
                 .peek(a -> System.out.println("SecurityUser: authority creada = " + a))
                 .collect(Collectors.toList());
 
-        System.out.println("SecurityUser: authorities finales = " + authorities);
+        System.out.println("SecurityUser: authorities finales = " + authorities.stream()
+            .map(GrantedAuthority::getAuthority).toList());
 
         return authorities;
     }
