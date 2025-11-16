@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+import java.util.List;
 
 /**
  * SecurityUser es un adaptador que convierte la entidad User de la aplicación
@@ -31,11 +32,14 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRoles().stream()
-                .map(UserRole::getRole)   
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toSet());
-    }
+    if (user.getRoles() == null) return List.of(); // nunca null
+
+    return user.getRoles().stream()
+               .map(UserRole::getRole)
+               .filter(r -> r != null && !r.isBlank())
+               .map(SimpleGrantedAuthority::new)
+               .collect(Collectors.toList());
+}
 
     @Override
     public String getPassword() {
