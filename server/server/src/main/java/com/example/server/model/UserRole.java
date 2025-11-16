@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "user") // exclude para evitar bucle
+@ToString(exclude = "user")
 public class UserRole {
 
     @Id

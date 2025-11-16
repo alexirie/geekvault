@@ -15,6 +15,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(exclude = "roles") // exclude para evitar bucle
+@ToString(exclude = "roles")
 public class User {
 
     @Id 
