@@ -43,7 +43,7 @@ public class SecurityUser implements UserDetails {
             return List.of(); // colección vacía segura
         }
 
-        user.getRoles().forEach(r -> System.out.println("SecurityUser: role = " + r));
+        user.getRoles().forEach(r -> System.out.println("SecurityUser: role = " + r.getRole()));
 
         List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
                 .map(UserRole::getRole)
