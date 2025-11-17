@@ -58,7 +58,8 @@ export const register = async (username, email, password) => {
 // CREATE FIGURE
 // ---------------------
 export const createFigure = async (name, brandId, price, inStock, imageUrl, anime, collection, description) => {
-
+  console.log('en createFigure: ' + imageUrl);
+  
   const res = await fetch(`${BASE_URL}/figures`, {
     method: "POST",
     headers: {

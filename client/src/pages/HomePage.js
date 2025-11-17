@@ -15,7 +15,7 @@ const HomePage = () => {
   const [activeFilter, setActiveFilter] = useState("brand"); // "brand" | "collection"
   const navigate = useNavigate();
 
-
+  console.log('Figures en HomePage:', figures);
 
   if (loading) return <div className="text-center mt-20">Cargando figuras...</div>;
 

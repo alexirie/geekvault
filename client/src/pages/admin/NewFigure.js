@@ -38,6 +38,8 @@ export default function NewFigure() {
             finalImageUrl = await res.text();
         }
 
+        console.log('En NewFigure: '+finalImageUrl);
+
         try {
             // Llamamos a la función del API con los campos que espera el backend
             await createFigure(

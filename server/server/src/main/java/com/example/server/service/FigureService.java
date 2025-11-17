@@ -69,26 +69,7 @@ public class FigureService {
         figure.setBrand(brandRepository.findById(dto.getBrandId())
                 .orElseThrow(() -> new IllegalArgumentException("Brand no encontrada con id: " + dto.getBrandId())));
 
-        // Si viene una URL completa de la imagen, extrae únicamente el filename
-        // Procesar imageUrl solo si viene y no está vacía
-        if (dto.getImageUrl() != null && !dto.getImageUrl().isBlank()) {
-            try {
-                URI uri = URI.create(dto.getImageUrl()); // puede lanzar excepción si no es una URL válida
-                String fileName = Paths.get(uri.getPath()).getFileName().toString();
-
-                // Si no se pudo sacar filename, deja null
-                figure.setImageUrl(fileName.isBlank() ? null : fileName);
-
-            } catch (Exception e) {
-                // Si falla (URL inválida, no tiene esquema, etc.), guarda null
-                figure.setImageUrl(null);
-            }
-
-        } else {
-            // Si viene vacío o null → guardamos null
-            figure.setImageUrl(null);
-        }
-
+        figure.setImageUrl(dto.getImageUrl());
         figure.setCollection(dto.getCollection());
         figure.setAnime(dto.getAnime());
         figure.setYear(dto.getYear());
@@ -112,11 +93,8 @@ public class FigureService {
         // Convierte el id al nombre
         dto.setBrandName(figure.getBrand().getName());
 
-        // Si hay imagen guardada, convertir filename → URL completa para mostrarla
-        if (figure.getImageUrl() != null) {
-            dto.setImageUrl(Constantes.IMAGES_URL + figure.getImageUrl());
-        }
-
+        
+        dto.setImageUrl(figure.getImageUrl());
         dto.setInStock(figure.getInStock());
         dto.setPrice(figure.getPrice());
         dto.setCollection(figure.getCollection());

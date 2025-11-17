@@ -10,6 +10,8 @@ const FigureCard = ({ figure, onClick }) => {
   const { isLogged } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  console.log("En figureCard: "+ figure.imageUrl);
+
   return (
     <div className="mt-2 w-full max-w-xs cursor-pointer group relative" onClick={onClick}>
 

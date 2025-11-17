@@ -5,11 +5,14 @@ export default function useFigures() {
   const [figures, setFigures] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  
+
   useEffect(() => {
     getFigures()
       .then((data) => {
         setFigures(
           data.map((f) => ({
+            
             ...f,
             brandName: f.brandName,
             collection: f.collection,

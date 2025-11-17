@@ -114,6 +114,10 @@ public class R2Service {
                 RequestBody.fromBytes(fileBytes));
 
         System.out.println("archivo SUBIDO");
+
+        //Ñapa para tener la buena... toy harto
+        publicUrl = "https://pub-a7a439eb25d84268834af547b9203b6c.r2.dev";
+
         // devuelve la URL completa
         return String.format("%s/%s", publicUrl, keyName);
     }

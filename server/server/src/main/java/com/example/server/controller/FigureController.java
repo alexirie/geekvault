@@ -70,7 +70,7 @@ public class FigureController {
         System.out.println("Ejecutando subida de imagen");
         String   url  =    r2Service.uploadFile(file, true );
         System.out.println("Funcionando..." + url); 
-        return ResponseEntity.ok( "Archivo subido correctamente a " + url); 
+        return ResponseEntity.ok(url); 
     } 
 
 }
