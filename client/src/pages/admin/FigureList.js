@@ -2,9 +2,12 @@ import React, { useEffect, useState, useMemo } from "react";
 import useFigures from "../../hooks/homePage/useFigures";
 import Table from "../../componentes/Table";
 
+import { useNavigate } from "react-router-dom";
+
 export default function FiguresList() {
 
  const { figures, loading } = useFigures();
+ const navigate = useNavigate();
 
  const columns = useMemo(
   () => [
@@ -48,6 +51,15 @@ export default function FiguresList() {
 
   return (
     <div className="p-6">
+        {/* Botón para crear nueva figura */}
+      <div className="flex justify-left mb-4">
+        <button
+          onClick={() => navigate("/admin/figuras/nueva")}
+          className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition"
+        >
+          Crear Figura
+        </button>
+      </div>
       <h1 className="text-2xl font-bold mb-4">Lista de Figuras</h1>
         <Table columns={columns} data={figures}/>
     </div>

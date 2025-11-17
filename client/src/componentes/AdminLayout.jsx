@@ -11,7 +11,6 @@ export default function AdminLayout() {
         <nav className="flex flex-col gap-2">
           <Link to="/admin" className="text-gray-700 hover:text-blue-600">Dashboard</Link>
           <Link to="/admin/figuras" className="text-gray-700 hover:text-blue-600">Figuras</Link>
-          <Link to="/admin/figuras/nueva" className="text-gray-700 hover:text-blue-600">Nueva Figura</Link>
           <Link to="/admin/usuarios" className="text-gray-700 hover:text-blue-600">Usuarios</Link>
           <Link to="/admin/configuracion" className="text-gray-700 hover:text-blue-600">Configuración</Link>
         </nav>
