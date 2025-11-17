@@ -10,9 +10,9 @@ import AdminLayout from "./componentes/AdminLayout";
 import ProtectedRoute from "./componentes/ProtectedRoute";
 import Dashboard from './pages/admin/Dashboard';
 import PublicRoute from './componentes/PublicRoute';
-import FiguresList from './pages/admin/FigureList';
-import NewFigure from './pages/admin/NewFigure';
-import EditFigure from './pages/admin/EditFigure';
+import FiguresList from './pages/admin/figures/FigureList';
+import NewFigure from './pages/admin/figures/NewFigure';
+import EditFigure from './pages/admin/figures/EditFigure';
 
 function App() {
 

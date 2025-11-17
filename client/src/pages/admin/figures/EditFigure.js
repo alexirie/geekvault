@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getFigureById, updateFigure } from "../../services/api";
-import FigureForm from "../../componentes/FigureForm";
+import { getFigureById, updateFigure } from "../../../services/api";
+import FigureForm from "../../../componentes/FigureForm";
 
 export default function EditFigure() {
   const { id } = useParams();

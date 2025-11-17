@@ -1,8 +1,8 @@
 // src/pages/admin/NewFigure.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createFigure } from "../../services/api";
-import FigureForm from "../../componentes/FigureForm";
+import { createFigure } from "../../../services/api";
+import FigureForm from "../../../componentes/FigureForm";
 
 export default function NewFigure() {
 

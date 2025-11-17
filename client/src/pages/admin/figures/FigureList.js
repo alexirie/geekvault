@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import useFigures from "../../hooks/homePage/useFigures";
-import Table from "../../componentes/Table";
-import { deleteFigure } from "../../services/api";
+import useFigures from "../../../hooks/homePage/useFigures";
+import Table from "../../../componentes/Table";
+import { deleteFigure } from "../../../services/api";
 
 import { useNavigate } from "react-router-dom";
 
