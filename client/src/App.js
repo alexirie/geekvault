@@ -14,6 +14,7 @@ import FiguresList from './pages/admin/figures/FigureList';
 import NewFigure from './pages/admin/figures/NewFigure';
 import EditFigure from './pages/admin/figures/EditFigure';
 import UserList from './pages/admin/users/UserList';
+import NewUser from './pages/admin/users/NewUser';
 
 function App() {
 
@@ -64,6 +65,7 @@ function App() {
 
             {/* USUARIOS */}
             <Route path="usuarios" element={<UserList />} />
+            <Route path="usuarios/nuevo" element={<NewUser />} />
             {/* más rutas admin hijas aquí */}
           </Route>
         </Route>

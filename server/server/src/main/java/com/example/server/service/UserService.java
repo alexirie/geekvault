@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import java.util.Set;
 import java.util.Collections;
 
-
 @Service
 @Transactional
 public class UserService {
@@ -90,12 +89,18 @@ public class UserService {
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
-        
+
         // Cifrar la contraseña antes de guardar
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-        user.setRoles(Collections.emptySet());
+        if (dto.getRoles() != null) {
+            Set<UserRole> roles = dto.getRoles().stream()
+                    .map(roleName -> new UserRole(null, roleName, user))
+                    .collect(Collectors.toSet());
+            user.setRoles(roles);
+        }
+
         user.setEnabled(true);
         user.setFailedLoginAttempts(0);
         user.setLockUntil(null);
