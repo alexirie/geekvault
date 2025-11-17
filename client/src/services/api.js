@@ -39,6 +39,19 @@ export const deleteFigure = async (id) => {
 };
 
 // ---------------------
+// USUARIOS
+// ---------------------
+export const getUsers = async () => {
+  const res = await fetch(`${BASE_URL}/users`);
+  if (!res.ok) throw new Error('Error fetching users');
+  return res.json();
+};
+
+
+
+
+
+// ---------------------
 // LOGIN
 // ---------------------
 export const login = async (email, password) => {

@@ -13,6 +13,7 @@ import PublicRoute from './componentes/PublicRoute';
 import FiguresList from './pages/admin/figures/FigureList';
 import NewFigure from './pages/admin/figures/NewFigure';
 import EditFigure from './pages/admin/figures/EditFigure';
+import UserList from './pages/admin/users/UserList';
 
 function App() {
 
@@ -56,9 +57,13 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} /> {/* Esta es la página por defecto */}
+            {/* FIGURAS */}
             <Route path="figuras" element={<FiguresList />} />
             <Route path="figuras/nueva" element={<NewFigure />} />
             <Route path="figuras/:id/editar" element={<EditFigure />} />
+
+            {/* USUARIOS */}
+            <Route path="usuarios" element={<UserList />} />
             {/* más rutas admin hijas aquí */}
           </Route>
         </Route>
