@@ -17,6 +17,7 @@ export default function EditFigure() {
   const handleSubmit = async (data) => {
     setLoading(true);
     try {
+        console.log(id, data);
       await updateFigure(id, data);
       navigate("/admin/figuras");
     } catch (e) {

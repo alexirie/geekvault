@@ -4,7 +4,7 @@ import { getFigureById, getFigures } from "../services/api";
 import FigureCard from "../componentes/FigureCard";
 import PriceComparisonPanel from "../componentes/PriceComparisonPanel";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import BottomNav from "../componentes/BottomNav";
 
 function FigureDetail() {

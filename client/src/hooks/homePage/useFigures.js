@@ -26,5 +26,5 @@ export default function useFigures() {
       .finally(() => setLoading(false));
   }, []);
 
-  return { figures, loading };
+  return { figures, loading, setFigures };
 }

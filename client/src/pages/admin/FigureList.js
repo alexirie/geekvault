@@ -1,13 +1,26 @@
-import React, { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import useFigures from "../../hooks/homePage/useFigures";
 import Table from "../../componentes/Table";
+import { deleteFigure } from "../../services/api";
 
 import { useNavigate } from "react-router-dom";
 
 export default function FiguresList() {
 
- const { figures, loading } = useFigures();
+ const { figures, loading, setFigures } = useFigures();
  const navigate = useNavigate();
+
+ const handleDelete = async (id) => {
+  if (!window.confirm("¿Seguro que quieres eliminar esta figura?")) return;
+  try {
+    await deleteFigure(id); // tu función que hace fetch DELETE
+    // Actualizas el estado para quitar la figura borrada
+    setFigures((prev) => prev.filter(f => f.id !== id));
+  } catch (err) {
+    alert("Error al eliminar: " + err.message);
+  }
+};
+
 
  const columns = useMemo(
   () => [
@@ -34,7 +47,7 @@ export default function FiguresList() {
           </button>
           <button
             className="text-red-500 hover:underline"
-            onClick={() => alert("Eliminar figura " + row.original.id)}
+            onClick={() => handleDelete(row.original.id)}
           >
             Eliminar
           </button>

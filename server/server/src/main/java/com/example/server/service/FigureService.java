@@ -7,8 +7,11 @@ import com.example.server.repository.BrandRepository;
 import org.springframework.stereotype.Service;
 import com.example.server.util.Constantes;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import java.net.URI;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,10 +44,19 @@ public class FigureService {
 
     public Figure update(Long id, Figure figure) {
         return figureRepository.findById(id).map(existing -> {
+
             existing.setName(figure.getName());
             existing.setBrand(figure.getBrand());
+            existing.setPrice(figure.getPrice());
+            existing.setImageUrl(figure.getImageUrl());
+            existing.setDescription(figure.getDescription());
+            existing.setAnime(figure.getAnime());
+            existing.setCollection(figure.getCollection());
+            existing.setInStock(figure.getInStock());
+
             return figureRepository.save(existing);
-        }).orElseGet(() -> figureRepository.save(figure));
+
+        }).orElseThrow(() -> new EntityNotFoundException("Figura no encontrada"));
     }
 
     public void delete(Long id) {
@@ -93,7 +105,6 @@ public class FigureService {
         // Convierte el id al nombre
         dto.setBrandName(figure.getBrand().getName());
 
-        
         dto.setImageUrl(figure.getImageUrl());
         dto.setInStock(figure.getInStock());
         dto.setPrice(figure.getPrice());

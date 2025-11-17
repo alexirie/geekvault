@@ -29,6 +29,15 @@ export const updateFigure = async (id, figureData) => {
   return res.json();
 };
 
+export const deleteFigure = async (id) => {
+  const res = await fetch(`${BASE_URL}/figures/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) throw new Error("Error deleting figure");
+  return true; 
+};
+
 // ---------------------
 // LOGIN
 // ---------------------

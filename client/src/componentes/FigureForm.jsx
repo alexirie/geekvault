@@ -1,5 +1,5 @@
 // src/components/FigureForm.jsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function FigureForm({ initialData = {}, onSubmit, loading, error }) {
     const [name, setName] = useState(initialData.name || "");
@@ -44,7 +44,7 @@ export default function FigureForm({ initialData = {}, onSubmit, loading, error 
         
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             {error && <p className="text-red-500 mb-4 bg-red-100 p-2 rounded">{error}</p>}
-            
+
             {/* NOMBRE */}
             <div>
                 <label className="block text-sm font-medium mb-1 text-gray-700">
