@@ -12,6 +12,7 @@ import Dashboard from './pages/admin/Dashboard';
 import PublicRoute from './componentes/PublicRoute';
 import FiguresList from './pages/admin/FigureList';
 import NewFigure from './pages/admin/NewFigure';
+import EditFigure from './pages/admin/EditFigure';
 
 function App() {
 
@@ -57,6 +58,7 @@ function App() {
             <Route index element={<Dashboard />} /> {/* Esta es la página por defecto */}
             <Route path="figuras" element={<FiguresList />} />
             <Route path="figuras/nueva" element={<NewFigure />} />
+            <Route path="figuras/:id/editar" element={<EditFigure />} />
             {/* más rutas admin hijas aquí */}
           </Route>
         </Route>

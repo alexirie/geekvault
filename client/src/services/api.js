@@ -1,6 +1,9 @@
 // src/services/api.js
 import { BASE_URL, BASE_URL_L } from '../constantes';
 
+// ---------------------
+// FIGURAS
+// ---------------------
 export const getFigures = async () => {
   const res = await fetch(`${BASE_URL}/figures`);
   if (!res.ok) throw new Error('Error fetching figures');
@@ -10,6 +13,19 @@ export const getFigures = async () => {
 export const getFigureById = async (id) => {
   const res = await fetch(`${BASE_URL}/figures/${id}`);
   if (!res.ok) throw new Error('Error fetching figure');
+  return res.json();
+};
+
+export const updateFigure = async (id, figureData) => {
+  const res = await fetch(`${BASE_URL}/figures/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(figureData),
+  });
+
+  if (!res.ok) throw new Error("Error updating figure");
   return res.json();
 };
 

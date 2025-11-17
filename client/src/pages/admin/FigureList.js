@@ -28,7 +28,7 @@ export default function FiguresList() {
         <div className="flex gap-2">
           <button
             className="text-blue-500 hover:underline"
-            onClick={() => alert("Editar figura " + row.original.id)}
+            onClick={() => navigate(`/admin/figuras/${row.original.id}/editar`)}
           >
             Editar
           </button>
