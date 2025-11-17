@@ -44,20 +44,22 @@ public class R2Service {
         System.out.println("Nombre original del archivo: " + file.getOriginalFilename());
         System.out.println("Tamaño del archivo (bytes): " + file.getSize());
 
-        //System.out.println("accesKey sin pasar por aws: "+accessKey);
+        // System.out.println("accesKey sin pasar por aws: "+accessKey);
 
         String cleanAccessKey = accessKey.split(" ")[0];
 
-        //System.out.println("accesKey cortado: "+cleanAccessKey);
+        // System.out.println("accesKey cortado: "+cleanAccessKey);
 
         AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(cleanAccessKey, secretKey);
 
-        /*System.out.println("----- DEBUG R2 CONFIG -----");
-        System.out.println("accessKey = [" + accessKey + "]");
-        System.out.println("secretKey = [" + secretKey + "]");
-        System.out.println("bucketName = [" + bucketName + "]");
-        System.out.println("endpoint = [" + endpoint + "]");
-        System.out.println("---------------------------");*/
+        /*
+         * System.out.println("----- DEBUG R2 CONFIG -----");
+         * System.out.println("accessKey = [" + accessKey + "]");
+         * System.out.println("secretKey = [" + secretKey + "]");
+         * System.out.println("bucketName = [" + bucketName + "]");
+         * System.out.println("endpoint = [" + endpoint + "]");
+         * System.out.println("---------------------------");
+         */
 
         S3Configuration serviceConfiguration = S3Configuration.builder()
                 .pathStyleAccessEnabled(true)
@@ -73,34 +75,45 @@ public class R2Service {
         // Asegurarse de que el bucket existe (crearlo si no existe)
         try {
             s3Client.headBucket(HeadBucketRequest.builder().bucket(bucketName).build());
-          
+
         } catch (NoSuchBucketException e) {
-          
+
             s3Client.createBucket(CreateBucketRequest.builder().bucket(bucketName).build());
-           
+
         }
 
         // Generar un nombre de clave único para el archivo
         String keyName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-        
+
+        // Nombre original del archivo
+        String originalFileName = file.getOriginalFilename(); // ej: "ds.PNG"
+
+        // Carpeta con el nombre del archivo sin extensión
+        String folderName = originalFileName.contains(".")
+                ? originalFileName.substring(0, originalFileName.lastIndexOf("."))
+                : originalFileName;
+
+        // Reutilizamos tu keyName existente y anteponemos la carpeta
+        keyName = folderName + "/" + keyName; // ahora keyName = "ds/UUID_ds.PNG"
 
         // Convertir el archivo a byte
         byte[] fileBytes = file.getBytes();
-       
 
         // Crear el PutObjectRequest con la ACL apropiada
-        PutObjectRequest.Builder putObjectRequestBuilder = PutObjectRequest.builder().bucket(bucketName).key(keyName);
+        PutObjectRequest.Builder putObjectRequestBuilder = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(keyName);
+
         if (isPublic) {
-            //putObjectRequestBuilder.acl(ObjectCannedACL.PUBLIC_READ);
-          
+            // putObjectRequestBuilder.acl(ObjectCannedACL.PUBLIC_READ);
         }
 
-        // Coloca el objeto en el bucket R2
+        // Subir el objeto al bucket R2
         s3Client.putObject(
                 putObjectRequestBuilder.build(),
                 RequestBody.fromBytes(fileBytes));
 
-        System.out.println("archivo SUBIDO");        
+        System.out.println("archivo SUBIDO");
         // devuelve la URL completa
         return String.format("%s/%s", publicUrl, keyName);
     }
