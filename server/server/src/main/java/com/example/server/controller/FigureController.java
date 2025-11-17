@@ -5,13 +5,12 @@ import com.example.server.model.Figure;
 import com.example.server.service.FigureService;
 import jakarta.validation.Valid;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.server.service.R2Service;
-
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,16 +66,11 @@ public class FigureController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) {
-        try {
-            String url = r2Service.uploadFile(file);
-            return ResponseEntity.ok(url);
-
-        } catch (Exception e) {
-            return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al subir la imagen: " + e.getMessage());
-        }
-    }
+    public ResponseEntity<String> uploadFile ( @RequestPart("file") MultipartFile file)  throws IOException { 
+        System.out.println("Ejecutando subida de imagen");
+        String   url  =    r2Service.uploadFile(file, true );
+        System.out.println("Funcionando..." + url); 
+        return ResponseEntity.ok( "Archivo subido correctamente a " + url); 
+    } 
 
 }

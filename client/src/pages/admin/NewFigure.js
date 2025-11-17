@@ -10,7 +10,6 @@ export default function NewFigure() {
     const [brandId, setBrand] = useState("");
     const [price, setPrice] = useState("");
     const [inStock, setInStock] = useState(true);
-    const [imageUrl, setImageUrl] = useState("");
     const [anime, setAnime] = useState("");
     const [collection, setCollection] = useState("");
     const [description, setDescription] = useState("");
@@ -29,7 +28,7 @@ export default function NewFigure() {
 
         if (imageFile) {
             const formData = new FormData();
-            formData.append("image", imageFile);
+            formData.append("file", imageFile);
 
             const res = await fetch(`${BASE_URL}/figures/upload`, {
                 method: "POST",
@@ -141,6 +140,7 @@ export default function NewFigure() {
                         </label>
                         <input
                             type="file"
+                            name="file"
                             accept="image/*"
                             onChange={handleFileChange}
                             className="w-full p-3 border rounded-lg"
