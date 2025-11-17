@@ -9,31 +9,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.server.service.R2Service;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.UUID;
-import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/api/figures")
 public class FigureController {
 
     private final FigureService figureService;
+    private final R2Service r2Service;
+
 
     @Autowired
-    private R2Service r2Service;
-
-    public FigureController(FigureService figureService) {
+    public FigureController(FigureService figureService, R2Service r2Service) {
         this.figureService = figureService;
+        this.r2Service = r2Service;
     }
 
     @GetMapping

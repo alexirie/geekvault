@@ -1,4 +1,4 @@
-package com.example.server.config; // <-- cambia esto a tu paquete
+package com.example.server.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,13 +15,13 @@ import java.net.URI;
 @Configuration
 public class R2Config {
 
-    @Value("${cloudflare.r2.accessKey}")
+    @Value("${r2.accessKey}")
     private String accessKey;
 
-    @Value("${cloudflare.r2.secretKey}")
+    @Value("${r2.secretKey}")
     private String secretKey;
 
-    @Value("${cloudflare.r2.endpoint}")
+    @Value("${r2.endpoint}")
     private String endpoint;
 
     @Bean

@@ -14,10 +14,10 @@ public class R2Service {
 
     private final S3Client s3Client;
 
-    @Value("${cloudflare.r2.bucket}")
+    @Value("${r2.bucket}")
     private String bucketName;
 
-    @Value("${cloudflare.r2.publicUrl}")
+    @Value("${r2.publicUrl}")
     private String publicUrl;
 
     public R2Service(S3Client s3Client) {
