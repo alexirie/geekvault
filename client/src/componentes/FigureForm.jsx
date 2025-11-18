@@ -1,5 +1,6 @@
 // src/components/FigureForm.jsx
 import { useState } from "react";
+import { BASE_URL } from "../constantes";
 
 export default function FigureForm({ initialData = {}, onSubmit, loading, error }) {
     const [name, setName] = useState(initialData.name || "");
@@ -19,7 +20,7 @@ export default function FigureForm({ initialData = {}, onSubmit, loading, error 
             const formData = new FormData();
             formData.append("file", imageFile);
 
-            const res = await fetch(`${process.env.REACT_APP_BASE_URL}/figures/upload`, {
+            const res = await fetch(`${BASE_URL}/figures/upload`, {
                 method: "POST",
                 body: formData,
             });

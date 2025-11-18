@@ -81,11 +81,13 @@ function FigureDetail() {
             {/* 🔥 CONTENIDO PRINCIPAL */}
             <div className="p-4 flex flex-col items-center">
                 {/* Imagen */}
-                <img
-                    src={figure.imageUrl}
-                    alt={figure.name}
-                    className="w-full max-w-md rounded-lg shadow-lg mb-4"
-                />
+                <div className="w-full h-[75vh] bg-white flex items-center justify-center rounded-lg shadow-lg mb-4">
+    <img
+        src={figure.imageUrl}
+        alt={figure.name}
+        className="max-w-full max-h-full object-contain"
+    />
+</div>
 
                 {/* Datos alineados a la izquierda */}
                 <div className="w-full max-w-md flex justify-between items-start mb-4">
