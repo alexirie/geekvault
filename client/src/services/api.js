@@ -103,6 +103,18 @@ export const createStock = async (  figureId, storeId, price, available, product
   return res.json();
 }
 
+export const deleteStock = async (id) => {
+  const res = await fetch(`${BASE_URL}/stocks/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) throw new Error("Error deleting stock");
+  return true; 
+};
+
+
+
+
 // ---------------------
 // STORES
 // ---------------------

@@ -8,7 +8,7 @@ export default function StockList() {
   const { stocks, loading, setStocks } = useStocks();
   const navigate = useNavigate();
 
-  /*const handleDelete = async (id) => {
+  const handleDelete = async (id) => {
     if (!window.confirm("¿Seguro que quieres eliminar este precio?")) return;
     try {
       await deleteStock(id); // tu función fetch DELETE
@@ -16,7 +16,7 @@ export default function StockList() {
     } catch (err) {
       alert("Error al eliminar: " + err.message);
     }
-  };*/
+  };
 
   const columns = useMemo(() => [
     { id: "id", header: "ID", accessorKey: "id" },
@@ -39,7 +39,7 @@ export default function StockList() {
           </button>
           <button
             className="text-red-500 hover:underline"
-            onClick={() => alert(row.original.id)}
+            onClick={() => handleDelete(row.original.id)}
           >
             Eliminar
           </button>
