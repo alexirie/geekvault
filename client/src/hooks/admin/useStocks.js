@@ -11,8 +11,8 @@ export default function useStocks() {
         setStocks(
           data.map((s) => ({
             ...s,
-            figureName: s.figure?.name || "",
-            storeName: s.store?.name || "",
+            figureName: s.figureName || "",
+            storeName: s.storeName || "",
             price: s.price ?? 0,
             available: s.available ?? false,
             productUrl: s.productUrl || "",

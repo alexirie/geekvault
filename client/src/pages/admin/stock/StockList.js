@@ -20,8 +20,8 @@ export default function StockList() {
 
   const columns = useMemo(() => [
     { id: "id", header: "ID", accessorKey: "id" },
-    { id: "figureName", header: "Figura", accessorKey: "figure.name" },
-    { id: "storeName", header: "Tienda", accessorKey: "store.name" },
+    { id: "figureName", header: "Figura", accessorKey: "figureName" },
+    { id: "storeName", header: "Tienda", accessorKey: "storeName" },
     { id: "price", header: "Precio", accessorKey: "price" },
     { id: "available", header: "Disponible", accessorKey: "available" },
     { id: "productUrl", header: "Link", accessorKey: "productUrl" },
@@ -49,6 +49,7 @@ export default function StockList() {
   ], []);
 
   if (loading) return <p>Cargando precios...</p>;
+  console.log(stocks);
 
   return (
     <div className="p-6">
