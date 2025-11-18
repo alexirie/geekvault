@@ -10,7 +10,7 @@ const SearchBar = ({ search, setSearch }) => (
       />
       <input
         type="text"
-        placeholder="Buscar figuras..."
+        placeholder="Buscar..."
         className="w-full p-3 pl-10 rounded-xl shadow-md border focus:ring-2 focus:ring-gray-300 outline-none mt-3"
         value={search}
         onChange={(e) => setSearch(e.target.value)}

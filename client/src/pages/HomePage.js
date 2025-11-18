@@ -30,7 +30,7 @@ const HomePage = () => {
     } else {
       key = fig.brandName || "Sin marca";
     }
-    fig.inStock = true; //PRUEBA PARA VER COMO QUEDA STOCK
+    fig.inStock = true;
 
     if (!acc[key]) acc[key] = [];
     acc[key].push(fig);
