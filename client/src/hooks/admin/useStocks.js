@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getStocks } from "../../services/api"; // Asegúrate de tener esta función en tu API
+import { getStocks } from "../../services/api";
 
 export default function useStocks() {
   const [stocks, setStocks] = useState([]);

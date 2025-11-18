@@ -17,6 +17,7 @@ import UserList from './pages/admin/users/UserList';
 import NewUser from './pages/admin/users/NewUser';
 import StockList from './pages/admin/stock/StockList';
 import NewStock from './pages/admin/stock/NewStock';
+import EditStock from './pages/admin/stock/EditStock';
 
 function App() {
 
@@ -68,6 +69,7 @@ function App() {
             {/* STOCK */}
             <Route path="stock" element={<StockList />} />
             <Route path="stock/nuevo" element={<NewStock />} />
+            <Route path="stock/:id/editar" element={<EditStock />} />
 
             {/* USUARIOS */}
             <Route path="usuarios" element={<UserList />} />

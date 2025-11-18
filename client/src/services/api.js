@@ -103,6 +103,25 @@ export const createStock = async (  figureId, storeId, price, available, product
   return res.json();
 }
 
+export const getStockById = async (id) => {
+  const res = await fetch(`${BASE_URL}/stocks/${id}`);
+  if (!res.ok) throw new Error('Error fetching stock');
+  return res.json();
+};
+
+export const updateStock = async (id, stockData) => {
+  const res = await fetch(`${BASE_URL}/stocks/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(stockData),
+  });
+
+  if (!res.ok) throw new Error("Error updating figure");
+  return res.json();
+};
+
 export const deleteStock = async (id) => {
   const res = await fetch(`${BASE_URL}/stocks/${id}`, {
     method: "DELETE",

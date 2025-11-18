@@ -33,7 +33,7 @@ export default function StockList() {
         <div className="flex gap-2">
           <button
             className="text-blue-500 hover:underline"
-            onClick={() => navigate(`/admin/precios/${row.original.id}/editar`)}
+            onClick={() => navigate(`/admin/stock/${row.original.id}/editar`)}
           >
             Editar
           </button>

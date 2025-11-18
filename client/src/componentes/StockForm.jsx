@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function StockForm({ figures = [], stores = [], initialData = {}, onSubmit, loading, error }) {
     const [figureId, setFigureId] = useState(initialData.figureId || "");
-    const [storeId, setStoreId] = useState(initialData.storeID || "");
+    const [storeId, setStoreId] = useState(initialData.storeId || "");
     const [price, setPrice] = useState(initialData.price || "");
     const [available, setAvailable] = useState(initialData.available ?? true);
     const [productUrl, setProductUrl] = useState(initialData.productUrl || "");
