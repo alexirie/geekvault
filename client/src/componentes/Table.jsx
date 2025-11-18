@@ -22,35 +22,47 @@ export default function Table({ columns, data }) {
   });
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full border border-gray-300">
-        <thead className="bg-gray-100">
+    <div className="w-full overflow-x-auto rounded-xl border border-gray-300 shadow-sm">
+      <table className="min-w-full table-auto">
+        <thead className="bg-gray-100 text-gray-700">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="border px-4 py-2 text-left cursor-pointer"
+                  className="border px-4 py-3 text-left font-semibold text-sm select-none whitespace-nowrap"
                   onClick={header.column.getToggleSortingHandler()}
                 >
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                  <span>
-                    {header.column.getIsSorted()
-                      ? header.column.getIsSorted() === "desc"
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
+                  <div className="flex items-center gap-1">
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                    <span className="text-xs opacity-60">
+                      {header.column.getIsSorted()
+                        ? header.column.getIsSorted() === "desc"
+                          ? "🔽"
+                          : "🔼"
+                        : ""}
+                    </span>
+                  </div>
                 </th>
               ))}
             </tr>
           ))}
         </thead>
+
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="hover:bg-gray-50">
+            <tr key={row.id} className="hover:bg-gray-50 transition">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="border px-4 py-2">
+                <td
+                  key={cell.id}
+                  className="
+                    border px-4 py-2 text-sm
+                    max-w-[250px] truncate 
+                    hover:whitespace-normal hover:bg-white
+                    transition
+                  "
+                  title={typeof cell.getValue() === "string" ? cell.getValue() : ""}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -59,34 +71,35 @@ export default function Table({ columns, data }) {
         </tbody>
       </table>
 
-      {/* Controles de paginación */}
-      <div className="flex justify-between items-center mt-2">
+      {/* PAGINACIÓN */}
+      <div className="flex justify-between items-center p-3 bg-gray-50 border-t">
         <div>
           <button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="px-2 py-1 border rounded mr-2 disabled:opacity-50"
+            className="px-3 py-1 border rounded mr-2 disabled:opacity-40 hover:bg-gray-200 transition"
           >
             Anterior
           </button>
+
           <button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="px-2 py-1 border rounded disabled:opacity-50"
+            className="px-3 py-1 border rounded disabled:opacity-40 hover:bg-gray-200 transition"
           >
             Siguiente
           </button>
         </div>
-        <div>
-          Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
+
+        <div className="text-sm">
+          Página <b>{table.getState().pagination.pageIndex + 1}</b> de <b>{table.getPageCount()}</b>
         </div>
-        <div>
+
+        <div className="text-sm">
           Mostrar{" "}
           <select
             value={table.getState().pagination.pageSize}
-            onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
-            }}
+            onChange={(e) => table.setPageSize(Number(e.target.value))}
             className="border px-2 py-1 rounded"
           >
             {[5, 10, 20, 50].map((size) => (
