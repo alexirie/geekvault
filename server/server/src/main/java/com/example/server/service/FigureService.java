@@ -50,6 +50,7 @@ public class FigureService {
             existing.setAnime(figure.getAnime());
             existing.setCollection(figure.getCollection());
             existing.setInStock(figure.getInStock());
+            existing.setYear(figure.getYear());
 
             return figureRepository.save(existing);
 

@@ -30,7 +30,7 @@ const HomePage = () => {
     } else {
       key = fig.brandName || "Sin marca";
     }
-    fig.inStock = true;
+  
 
     if (!acc[key]) acc[key] = [];
     acc[key].push(fig);
@@ -79,7 +79,7 @@ const HomePage = () => {
             <HorizontalScroller>
               {items.map((fig) => (
                 
-                <div key={fig.id} className="snap-center min-w-[260px]">
+                <div key={fig.id} className="snap-center w-[256px] shrink-0">
                   <FigureCard figure={fig} onClick={() => navigate(`/figure/${fig.id}`)} />
                 </div>
               ))}

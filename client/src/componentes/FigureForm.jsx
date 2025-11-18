@@ -11,6 +11,7 @@ export default function FigureForm({ initialData = {}, onSubmit, loading, error 
     const [collection, setCollection] = useState(initialData.collection || "");
     const [description, setDescription] = useState(initialData.description || "");
     const [imageFile, setImageFile] = useState(null);
+    const [year, setYear] = useState(initialData.year || "");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,13 +37,14 @@ export default function FigureForm({ initialData = {}, onSubmit, loading, error 
             collection,
             description,
             imageUrl: finalImageUrl,
+            year,
         });
     };
 
     const handleFileChange = (e) => setImageFile(e.target.files[0]);
 
     return (
-        
+
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             {error && <p className="text-red-500 mb-4 bg-red-100 p-2 rounded">{error}</p>}
 
@@ -140,6 +142,20 @@ export default function FigureForm({ initialData = {}, onSubmit, loading, error 
                     className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                 />
             </div>
+
+            {/* AÑO DE LA FIGURA */}
+            <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700">
+                    Fecha
+                </label>
+                <input
+                    type="date"
+                    value={year || ""}
+                    onChange={(e) => setYear(e.target.value)}
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                />
+            </div>
+
 
             {/* DESCRIPCIÓN */}
             <div>
