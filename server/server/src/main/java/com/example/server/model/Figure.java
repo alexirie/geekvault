@@ -38,6 +38,7 @@ public class Figure {
 
     private LocalDate year;
 
+    @Column(length = 1000)
     private String description;
 
     @OneToMany(mappedBy = "figure", cascade = CascadeType.ALL, orphanRemoval = true)
