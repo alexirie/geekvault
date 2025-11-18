@@ -5,13 +5,10 @@ import com.example.server.model.Figure;
 import com.example.server.repository.FigureRepository;
 import com.example.server.repository.BrandRepository;
 import org.springframework.stereotype.Service;
-import com.example.server.util.Constantes;
+
 
 import jakarta.persistence.EntityNotFoundException;
 
-import java.net.URI;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 

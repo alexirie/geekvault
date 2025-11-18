@@ -1,15 +1,18 @@
 package com.example.server.service;
 
 import com.example.server.dto.StockDTO;
+import com.example.server.model.Figure;
 import com.example.server.model.Stock;
 import com.example.server.repository.StockRepository;
 import com.example.server.repository.FigureRepository;
 import com.example.server.repository.StoreRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Comparator;
 
 @Service
 public class StockService {
@@ -19,8 +22,8 @@ public class StockService {
     private final StoreRepository storeRepository;
 
     public StockService(StockRepository stockRepository,
-                        FigureRepository figureRepository,
-                        StoreRepository storeRepository) {
+            FigureRepository figureRepository,
+            StoreRepository storeRepository) {
         this.stockRepository = stockRepository;
         this.figureRepository = figureRepository;
         this.storeRepository = storeRepository;
@@ -39,8 +42,14 @@ public class StockService {
     }
 
     public Stock save(Stock stock) {
-        if (stock.getLastChecked() == null) stock.setLastChecked(LocalDateTime.now());
-        return stockRepository.save(stock);
+        if (stock.getLastChecked() == null)
+            stock.setLastChecked(LocalDateTime.now());
+        Stock savedStock = stockRepository.save(stock);
+
+        // Actualizamos el precio de la figura si es necesario
+        updateFigurePrice(savedStock.getFigure().getId());
+
+        return savedStock;
     }
 
     public Stock saveFromDTO(StockDTO dto) {
@@ -54,8 +63,10 @@ public class StockService {
             existing.setAvailable(stock.getAvailable());
             existing.setProductUrl(stock.getProductUrl());
             existing.setLastChecked(stock.getLastChecked() != null ? stock.getLastChecked() : LocalDateTime.now());
-            if (stock.getFigure() != null) existing.setFigure(stock.getFigure());
-            if (stock.getStore() != null) existing.setStore(stock.getStore());
+            if (stock.getFigure() != null)
+                existing.setFigure(stock.getFigure());
+            if (stock.getStore() != null)
+                existing.setStore(stock.getStore());
             return stockRepository.save(existing);
         }).orElseGet(() -> save(stock));
     }
@@ -96,10 +107,31 @@ public class StockService {
         dto.setLastChecked(stock.getLastChecked());
         dto.setFigureId(stock.getFigure().getId());
         dto.setStoreId(stock.getStore().getId());
-        //Traer nombres
+        // Traer nombres
         dto.setFigureName(stock.getFigure().getName());
         dto.setStoreName(stock.getStore().getName());
         return dto;
+    }
+
+    // Actualizar precio figura al tener los precios de las tiendas
+    private void updateFigurePrice(Long figureId) {
+        // Obtenemos todos los stocks de esta figura que estén disponibles
+        List<Stock> stocks = stockRepository.findByFigureId(figureId);
+
+        if (stocks.isEmpty())
+            return; // No hacemos nada si no hay stocks disponibles
+
+        // Calculamos el precio mínimo
+        BigDecimal minPrice = stocks.stream()
+                .map(Stock::getPrice)
+                .min(Comparator.naturalOrder())
+                .orElse(null);
+
+        if (minPrice != null) {
+            Figure figure = figureRepository.findById(figureId).orElseThrow();
+            figure.setPrice(minPrice);
+            figureRepository.save(figure);
+        }
     }
 
     // --------------------
@@ -113,4 +145,5 @@ public class StockService {
     public List<Stock> findByStoreId(Long storeId) {
         return stockRepository.findByStoreId(storeId);
     }
+
 }
