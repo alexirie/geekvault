@@ -96,6 +96,9 @@ public class StockService {
         dto.setLastChecked(stock.getLastChecked());
         dto.setFigureId(stock.getFigure().getId());
         dto.setStoreId(stock.getStore().getId());
+        //Traer nombres
+        dto.setFigureName(stock.getFigure().getName());
+        dto.setStoreName(stock.getStore().getName());
         return dto;
     }
 

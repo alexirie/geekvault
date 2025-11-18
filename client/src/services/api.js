@@ -38,6 +38,19 @@ export const deleteFigure = async (id) => {
   return true; 
 };
 
+
+
+// ---------------------
+// STOCK
+// ---------------------
+export const getStocks = async () => {
+  const res = await fetch(`${BASE_URL}/stocks`); // Endpoint en tu backend
+  if (!res.ok) throw new Error("Error fetching stocks");
+  return res.json();
+};
+
+
+
 // ---------------------
 // USUARIOS
 // ---------------------

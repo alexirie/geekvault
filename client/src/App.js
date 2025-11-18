@@ -15,6 +15,7 @@ import NewFigure from './pages/admin/figures/NewFigure';
 import EditFigure from './pages/admin/figures/EditFigure';
 import UserList from './pages/admin/users/UserList';
 import NewUser from './pages/admin/users/NewUser';
+import StockList from './pages/admin/stock/StockList';
 
 function App() {
 
@@ -62,6 +63,9 @@ function App() {
             <Route path="figuras" element={<FiguresList />} />
             <Route path="figuras/nueva" element={<NewFigure />} />
             <Route path="figuras/:id/editar" element={<EditFigure />} />
+
+            {/* STOCK */}
+            <Route path="stock" element={<StockList />} />
 
             {/* USUARIOS */}
             <Route path="usuarios" element={<UserList />} />

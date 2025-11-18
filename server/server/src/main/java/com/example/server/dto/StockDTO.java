@@ -26,4 +26,8 @@ public class StockDTO {
     private String productUrl;
 
     private LocalDateTime lastChecked;
+
+    private String figureName;
+
+    private String storeName;
 }

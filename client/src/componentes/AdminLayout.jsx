@@ -12,6 +12,7 @@ export default function AdminLayout() {
           <Link to="/admin" className="text-gray-700 hover:text-blue-600">Dashboard</Link>
           <Link to="/admin/figuras" className="text-gray-700 hover:text-blue-600">Figuras</Link>
           <Link to="/admin/usuarios" className="text-gray-700 hover:text-blue-600">Usuarios</Link>
+          <Link to="/admin/stock" className="text-gray-700 hover:text-blue-600">Precios por tienda</Link>
           <Link to="/admin/configuracion" className="text-gray-700 hover:text-blue-600">Configuración</Link>
         </nav>
       </aside>
