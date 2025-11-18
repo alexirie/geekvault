@@ -10,4 +10,6 @@ public class StoreDTO {
 
     @NotBlank(message = "El nombre de la tienda es obligatorio")
     private String name;
+
+    private String region;
 }

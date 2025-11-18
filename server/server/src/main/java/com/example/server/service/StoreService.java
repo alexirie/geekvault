@@ -52,6 +52,7 @@ public class StoreService {
         Store store = new Store();
         store.setId(dto.getId());
         store.setName(dto.getName());
+        store.setRegion(dto.getRegion());
         return store;
     }
 
@@ -59,6 +60,7 @@ public class StoreService {
         StoreDTO dto = new StoreDTO();
         dto.setId(store.getId());
         dto.setName(store.getName());
+        dto.setRegion(store.getRegion());
         return dto;
     }
 }
