@@ -6,6 +6,8 @@ import PriceComparisonPanel from "../componentes/PriceComparisonPanel";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import BottomNav from "../componentes/BottomNav";
+import useStocks from "../hooks/admin/useStocks";
+import storeLogos from "../config/storeLogos";
 
 function FigureDetail() {
     const { id } = useParams();
@@ -14,7 +16,18 @@ function FigureDetail() {
     const [related, setRelated] = useState([]);
     const [loading, setLoading] = useState(true);
     const [favorite, setFavorite] = useState(false);
+    const { stocks } = useStocks();
 
+    // Filtramos los precios de la figura actual
+    const figureStocks = stocks
+        .filter(s => s.figureId === figure.id)
+        .map(s => ({
+            ...s,
+            logoUrl: storeLogos[s.storeName] || null,
+            name: s.storeName,
+            url: s.productUrl,
+            price: s.price,
+        }));
 
     useEffect(() => {
         async function fetchData() {
@@ -43,27 +56,6 @@ function FigureDetail() {
 
     //figure.description = "Banpresto es uno de los mayores fabricantes Japoneses de Figuras a nivel mundial. Perteneciente al grupo Bandai Spirits, esta empresa ofrece una calidad precio única. Actualmente dispone de múltiples líneas diferentes para que todos los fans puedan tener en su colección una figura que se adapte a su manera de disfrutar del mundo de las figuras.";
 
-    const mockPrices = [
-        {
-            name: "Amazon",
-            price: 45.99,
-            url: "https://amazon.com/figura123",
-            logoUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
-        },
-        {
-            name: "eBay",
-            price: 43.50,
-            url: "https://www.ebay.com/",
-            logoUrl: "https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg",
-        },
-        {
-            name: "Banpresto",
-            price: 47.20,
-            url: "https://www.banpresto.es/",
-            logoUrl: "https://www.banpresto.es/wp-content/uploads/2022/06/BANPRESTO_logo_RGB.png",
-        },
-    ];
-
 
     return (
         <div className="bg-gray-100 min-h-screen pb-24">
@@ -82,19 +74,19 @@ function FigureDetail() {
             <div className="p-4 flex flex-col items-center">
                 {/* Imagen */}
                 <div className="w-full h-[75vh] bg-white flex items-center justify-center rounded-lg shadow-lg mb-4">
-    <img
-        src={figure.imageUrl}
-        alt={figure.name}
-        className="max-w-full max-h-full object-contain"
-    />
-</div>
+                    <img
+                        src={figure.imageUrl}
+                        alt={figure.name}
+                        className="max-w-full max-h-full object-contain"
+                    />
+                </div>
 
                 {/* Datos alineados a la izquierda */}
                 <div className="w-full max-w-md flex justify-between items-start mb-4">
                     <div className="flex flex-col gap-1">
                         <h2 className="text-2xl font-bold">{figure.name}</h2>
                         <p className="text-gray-600">{figure.brandName}</p>
-                      
+
                     </div>
 
                     {/* Botón pequeño de favorito */}
@@ -121,7 +113,7 @@ function FigureDetail() {
                 )}
 
                 {/* Panel de precios */}
-                <PriceComparisonPanel prices={mockPrices} />
+                <PriceComparisonPanel prices={figureStocks} />
 
                 {/* Figuras relacionadas */}
                 {related.length > 0 && (
