@@ -51,6 +51,13 @@ function FigureDetail() {
         fetchData();
     }, [id]);
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, [id]); // <- ID de la figura actual
+
     if (loading) return <p className="p-4 text-center">Cargando...</p>;
     if (!figure) return <p className="p-4 text-center">Figura no encontrada</p>;
 
@@ -62,7 +69,7 @@ function FigureDetail() {
             {/* 🔙 HEADER */}
             <div className="sticky top-0 z-30 bg-gray-100 flex items-center p-4 shadow-sm">
                 <button
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate('/')}
                     className="text-blue-500 font-bold mr-4"
                 >
                     ← Volver
@@ -124,7 +131,7 @@ function FigureDetail() {
                         <div className="flex overflow-x-auto gap-3 px-2 snap-x">
                             {related.map((f) => (
                                 <div key={f.id} className="snap-center min-w-[200px]">
-                                    <FigureCard figure={f} />
+                                    <FigureCard figure={f} onClick={() => navigate(`/figure/${f.id}`)} />
                                 </div>
                             ))}
                         </div>
