@@ -65,7 +65,7 @@ export default function StockList() {
 
     if (loading) return <p>Cargando precios...</p>;
 
-
+    const placeholderText = "Precios por tienda";
 
     return (
         <div className="p-6">
@@ -79,7 +79,7 @@ export default function StockList() {
                 </button>
 
                 <div className="flex-1 min-w-[500px] max-w-xs ml-auto">
-                    <SearchBar search={search} setSearch={setSearch} />
+                    <SearchBar search={search} setSearch={setSearch} placeholderText={placeholderText} />
                 </div>
             </div>
 

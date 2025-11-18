@@ -15,8 +15,6 @@ const HomePage = () => {
   const [activeFilter, setActiveFilter] = useState("brand"); // "brand" | "collection"
   const navigate = useNavigate();
 
-  console.log('Figures en HomePage:', figures);
-
   if (loading) return <div className="text-center mt-20">Cargando figuras...</div>;
 
   // Agrupar según filtro activo
@@ -37,14 +35,14 @@ const HomePage = () => {
     return acc;
   }, {});
 
-
+  const placeholderText = "GeekVault";
 
   return (
     <div className="bg-gray-100 p-0 sm:px-8 pb-24">
       {/* 🔎 NAV */}
       <div className="sticky top-0 z-30 bg-gray-100">
         {/* 🔎 BUSCADOR */}
-        <SearchBar search={search} setSearch={setSearch} />
+        <SearchBar search={search} setSearch={setSearch} placeholderText={placeholderText} />
 
         {/* 🔎 SEPARADOR */}
         <div className="w-full h-px bg-gray-200 shadow-sm" />
