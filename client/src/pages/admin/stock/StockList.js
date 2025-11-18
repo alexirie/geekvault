@@ -56,7 +56,7 @@ export default function StockList() {
       {/* Botón para crear nuevo precio */}
       <div className="flex justify-left mb-4">
         <button
-          onClick={() => navigate("/admin/precios/nuevo")}
+          onClick={() => navigate("/admin/stock/nuevo")}
           className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition"
         >
           Añadir Precio

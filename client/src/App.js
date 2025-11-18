@@ -16,6 +16,7 @@ import EditFigure from './pages/admin/figures/EditFigure';
 import UserList from './pages/admin/users/UserList';
 import NewUser from './pages/admin/users/NewUser';
 import StockList from './pages/admin/stock/StockList';
+import NewStock from './pages/admin/stock/NewStock';
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
 
             {/* STOCK */}
             <Route path="stock" element={<StockList />} />
+            <Route path="stock/nuevo" element={<NewStock />} />
 
             {/* USUARIOS */}
             <Route path="usuarios" element={<UserList />} />
