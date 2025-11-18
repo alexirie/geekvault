@@ -67,7 +67,11 @@ public class StockService {
                 existing.setFigure(stock.getFigure());
             if (stock.getStore() != null)
                 existing.setStore(stock.getStore());
-            return stockRepository.save(existing);
+             
+            // Actualizamos el precio de la figura
+            Stock updatedStock = stockRepository.save(existing);
+            updateFigurePrice(updatedStock.getFigure().getId());
+            return updatedStock;
         }).orElseGet(() -> save(stock));
     }
 
