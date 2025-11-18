@@ -93,6 +93,8 @@ function FigureDetail() {
                     <div className="flex flex-col gap-1">
                         <h2 className="text-2xl font-bold">{figure.name}</h2>
                         <p className="text-gray-600">{figure.brandName}</p>
+                        <p className="text-gray-600">Colección: {figure.collection}</p>
+                        <p className="text-gray-600">Serie: {figure.anime}</p>
 
                     </div>
 
