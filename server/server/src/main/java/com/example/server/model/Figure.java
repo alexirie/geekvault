@@ -5,6 +5,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,6 +39,9 @@ public class Figure {
     private LocalDate year;
 
     private String description;
+
+    @OneToMany(mappedBy = "figure", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Stock> stockList = new ArrayList<>();
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;

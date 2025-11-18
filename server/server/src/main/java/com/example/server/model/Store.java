@@ -1,7 +1,10 @@
 package com.example.server.model;
 
+import java.util.ArrayList;
+
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,4 +20,7 @@ public class Store {
     private String name;
 
     private String url;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Stock> stockList = new ArrayList<>();
 }

@@ -10,7 +10,7 @@ const FigureCard = ({ figure, onClick }) => {
   const { isLogged } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  console.log("En figureCard: "+ figure.imageUrl);
+  console.log("En figureCard: " + figure.imageUrl);
 
   return (
     <div className="mt-2 w-full max-w-xs cursor-pointer group relative" onClick={onClick}>
@@ -37,14 +37,14 @@ const FigureCard = ({ figure, onClick }) => {
           <div className="absolute top-2 right-2">
             <motion.button
               onClick={(e) => {
-                if (isLogged){
+                if (isLogged) {
                   e.stopPropagation(); // evita que se active el click de la card
                   setFavorite(!favorite);
-                } else{
+                } else {
                   e.stopPropagation(); // evita que se active el click de la card
                   navigate('/login');
                 }
-                
+
               }}
               className="text-blue-500 text-2xl"
               whileTap={{ scale: 1.3 }} // efecto “pop” al pulsar
@@ -57,7 +57,10 @@ const FigureCard = ({ figure, onClick }) => {
 
           {/* ✨ Precio en banda negra inferior */}
           <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white text-lg font-bold text-center py-1">
-            {figure.stockPrice ? `${figure.stockPrice} €` : `${figure.price} €`}
+            {figure.stockPrice
+              ? `${Number(figure.stockPrice).toFixed(2)} €`
+              : `${Number(figure.price).toFixed(2)} €`
+            }
           </div>
         </div>
 
