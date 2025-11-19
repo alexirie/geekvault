@@ -16,7 +16,7 @@ export const getFigureById = async (id) => {
   return res.json();
 };
 
-export const createFigure = async (name, brandId, price, inStock, imageUrl, anime, collection, description) => {
+export const createFigure = async (name, brandId, price, inStock, imageUrl, anime, collection, material, year, description) => {
   console.log('en createFigure: ' + imageUrl);
   
   const res = await fetch(`${BASE_URL}/figures`, {
@@ -33,6 +33,8 @@ export const createFigure = async (name, brandId, price, inStock, imageUrl, anim
       imageUrl,
       anime,
       collection,
+      material,
+      year,
       description,
     }),
   });

@@ -95,6 +95,7 @@ function FigureDetail() {
                         <p className="text-gray-600">{figure.brandName}</p>
                         <p className="text-gray-600">Colección: {figure.collection}</p>
                         <p className="text-gray-600">Serie: {figure.anime}</p>
+                        <p className="text-gray-600">Material: {figure.material}</p>
 
                     </div>
 
@@ -133,7 +134,7 @@ function FigureDetail() {
                       
                             <HorizontalScroller>
                             {related.map((f) => (
-                                <div key={f.id} className="snap-center min-w-[200px] flex-none">
+                                <div key={f.id} className="snap-center w-[256px] flex-none">
                                     <FigureCard figure={f} onClick={() => navigate(`/figure/${f.id}`)} />
                                 </div>
                             ))}

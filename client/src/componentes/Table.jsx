@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-table";
 
 export default function Table({ columns, data }) {
-  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 });
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 15 });
 
   const table = useReactTable({
     columns,

@@ -17,7 +17,7 @@ export default function EditFigure() {
   const handleSubmit = async (data) => {
     setLoading(true);
     try {
-        console.log(id, data);
+      console.log(id, data);
       await updateFigure(id, data);
       navigate("/admin/figuras");
     } catch (e) {
@@ -27,13 +27,26 @@ export default function EditFigure() {
   };
 
   if (!figure) return <p>Cargando...</p>;
-
+  /*<FigureForm
+        initialData={figure}
+        onSubmit={handleSubmit}
+        loading={loading}
+        error={error}
+      />*/
   return (
-    <FigureForm
-      initialData={figure}
-      onSubmit={handleSubmit}
-      loading={loading}
-      error={error}
-    />
+    <div className="w-full flex justify-center py-10">
+      <div className="w-full max-w-2xl bg-white shadow-lg rounded-2xl p-8 border border-gray-200">
+        <h1 className="text-3xl font-bold mb-6 text-gray-800">
+          Editar Figura
+        </h1>
+        <FigureForm
+          initialData={figure}
+          onSubmit={handleSubmit}
+          loading={loading}
+          error={error}
+        />
+
+      </div>
+    </div>
   );
 }

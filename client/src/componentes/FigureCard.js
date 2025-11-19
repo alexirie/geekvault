@@ -66,7 +66,7 @@ const FigureCard = ({ figure, onClick }) => {
 
         {/* Información */}
         <div className="mt-0 rounded-xl p-2">
-          <h2 className="text-lg font-bold text-gray-500 truncate font-sans">
+          <h2 className="text-lg font-bold text-gray-500 font-sans line-clamp-2">
             {figure.name}
           </h2>
 

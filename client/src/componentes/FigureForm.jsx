@@ -39,6 +39,7 @@ export default function FigureForm({ initialData = {}, onSubmit, loading, error 
             description,
             imageUrl: finalImageUrl,
             year,
+            material,
         });
     };
 
