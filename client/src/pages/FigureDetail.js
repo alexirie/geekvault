@@ -9,6 +9,7 @@ import BottomNav from "../componentes/BottomNav";
 import useStocks from "../hooks/admin/useStocks";
 import storeLogos from "../config/storeLogos";
 import LoadingSpinner from "../componentes/LoadingSpinner";
+import HorizontalScroller from "../componentes/HorizontalScroller";
 
 function FigureDetail() {
     const { id } = useParams();
@@ -129,13 +130,15 @@ function FigureDetail() {
                         <h3 className="text-lg font-semibold mb-2 ml-2">
                             Más de {figure.brandName}
                         </h3>
-                        <div className="flex overflow-x-auto gap-3 px-2 snap-x">
+                      
+                            <HorizontalScroller>
                             {related.map((f) => (
-                                <div key={f.id} className="snap-center min-w-[200px]">
+                                <div key={f.id} className="snap-center min-w-[200px] flex-none">
                                     <FigureCard figure={f} onClick={() => navigate(`/figure/${f.id}`)} />
                                 </div>
                             ))}
-                        </div>
+                            </HorizontalScroller>
+                        
                     </section>
                 )}
             </div>
@@ -143,5 +146,6 @@ function FigureDetail() {
         </div>
     );
 }
+
 
 export default FigureDetail;

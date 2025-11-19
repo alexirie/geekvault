@@ -52,8 +52,8 @@ const HorizontalScroller = ({ children }) => {
       {canScrollLeft && (
         <button
           onClick={() => scrollBy(-1)}
-          className="absolute left-0 z-10 top-1/2 -translate-y-1/2 p-2 
-                     bg-white/80 backdrop-blur rounded-full shadow hover:scale-110"
+          className="absolute left-0 z-10 p-2 bg-white/80 backdrop-blur rounded-full shadow hover:scale-110"
+          style={{ top: "40%", transform: "translateY(-50%)" }}
         >
           <ChevronLeft size={28} />
         </button>
@@ -77,8 +77,8 @@ const HorizontalScroller = ({ children }) => {
       {canScrollRight && (
         <button
           onClick={() => scrollBy(1)}
-          className="absolute right-0 z-10 top-1/2 -translate-y-1/2 p-2 
-                     bg-white/80 backdrop-blur rounded-full shadow hover:scale-110"
+          className="absolute right-0 z-10 p-2 bg-white/80 backdrop-blur rounded-full shadow hover:scale-110"
+        style={{ top: "40%", transform: "translateY(-50%)" }}
         >
           <ChevronRight size={28} />
         </button>
