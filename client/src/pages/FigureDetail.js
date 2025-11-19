@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import BottomNav from "../componentes/BottomNav";
 import useStocks from "../hooks/admin/useStocks";
 import storeLogos from "../config/storeLogos";
+import LoadingSpinner from "../componentes/LoadingSpinner";
 
 function FigureDetail() {
     const { id } = useParams();
@@ -58,12 +59,10 @@ function FigureDetail() {
         });
     }, [id]); // <- ID de la figura actual
 
-    if (loading) return <p className="p-4 text-center">Cargando...</p>;
+    if (!loading) return <LoadingSpinner />;
     if (!figure) return <p className="p-4 text-center">Figura no encontrada</p>;
 
-    //figure.description = "Banpresto es uno de los mayores fabricantes Japoneses de Figuras a nivel mundial. Perteneciente al grupo Bandai Spirits, esta empresa ofrece una calidad precio única. Actualmente dispone de múltiples líneas diferentes para que todos los fans puedan tener en su colección una figura que se adapte a su manera de disfrutar del mundo de las figuras.";
-
-
+ 
     return (
         <div className="bg-gray-100 min-h-screen pb-24">
             {/* 🔙 HEADER */}

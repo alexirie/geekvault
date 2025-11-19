@@ -7,7 +7,7 @@ import SearchBar from "../componentes/SearchBar";
 import FilterPills from "../componentes/homePage/FilterPills";
 import BottomNav from "../componentes/BottomNav";
 import { useNavigate } from "react-router-dom";
-
+import LoadingSpinner from "../componentes/LoadingSpinner";
 
 const HomePage = () => {
   const { figures, loading } = useFigures();
@@ -15,7 +15,8 @@ const HomePage = () => {
   const [activeFilter, setActiveFilter] = useState("brand"); // "brand" | "collection"
   const navigate = useNavigate();
 
-  if (loading) return <div className="text-center mt-20">Cargando figuras...</div>;
+  if (loading) return <LoadingSpinner />;
+
 
   // Agrupar según filtro activo
   const grouped = figures.reduce((acc, fig) => {
