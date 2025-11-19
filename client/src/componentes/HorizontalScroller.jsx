@@ -1,6 +1,7 @@
 // src/componentes/HorizontalScroller.jsx
 import { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const HorizontalScroller = ({ children }) => {
   const ref = useRef(null);
@@ -50,13 +51,19 @@ const HorizontalScroller = ({ children }) => {
 
       {/* Flecha Izquierda */}
       {canScrollLeft && (
-        <button
+        <motion.button
           onClick={() => scrollBy(-1)}
-          className="absolute left-0 z-10 p-2 bg-white/80 backdrop-blur rounded-full shadow hover:scale-110"
-          style={{ top: "40%", transform: "translateY(-50%)" }}
+          className="absolute left-0 z-10 p-2 bg-white/80 backdrop-blur rounded-full shadow"
+          style={{ top: "40%" }}
+          whileTap={{ scale: 0.85, rotate: -10 }}
+          whileHover={{ scale: 1.15, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 500, damping: 20 }}
+          // Añadimos un transform inicial con translateY para centrar verticalmente
+          initial={{ translateY: "-50%" }}
+          animate={{ translateY: "-50%" }}
         >
           <ChevronLeft size={28} />
-        </button>
+        </motion.button>
       )}
 
       {/* Scroll principal */}
@@ -75,13 +82,20 @@ const HorizontalScroller = ({ children }) => {
 
       {/* Flecha Derecha */}
       {canScrollRight && (
-        <button
+        <motion.button
           onClick={() => scrollBy(1)}
-          className="absolute right-0 z-10 p-2 bg-white/80 backdrop-blur rounded-full shadow hover:scale-110"
-        style={{ top: "40%", transform: "translateY(-50%)" }}
+          className="absolute right-0 z-10 p-2 bg-white/80 backdrop-blur rounded-full shadow"
+          style={{ top: "40%" }}
+          whileTap={{ scale: 0.85, rotate: 10 }}
+          whileHover={{ scale: 1.15, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 500, damping: 20 }}
+          // Centrado vertical con Framer Motion
+          initial={{ translateY: "-50%" }}
+          animate={{ translateY: "-50%" }}
         >
           <ChevronRight size={28} />
-        </button>
+        </motion.button>
+
       )}
 
       {/* Fade izquierda */}
