@@ -29,3 +29,10 @@ target/
 # ============================
 .DS_Store
 Thumbs.db
+
+# Firebase hosting build artifacts
+firebase-debug.log
+.firebaserc
+.firebase
+.firerc
+hosting.*

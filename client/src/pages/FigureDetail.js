@@ -59,7 +59,7 @@ function FigureDetail() {
         });
     }, [id]); // <- ID de la figura actual
 
-    if (!loading) return <LoadingSpinner />;
+    if (loading) return <LoadingSpinner />;
     if (!figure) return <p className="p-4 text-center">Figura no encontrada</p>;
 
  

@@ -15,7 +15,7 @@ const HomePage = () => {
   const [activeFilter, setActiveFilter] = useState("brand"); // "brand" | "collection"
   const navigate = useNavigate();
 
-  if (loading) return <LoadingSpinner />;
+  if (!loading) return <LoadingSpinner />;
 
 
   // Agrupar según filtro activo
