@@ -38,6 +38,8 @@ public class Figure {
 
     private LocalDate year;
 
+    private String material;
+
     @Column(length = 1000)
     private String description;
 

@@ -51,6 +51,7 @@ public class FigureService {
             existing.setCollection(figure.getCollection());
             existing.setInStock(figure.getInStock());
             existing.setYear(figure.getYear());
+            existing.setMaterial(figure.getMaterial());
 
             return figureRepository.save(existing);
 
@@ -83,6 +84,7 @@ public class FigureService {
         figure.setCollection(dto.getCollection());
         figure.setAnime(dto.getAnime());
         figure.setYear(dto.getYear());
+        figure.setMaterial(dto.getMaterial());
         figure.setDescription(dto.getDescription());
         figure.setPrice(dto.getPrice());
         figure.setInStock(dto.getInStock());
@@ -109,6 +111,7 @@ public class FigureService {
         dto.setCollection(figure.getCollection());
         dto.setAnime(figure.getAnime());
         dto.setYear(figure.getYear());
+        dto.setMaterial(figure.getMaterial());
         dto.setDescription(figure.getDescription());
         dto.setInStock(figure.getInStock());
         dto.setLastUpdate(figure.getLastUpdate());

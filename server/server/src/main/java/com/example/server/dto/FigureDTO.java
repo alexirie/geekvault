@@ -35,5 +35,7 @@ public class FigureDTO {
 
     private LocalDate year;
 
+    private String material;
+
     private LocalDateTime lastUpdate;
 }
