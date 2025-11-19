@@ -20,6 +20,8 @@ export default function useFigures() {
             inStock: f.inStock,
             imageUrl: f.imageUrl || null,
             anime: f.anime,
+            year: f.year,
+            material: f.material,
           }))
         );
       })

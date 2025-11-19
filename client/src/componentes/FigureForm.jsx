@@ -12,6 +12,7 @@ export default function FigureForm({ initialData = {}, onSubmit, loading, error 
     const [description, setDescription] = useState(initialData.description || "");
     const [imageFile, setImageFile] = useState(null);
     const [year, setYear] = useState(initialData.year || "");
+    const [material, setMaterial] = useState(initialData.material || "");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -139,6 +140,19 @@ export default function FigureForm({ initialData = {}, onSubmit, loading, error 
                     type="text"
                     value={collection}
                     onChange={(e) => setCollection(e.target.value)}
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                />
+            </div>
+
+            {/* MATERIAL */}
+            <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700">
+                    Material
+                </label>
+                <input
+                    type="text"
+                    value={material}
+                    onChange={(e) => setMaterial(e.target.value)}
                     className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                 />
             </div>

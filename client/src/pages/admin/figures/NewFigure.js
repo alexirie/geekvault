@@ -23,6 +23,8 @@ export default function NewFigure() {
                 data.imageUrl,
                 data.anime,
                 data.collection,
+                data.material,
+                data.year,
                 data.description
             );
             navigate("/admin/figuras");
