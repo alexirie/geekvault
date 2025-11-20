@@ -112,7 +112,7 @@ function FigureDetail() {
             {/* 🔥 CONTENIDO PRINCIPAL */}
             <div className="p-4 flex flex-col items-center">
                 {/* Imagen */}
-                <div className="w-full h-[75vh] bg-white flex items-center justify-center rounded-lg shadow-lg mb-4">
+                <div className="w-full h-[60vh] bg-white flex items-center justify-center rounded-lg shadow-lg mb-4">
                     <img
                         src={figure.imageUrl}
                         alt={figure.name}

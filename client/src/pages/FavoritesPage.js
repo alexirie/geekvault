@@ -64,7 +64,7 @@ const FavoritesPage = () => {
   return (
     <div className="bg-gray-100 p-0 sm:px-8 pb-24">
 
-      {/* 🔍 BUSCADOR */}
+      {/* BUSCADOR */}
       <div className="sticky top-0 z-30 bg-gray-100">
         <SearchBar
           search={search}
@@ -74,7 +74,7 @@ const FavoritesPage = () => {
         <div className="w-full h-px bg-gray-200 shadow-sm" />
       </div>
 
-      {/* 🏷️ FILTROS */}
+      {/* FILTROS */}
       <div className="mt-3 flex justify-center flex-wrap">
         <FilterPills
           activeFilter={activeFilter}
@@ -82,7 +82,7 @@ const FavoritesPage = () => {
         />
       </div>
 
-      {/* ❤️ FIGURAS FAVORITAS AGRUPADAS */}
+      {/* FIGURAS FAVORITAS AGRUPADAS */}
       {Object.keys(grouped).map((categoryName) => {
         let items = grouped[categoryName];
 
