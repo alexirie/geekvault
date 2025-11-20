@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUsersFavorites } from "../../services/api"; // Asegúrate de tener esta función en tu API
+import { getUsersFavorites } from "../services/api"; // Asegúrate de tener esta función en tu API
 
 export default function useUsers() {
     const [favorites, setFavorites] = useState([]);

@@ -70,7 +70,7 @@ const FigureCard = ({ figure, isFavorite, onClick }) => {
                     console.log("Lllamando al delete fav, token: " + token);
                     await deleteUserFavorite(figure.id, token);
                     setFavorite(false);
-                    showToast("Eliminado de favoritos 💙");
+                    showToast("Eliminado de favoritos 💔");
                   }
                 } catch (err) {
                   console.error("Error actualizando favorito:", err);

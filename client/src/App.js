@@ -18,6 +18,7 @@ import NewUser from './pages/admin/users/NewUser';
 import StockList from './pages/admin/stock/StockList';
 import NewStock from './pages/admin/stock/NewStock';
 import EditStock from './pages/admin/stock/EditStock';
+import FavoritesPage from './pages/FavoritesPage';
 
 function App() {
 
@@ -57,8 +58,12 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
         </Route>
 
+        {/* FAVORITOS */}
+        <Route path="/favoritos" element={<FavoritesPage />} />
+
         {/* Rutas admin protegidas */}
         <Route element={<ProtectedRoute />}>
+          
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} /> {/* Esta es la página por defecto */}
             {/* FIGURAS */}
@@ -70,6 +75,8 @@ function App() {
             <Route path="stock" element={<StockList />} />
             <Route path="stock/nuevo" element={<NewStock />} />
             <Route path="stock/:id/editar" element={<EditStock />} />
+
+            
 
             {/* USUARIOS */}
             <Route path="usuarios" element={<UserList />} />
