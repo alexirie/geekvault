@@ -1,16 +1,25 @@
 // src/components/FigureCard.js
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/AuthContext';
+import { createUserFavorite, deleteUserFavorite } from "../services/api";
+import useToast from '../hooks/useToast';
+import CustomToast from "../componentes/ui/CustomToast";
 
-const FigureCard = ({ figure, onClick }) => {
-  const [favorite, setFavorite] = useState(false);
-  const { isLogged } = useContext(AuthContext);
+
+
+const FigureCard = ({ figure, isFavorite, onClick }) => {
+  const [favorite, setFavorite] = useState(isFavorite);
+  const { isLogged, token } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { toast, showToast } = useToast();
 
-  console.log("En figureCard: " + figure.imageUrl);
+  useEffect(() => {
+    setFavorite(isFavorite);
+  }, [isFavorite]);
+
 
   return (
     <div className="mt-2 w-full max-w-xs cursor-pointer group relative" onClick={onClick}>
@@ -33,27 +42,49 @@ const FigureCard = ({ figure, onClick }) => {
             </div>
           )}
 
+
           {/* Botón favorito en la esquina superior derecha */}
           <div className="absolute top-2 right-2">
             <motion.button
-              onClick={(e) => {
-                if (isLogged) {
-                  e.stopPropagation(); // evita que se active el click de la card
-                  setFavorite(!favorite);
-                } else {
-                  e.stopPropagation(); // evita que se active el click de la card
-                  navigate('/login');
+              onClick={async (e) => {
+                e.stopPropagation(); // evita que se active el click de la card
+
+                if (!isLogged) {
+                  console.log("Usuario no logueado, redirigiendo a login");
+                  navigate("/login");
+                  return;
                 }
 
+                console.log("Token actual:", token);
+                console.log("Figura que intento marcar:", figure.id);
+
+                try {
+                  if (!favorite) {
+                    // crear favorito
+                    const response = await createUserFavorite({ figureId: figure.id }, token);
+                    console.log("Respuesta backend:", response);
+                    setFavorite(true);
+                    showToast("Agregado a favoritos 💙");
+                  } else {
+                    // eliminar favorito (si tienes la función deleteUserFavorite)
+                    console.log("Lllamando al delete fav, token: " + token);
+                    await deleteUserFavorite(figure.id, token);
+                    setFavorite(false);
+                    showToast("Eliminado de favoritos 💙");
+                  }
+                } catch (err) {
+                  console.error("Error actualizando favorito:", err);
+                }
               }}
               className="text-blue-500 text-2xl"
-              whileTap={{ scale: 1.3 }} // efecto “pop” al pulsar
+              whileTap={{ scale: 1.3 }}
               animate={{ scale: favorite ? 1.2 : 1 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+              transition={{ type: "spring", stiffness: 500, damping: 20 }}
             >
               {favorite ? <FaHeart /> : <FaRegHeart />}
             </motion.button>
           </div>
+
 
           {/* ✨ Precio en banda negra inferior */}
           <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white text-lg font-bold text-center py-1">
@@ -76,6 +107,10 @@ const FigureCard = ({ figure, onClick }) => {
         </div>
 
       </div>
+      <CustomToast
+        message={toast.message}
+        visible={toast.visible}
+      />
     </div>
   );
 };

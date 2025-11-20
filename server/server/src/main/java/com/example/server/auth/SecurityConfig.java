@@ -13,6 +13,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.example.server.repository.UserRepository;
+
 import java.util.List;
 
 /**
@@ -44,10 +47,11 @@ public class SecurityConfig {
 
     private final JwtUtils jwtUtils;
     private final CustomUserDetailsService userDetailsService;
+    private final UserRepository userRepository;
 
     @Bean
     public AuthTokenFilter authTokenFilter() {
-        return new AuthTokenFilter(jwtUtils, userDetailsService);
+        return new AuthTokenFilter(jwtUtils, userDetailsService, userRepository);
     }
 
     /**

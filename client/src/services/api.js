@@ -18,7 +18,7 @@ export const getFigureById = async (id) => {
 
 export const createFigure = async (name, brandId, price, inStock, imageUrl, anime, collection, material, year, description) => {
   console.log('en createFigure: ' + imageUrl);
-  
+
   const res = await fetch(`${BASE_URL}/figures`, {
     method: "POST",
     headers: {
@@ -66,7 +66,7 @@ export const deleteFigure = async (id) => {
   });
 
   if (!res.ok) throw new Error("Error deleting figure");
-  return true; 
+  return true;
 };
 
 
@@ -80,8 +80,8 @@ export const getStocks = async () => {
   return res.json();
 };
 
-export const createStock = async (  figureId, storeId, price, available, productUrl,) => {
-  
+export const createStock = async (figureId, storeId, price, available, productUrl,) => {
+
   const res = await fetch(`${BASE_URL}/stocks`, {
     method: "POST",
     headers: {
@@ -130,7 +130,7 @@ export const deleteStock = async (id) => {
   });
 
   if (!res.ok) throw new Error("Error deleting stock");
-  return true; 
+  return true;
 };
 
 
@@ -166,9 +166,51 @@ export const createUser = async (userData) => {
   return res.json();
 };
 
+// ---------------------
+// FAVORITOS
+// ---------------------
+export const getUserFavorites = async (token) => {
+  const res = await fetch(`${BASE_URL}/user/favorites`, {
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    }
+  });
+
+  if (!res.ok) throw new Error("Error obteniendo favoritos");
+  return res.json(); // lista de IDs
+};
 
 
+export const createUserFavorite = async (figureData, token) => {
+  const res = await fetch(`${BASE_URL}/user/favorites`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify({ figureId: figureData.figureId }),
+  });
+  if (!res.ok) throw new Error("Error creando favorito");
+  return res.json();
+};
 
+export const deleteUserFavorite = async (id, token) => {
+  const res = await fetch(`${BASE_URL}/user/favorites/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  // para debugging puedes loguear el status
+  if (!res.ok) {
+    const text = await res.text().catch(() => null);
+    console.error("deleteUserFavorite failed:", res.status, text);
+    throw new Error("Error deleting favorite");
+  }
+  return true;
+};
 
 
 // ---------------------

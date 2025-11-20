@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getFigureById, getFigures } from "../services/api";
 import FigureCard from "../componentes/FigureCard";
 import PriceComparisonPanel from "../componentes/PriceComparisonPanel";
@@ -10,6 +10,8 @@ import useStocks from "../hooks/admin/useStocks";
 import storeLogos from "../config/storeLogos";
 import LoadingSpinner from "../componentes/LoadingSpinner";
 import HorizontalScroller from "../componentes/HorizontalScroller";
+import { getUserFavorites, createUserFavorite, deleteUserFavorite } from "../services/api";
+import { AuthContext } from '../context/AuthContext';
 
 function FigureDetail() {
     const { id } = useParams();
@@ -19,6 +21,8 @@ function FigureDetail() {
     const [loading, setLoading] = useState(true);
     const [favorite, setFavorite] = useState(false);
     const { stocks } = useStocks();
+    const [favorites, setFavorites] = useState([]);
+    const { isLogged, token } = useContext(AuthContext);
 
     // Filtramos los precios de la figura actual
     const figureStocks = stocks
@@ -53,6 +57,34 @@ function FigureDetail() {
         fetchData();
     }, [id]);
 
+
+    //Cargar favoritos
+    useEffect(() => {
+        const loadData = async () => {
+            const token = localStorage.getItem("token");
+
+            const favoritesFromApi = await getUserFavorites(token);
+
+            console.log("Favoritos:", favoritesFromApi);
+
+            // Extraemos solo los IDs de figura
+            const favoriteIds = favoritesFromApi.map(f => f.figureId);
+
+            setFavorites(favoriteIds);
+            console.log("Favoritos IDs:", favoriteIds);
+
+        };
+
+        loadData();
+    }, [id]);
+
+    // Cuando figure o favorites cambian, sincronizamos el favorito
+    useEffect(() => {
+        if (figure) {
+            setFavorite(favorites.includes(Number(figure.id)));
+        }
+    }, [figure, favorites]);
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -63,7 +95,7 @@ function FigureDetail() {
     if (loading) return <LoadingSpinner />;
     if (!figure) return <p className="p-4 text-center">Figura no encontrada</p>;
 
- 
+
     return (
         <div className="bg-gray-100 min-h-screen pb-24">
             {/* 🔙 HEADER */}
@@ -101,14 +133,40 @@ function FigureDetail() {
 
                     {/* Botón pequeño de favorito */}
                     <motion.button
-                        onClick={(e) => {
+                        onClick={async (e) => {
                             e.stopPropagation(); // evita que se active el click de la card
-                            setFavorite(!favorite);
+
+                            if (!isLogged) {
+                                console.log("Usuario no logueado, redirigiendo a login");
+                                navigate("/login");
+                                return;
+                            }
+
+                            console.log("Token actual:", token);
+                            console.log("Figura que intento marcar:", figure.id);
+
+                            try {
+                                if (!favorite) {
+                                    // crear favorito
+                                    const response = await createUserFavorite({ figureId: figure.id }, token);
+                                    console.log("Respuesta backend:", response);
+                                    setFavorite(true);
+                                    setFavorites(prev => [...prev, Number(figure.id)]);
+                                } else {
+                                    // eliminar favorito (si tienes la función deleteUserFavorite)
+                                    console.log("Lllamando al delete fav, token: " + token);
+                                    await deleteUserFavorite(figure.id, token);
+                                    setFavorite(false);
+                                    setFavorites(prev => prev.filter(fid => fid !== Number(figure.id)));
+                                }
+                            } catch (err) {
+                                console.error("Error actualizando favorito:", err);
+                            }
                         }}
                         className="text-blue-500 text-2xl"
-                        whileTap={{ scale: 1.3 }} // efecto “pop” al pulsar
+                        whileTap={{ scale: 1.3 }}
                         animate={{ scale: favorite ? 1.2 : 1 }}
-                        transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 20 }}
                     >
                         {favorite ? <FaHeart /> : <FaRegHeart />}
                     </motion.button>
@@ -131,15 +189,15 @@ function FigureDetail() {
                         <h3 className="text-lg font-semibold mb-2 ml-2">
                             Más de {figure.brandName}
                         </h3>
-                      
-                            <HorizontalScroller>
+
+                        <HorizontalScroller>
                             {related.map((f) => (
                                 <div key={f.id} className="snap-center w-[256px] flex-none">
-                                    <FigureCard figure={f} onClick={() => navigate(`/figure/${f.id}`)} />
+                                    <FigureCard figure={f} isFavorite={favorites.includes(f.id)} onClick={() => navigate(`/figure/${f.id}`)} />
                                 </div>
                             ))}
-                            </HorizontalScroller>
-                        
+                        </HorizontalScroller>
+
                     </section>
                 )}
             </div>

@@ -1,5 +1,5 @@
 // src/pages/HomePage.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FigureCard from "../componentes/FigureCard";
 import HorizontalScroller from "../componentes/HorizontalScroller";
 import useFigures from "../hooks/homePage/useFigures";
@@ -8,14 +8,37 @@ import FilterPills from "../componentes/homePage/FilterPills";
 import BottomNav from "../componentes/BottomNav";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../componentes/LoadingSpinner";
+import { getUserFavorites } from "../services/api";
 
 const HomePage = () => {
   const { figures, loading } = useFigures();
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("brand"); // "brand" | "collection"
   const navigate = useNavigate();
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+  const loadData = async () => {
+    const token = localStorage.getItem("token");
+
+    const favoritesFromApi = await getUserFavorites(token);
+
+    console.log("Favoritos:", favoritesFromApi);
+
+    // Extraemos solo los IDs de figura
+    const favoriteIds = favoritesFromApi.map(f => f.figureId);
+
+    setFavorites(favoriteIds);
+    console.log("Favoritos IDs:", favoriteIds);
+
+  };
+
+  loadData();
+}, []);
 
   if (loading) return <LoadingSpinner />;
+
+  
 
 
   // Agrupar según filtro activo
@@ -35,6 +58,8 @@ const HomePage = () => {
     acc[key].push(fig);
     return acc;
   }, {});
+
+  
 
   const placeholderText = "GeekVault";
 
@@ -79,7 +104,7 @@ const HomePage = () => {
               {items.map((fig) => (
                 
                 <div key={fig.id} className="snap-center w-[256px] shrink-0">
-                  <FigureCard figure={fig} onClick={() => navigate(`/figure/${fig.id}`)} />
+                  <FigureCard figure={fig} isFavorite={favorites.includes(fig.id)} onClick={() => navigate(`/figure/${fig.id}`)} />
                 </div>
               ))}
             </HorizontalScroller>

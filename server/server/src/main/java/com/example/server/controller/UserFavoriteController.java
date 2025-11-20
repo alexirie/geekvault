@@ -10,9 +10,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/user/favorites")
+@RequestMapping("api/user/favorites")
 @RequiredArgsConstructor
 public class UserFavoriteController {
 
@@ -26,11 +27,25 @@ public class UserFavoriteController {
     }
 
     // POST -> añadir favorito
-    @PostMapping("/{figureId}")
-    public void addFavorite(@AuthenticationPrincipal User currentUser, @PathVariable Long figureId) {
+    @PostMapping
+    public Map<String, Object> addFavorite(
+            @AuthenticationPrincipal User currentUser,
+            @RequestBody Map<String, Long> body) {
+
+        System.out.println("=== ADD FAVORITE ===");
+        System.out.println("Usuario actual: " + currentUser);
+        System.out.println("Body recibido: " + body);
+
+        if (currentUser == null) {
+            System.out.println("ERROR: Usuario no autenticado");
+            throw new RuntimeException("Usuario no autenticado");
+        }
+        Long figureId = body.get("figureId");
         Figure figure = figureService.findById(figureId)
                 .orElseThrow(() -> new RuntimeException("Figura no encontrada"));
         userFavoriteService.addFavorite(currentUser, figure);
+        System.out.println("Favorito añadido correctamente!");
+        return Map.of("status", "ok");
     }
 
     // DELETE -> eliminar favorito
