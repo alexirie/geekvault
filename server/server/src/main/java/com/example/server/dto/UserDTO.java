@@ -24,6 +24,8 @@ public class UserDTO {
     @Size(min = 6, max = 50)
     private String password;
 
+    private String urlImagen;
+
     private boolean enabled = true;
 
     private int failedLoginAttempts = 0;

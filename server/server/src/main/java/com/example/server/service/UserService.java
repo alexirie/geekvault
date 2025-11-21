@@ -71,7 +71,7 @@ public class UserService {
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         dto.setPassword(""); // Nunca devolvemos la password real
-
+        dto.setUrlImagen(user.getUrlImagen());
         // Roles
         if (user.getRoles() != null) {
             Set<String> roleNames = user.getRoles().stream()
@@ -89,7 +89,7 @@ public class UserService {
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
-
+        user.setUrlImagen(dto.getUrlImagen());
         // Cifrar la contraseña antes de guardar
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(dto.getPassword()));

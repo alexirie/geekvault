@@ -34,6 +34,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserRole> roles;
 
+    private String urlImagen;
+
     private boolean enabled = true;
     private int failedLoginAttempts = 0;
 

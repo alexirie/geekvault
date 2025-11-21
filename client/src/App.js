@@ -19,6 +19,7 @@ import StockList from './pages/admin/stock/StockList';
 import NewStock from './pages/admin/stock/NewStock';
 import EditStock from './pages/admin/stock/EditStock';
 import FavoritesPage from './pages/FavoritesPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
 
@@ -50,10 +51,13 @@ function App() {
       <BackButtonHandler />
 
       <Routes>
+        {/* HOME */}
         <Route path="/" element={<HomePage />} />
-        {/* Otras rutas */}
+
+        {/* FIGURE DETAIL */}
         <Route path="/figure/:id" element={<FigureDetail />} />
 
+        {/* LOGIN */}
         <Route element={<PublicRoute />}>
           <Route path="/login" element={<LoginPage />} />
         </Route>
@@ -61,9 +65,12 @@ function App() {
         {/* FAVORITOS */}
         <Route path="/favoritos" element={<FavoritesPage />} />
 
+        {/* PERFIL */}
+        <Route path="/perfil" element={<ProfilePage />} />
+
+
         {/* Rutas admin protegidas */}
-        <Route element={<ProtectedRoute />}>
-          
+        <Route element={<ProtectedRoute />}> 
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} /> {/* Esta es la página por defecto */}
             {/* FIGURAS */}
@@ -75,8 +82,6 @@ function App() {
             <Route path="stock" element={<StockList />} />
             <Route path="stock/nuevo" element={<NewStock />} />
             <Route path="stock/:id/editar" element={<EditStock />} />
-
-            
 
             {/* USUARIOS */}
             <Route path="usuarios" element={<UserList />} />

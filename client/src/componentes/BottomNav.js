@@ -1,12 +1,13 @@
 import { Home, Heart, Bell, User, Boxes } from "lucide-react";
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function BottomNav() {
   const [active, setActive] = useState("inicio");
   const navigate = useNavigate();
   const { isLogged } = useContext(AuthContext);
+  const location = useLocation();
 
   const tabs = [
     { id: "inicio", label: "Inicio", icon: Home, route: "/" },
@@ -15,6 +16,12 @@ export default function BottomNav() {
     { id: "notificaciones", label: "Notificaciones", icon: Bell, route: "/notificaciones" },
     { id: "perfil", label: "Perfil", icon: User, route: "/perfil" },
   ];
+
+  // Cada vez que cambia la ruta, actualizamos el boton activo
+  useEffect(() => {
+    const tab = tabs.find(t => t.route === location.pathname);
+    if (tab) setActive(tab.id);
+  }, [location.pathname]);
 
   const handleNavigation = (tab) => {
     // Si NO está logueado y la pestaña no es Inicio → login
@@ -38,9 +45,8 @@ export default function BottomNav() {
           <button
             key={tab.id}
             onClick={() => handleNavigation(tab)}
-            className={`flex flex-col items-center gap-1 text-sm transition-colors ${
-              active === tab.id ? "text-blue-500" : "text-gray-500"
-            }`}
+            className={`flex flex-col items-center gap-1 text-sm transition-colors ${active === tab.id ? "text-blue-500" : "text-gray-500"
+              }`}
           >
             <Icon className="w-6 h-6" />
             <span>{tab.label}</span>
