@@ -49,11 +49,32 @@ public class UserService {
     }
 
     public UserDTO update(Long id, UserDTO dto) {
+
         User updated = userRepository.findById(id)
                 .map(user -> {
-                    user.setUsername(dto.getUsername());
-                    user.setEmail(dto.getEmail());
-                    user.setPassword(dto.getPassword());
+
+                    // Campos normales
+                    if (dto.getUsername() != null)
+                        user.setUsername(dto.getUsername());
+                    if (dto.getEmail() != null)
+                        user.setEmail(dto.getEmail());
+                    if (dto.getUrlImagen() != null)
+                        user.setUrlImagen(dto.getUrlImagen());
+
+                    // --- Actualizar roles sin reemplazar el Set ---
+                    if (dto.getRoles() != null) {
+                        user.getRoles().clear(); // vaciamos la colección gestionada
+                        for (String roleName : dto.getRoles()) {
+                            user.getRoles().add(new UserRole(null, roleName, user));
+                        }
+                    }
+
+                    // SOLO actualizar contraseña si realmente viene
+                    if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
+                        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                        user.setPassword(encoder.encode(dto.getPassword()));
+                    }
+
                     return userRepository.save(user);
                 })
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
@@ -90,9 +111,13 @@ public class UserService {
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
         user.setUrlImagen(dto.getUrlImagen());
-        // Cifrar la contraseña antes de guardar
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+        // 👇 SOLO si el frontend envía password
+        if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
 
         if (dto.getRoles() != null) {
             Set<UserRole> roles = dto.getRoles().stream()
@@ -100,10 +125,6 @@ public class UserService {
                     .collect(Collectors.toSet());
             user.setRoles(roles);
         }
-
-        user.setEnabled(true);
-        user.setFailedLoginAttempts(0);
-        user.setLockUntil(null);
 
         return user;
     }

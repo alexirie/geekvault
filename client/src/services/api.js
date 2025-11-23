@@ -166,6 +166,21 @@ export const createUser = async (userData) => {
   return res.json();
 };
 
+export const updateUser = async (id, userData, token) => {
+  const res = await fetch(`${BASE_URL}/users/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(userData),
+  });
+
+  if (!res.ok) throw new Error("Error updating user");
+  return res.json();
+};
+
+
 // ---------------------
 // FAVORITOS
 // ---------------------

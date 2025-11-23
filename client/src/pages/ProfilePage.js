@@ -3,10 +3,45 @@ import { AuthContext } from "../context/AuthContext";
 import { LogOut, Mail, User, Shield, Globe, Bell, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../constantes";
+import { updateUser } from "../services/api";
 
 export default function ProfilePage() {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, setUser, token } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const handleUploadProfilePic = async (file) => {
+    try {
+      // 1. Subir archivo
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch(`${BASE_URL}/figures/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const imageUrl = await res.text();
+
+      console.log("Frontend user.id:", user.id);
+      console.log("Token:", token);
+
+      // 2. Guardar URL en el usuario
+      const updatedUser = await updateUser(
+        user.id,
+        { urlImagen: imageUrl },
+        token 
+      );
+
+      // 3. Actualizar estado global/local
+      setUser(updatedUser);
+      console.log("Updated user:", updatedUser);
+
+    } catch (err) {
+      console.error("Error subiendo imagen", err);
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -25,19 +60,35 @@ export default function ProfilePage() {
       <div className="h-40 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-b-3xl relative">
         {/* Avatar */}
         <div className="absolute inset-0 flex flex-col items-center mt-10">
+          {/* Hidden file input */}
+          <input
+            type="file"
+            accept="image/*"
+            id="profileUpload"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) handleUploadProfilePic(file);
+            }}
+          />
+
+          {/* Avatar clickable */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.4 }}
             className="relative"
           >
-            <img
-              src={user?.avatar || "/logo-dibujo.jpg"}
-              alt="avatar"
-              className="w-28 h-28 rounded-full border-4 shadow-lg object-cover"
-            />
-            <button className="absolute bottom-1 right-1 bg-white p-1 rounded-full shadow-md">
-              <User className="w-4 h-4 text-gray-700" />
+            <button
+              onClick={() => document.getElementById("profileUpload").click()}
+              className="relative"
+            >
+              <img
+                src={user?.urlImagen || "/logo-dibujo.jpg"}
+                alt="avatar"
+                className="w-28 h-28 rounded-full border-4 shadow-lg object-cover"
+              />
+
             </button>
           </motion.div>
 
