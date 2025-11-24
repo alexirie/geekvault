@@ -218,7 +218,6 @@ export const deleteUserFavorite = async (id, token) => {
     },
   });
 
-  // para debugging puedes loguear el status
   if (!res.ok) {
     const text = await res.text().catch(() => null);
     console.error("deleteUserFavorite failed:", res.status, text);
@@ -265,5 +264,24 @@ export const register = async (username, email, password) => {
 
   return res.json(); // si tu backend devuelve algo
 };
+
+export const logoutRequest = async (refreshToken) => {
+  const res = await fetch(`${BASE_URL_L}/auth/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ refreshToken }),
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(errorText || "Error al hacer logout");
+  }
+
+  return res.text();
+};
+
 
 

@@ -1,67 +1,81 @@
 // src/context/AuthContext.jsx
 import { createContext, useState, useEffect } from "react";
+import { logoutRequest } from "../services/api";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLogged, setIsLogged] = useState(!!localStorage.getItem("token"));
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [refreshToken, setRefreshToken] = useState(localStorage.getItem("refreshToken") || null);
+ 
+  // Estado derivado del token actual
+  const isLogged = !!token;
 
-  // opcional: escuchar cambios en localStorage
+  // Cargar user al iniciar
   useEffect(() => {
-  const token = localStorage.getItem("token");
-  const storedUser = localStorage.getItem("user");
-
-  if (token && storedUser) {
-    setIsLogged(true);
-    setUser(JSON.parse(storedUser));
-    setToken(token);
-  } else {
-    setIsLogged(false);
-    setUser(null);
-    setToken(null);
-  }
-
-  const handleStorage = () => {
-    const token = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
+
     if (token && storedUser) {
-      setIsLogged(true);
       setUser(JSON.parse(storedUser));
-      setToken(token);
     } else {
-      setIsLogged(false);
       setUser(null);
-      setToken(null);
     }
-  };
+  }, [token]);
 
-  window.addEventListener("storage", handleStorage);
-  return () => window.removeEventListener("storage", handleStorage);
-}, []);
+  // -------------------------
+  // LOGIN
+  // -------------------------
+  const login = (userData, accessToken, refreshTokenFromBackend) => {
+    // guardar en localStorage
+    localStorage.setItem("token", accessToken);
+    localStorage.setItem("refreshToken", refreshTokenFromBackend);
+    localStorage.setItem("user", JSON.stringify(userData));
 
-
-  // función para loguear
-  const login = (userData, token) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(userData)); // guardar user
+    // actualizar estado
     setUser(userData);
-    setIsLogged(true);
-    setToken(token);
+    setToken(accessToken);
+    setRefreshToken(refreshTokenFromBackend);
   };
 
-  // función para desloguear
-  const logout = () => {
+  // -------------------------
+  // LOGOUT
+  // -------------------------
+  const logout = async () => {
+
+    try {
+      if (refreshToken) {
+        await logoutRequest(refreshToken);
+      }
+    } catch (err) {
+      console.error("Error cerrando sesión en backend:", err);
+    }
+
+    // limpiar front
     localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
+
     setUser(null);
-    setIsLogged(false);
     setToken(null);
+    setRefreshToken(null);
+
+    window.location.href = "/login";
+
   };
 
   return (
-    <AuthContext.Provider value={{ isLogged, user, setUser, token, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isLogged,
+        user,
+        token,
+        refreshToken,
+        login,
+        logout,
+        setUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
