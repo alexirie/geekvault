@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../constantes";
 import { updateUser } from "../services/api";
+import BottomNav from "../componentes/BottomNav";
 
 export default function ProfilePage() {
   const { user, logout, setUser, token } = useContext(AuthContext);
@@ -155,6 +156,7 @@ export default function ProfilePage() {
           </button>
         </div>
       </div>
+      <BottomNav></BottomNav>
     </div>
   );
 }
