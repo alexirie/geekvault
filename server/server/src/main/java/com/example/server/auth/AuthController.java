@@ -63,7 +63,8 @@ public class AuthController {
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
-                roleNames);
+                roleNames,
+                user.getUrlImagen());
 
         return ResponseEntity.ok(new AuthResponse(
                 accessToken,

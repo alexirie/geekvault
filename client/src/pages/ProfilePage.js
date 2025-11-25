@@ -127,7 +127,7 @@ export default function ProfilePage() {
         {/* Opciones */}
         <div className="mt-8 bg-white rounded-2xl shadow-md divide-y">
           {[
-            { label: "Cambiar email", icon: Mail },
+            { label: "Datos personales", icon: Mail },
             { label: "Cambiar contraseña", icon: Lock },
             { label: "Idioma", icon: Globe },
             { label: "Notificaciones", icon: Bell },
