@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../componentes/LoadingSpinner";
 import { getUserFavorites } from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import Footer from "../componentes/Footer";
 
 const FavoritesPage = () => {
   const [favoriteFigures, setFavoriteFigures] = useState([]); 
@@ -115,7 +116,7 @@ const FavoritesPage = () => {
           </section>
         );
       })}
-
+      <Footer/>
       <BottomNav />
     </div>
   );

@@ -12,6 +12,7 @@ import LoadingSpinner from "../componentes/LoadingSpinner";
 import HorizontalScroller from "../componentes/HorizontalScroller";
 import { getUserFavorites, createUserFavorite, deleteUserFavorite } from "../services/api";
 import { AuthContext } from '../context/AuthContext';
+import Footer from "../componentes/Footer";
 
 function FigureDetail() {
     const { id } = useParams();
@@ -201,6 +202,7 @@ function FigureDetail() {
                     </section>
                 )}
             </div>
+            <Footer/>
             <BottomNav></BottomNav>
         </div>
     );

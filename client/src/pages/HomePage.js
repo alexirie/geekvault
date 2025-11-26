@@ -9,6 +9,7 @@ import BottomNav from "../componentes/BottomNav";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../componentes/LoadingSpinner";
 import { getUserFavorites } from "../services/api";
+import Footer from "../componentes/Footer";
 
 const HomePage = () => {
   const { figures, loading } = useFigures();
@@ -111,6 +112,7 @@ const HomePage = () => {
           </section>
         );
       })}
+      <Footer/>
       <BottomNav></BottomNav>
     </div>
   );
