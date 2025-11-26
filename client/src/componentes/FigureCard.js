@@ -87,12 +87,15 @@ const FigureCard = ({ figure, isFavorite, onClick }) => {
 
 
           {/* ✨ Precio en banda negra inferior */}
-          <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white text-lg font-bold text-center py-1">
-            {figure.stockPrice
-              ? `${Number(figure.stockPrice).toFixed(2)} €`
-              : `${Number(figure.price).toFixed(2)} €`
-            }
-          </div>
+          {figure.stockPrice !== 0 && (
+            <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white text-lg font-bold text-center py-1">
+              {figure.stockPrice
+                ? `${Number(figure.stockPrice).toFixed(2)} €`
+                : `${Number(figure.price).toFixed(2)} €`
+              }
+            </div>
+          )}
+
         </div>
 
         {/* Información */}
