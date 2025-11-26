@@ -52,14 +52,14 @@ public class R2Service {
 
         AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(cleanAccessKey, secretKey);
 
-        /*
-         * System.out.println("----- DEBUG R2 CONFIG -----");
-         * System.out.println("accessKey = [" + accessKey + "]");
-         * System.out.println("secretKey = [" + secretKey + "]");
-         * System.out.println("bucketName = [" + bucketName + "]");
-         * System.out.println("endpoint = [" + endpoint + "]");
-         * System.out.println("---------------------------");
-         */
+        
+          System.out.println("----- DEBUG R2 CONFIG -----");
+          System.out.println("accessKey = [" + accessKey + "]");
+          System.out.println("secretKey = [" + secretKey + "]");
+          System.out.println("bucketName = [" + bucketName + "]");
+          System.out.println("endpoint = [" + endpoint + "]");
+          System.out.println("---------------------------");
+         
 
         S3Configuration serviceConfiguration = S3Configuration.builder()
                 .pathStyleAccessEnabled(true)
@@ -69,7 +69,7 @@ public class R2Service {
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
                 .endpointOverride(URI.create(endpoint))
                 .serviceConfiguration(serviceConfiguration)
-                .region(Region.US_EAST_1)
+                .region(Region.of("auto")) //cambio aqui
                 .build();
 
         // Asegurarse de que el bucket existe (crearlo si no existe)
