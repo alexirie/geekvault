@@ -100,14 +100,21 @@ function FigureDetail() {
     return (
         <div className="bg-gray-100 min-h-screen pb-24">
             {/* 🔙 HEADER */}
-            <div className="sticky top-0 z-30 bg-gray-100 flex items-center p-4 shadow-sm">
+            <div className="sticky top-0 z-30 bg-gray-100 h-16 shadow-sm relative">
+                {/* Botón volver */}
                 <button
                     onClick={() => navigate('/')}
-                    className="text-blue-500 font-bold mr-4"
+                    className="text-blue-500 font-bold absolute left-4 top-1/2 -translate-y-1/2"
                 >
                     ← Volver
                 </button>
 
+                {/* Logo centrado */}
+                <img
+                    src="/logo.jpg"
+                    alt="Logo"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-16 object-contain"
+                />
             </div>
 
             {/* 🔥 CONTENIDO PRINCIPAL */}
@@ -202,7 +209,7 @@ function FigureDetail() {
                     </section>
                 )}
             </div>
-            <Footer/>
+            <Footer />
             <BottomNav></BottomNav>
         </div>
     );
