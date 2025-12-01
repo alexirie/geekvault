@@ -53,7 +53,7 @@ const HorizontalScroller = ({ children }) => {
         <motion.button
           onClick={() => scrollBy(-1)}
           className="absolute left-2 z-20 p-3 rounded-full bg-[#1b2838]/80 backdrop-blur-lg shadow-xl border border-[#66c0f4]/20 text-[#66c0f4] hover:text-white hover:bg-[#1b2838]"
-          style={{ top: "40%" }}
+          style={{ top: "45%" }}
           whileTap={{ scale: 0.8 }}
           whileHover={{ scale: 1.2 }}
           initial={{ translateY: "-50%", opacity: 0 }}
@@ -77,7 +77,7 @@ const HorizontalScroller = ({ children }) => {
         <motion.button
           onClick={() => scrollBy(1)}
           className="absolute right-2 z-20 p-3 rounded-full bg-[#1b2838]/80 backdrop-blur-lg shadow-xl border border-[#66c0f4]/20 text-[#66c0f4] hover:text-white hover:bg-[#1b2838]"
-          style={{ top: "40%" }}
+          style={{ top: "45%" }}
           whileTap={{ scale: 0.8 }}
           whileHover={{ scale: 1.2 }}
           initial={{ translateY: "-50%", opacity: 0 }}
