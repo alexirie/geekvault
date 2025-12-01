@@ -98,29 +98,22 @@ function FigureDetail() {
 
 
     return (
-        <div className="bg-gray-100 min-h-screen pb-24">
+        <div className="bg-[#0b0f15] min-h-screen pb-24 text-[#c7d5e0]">
             {/* 🔙 HEADER */}
-            <div className="sticky top-0 z-30 bg-gray-100 h-16 shadow-sm relative">
+            <div className="sticky top-0 z-30 bg-[#0b0f15]/90 backdrop-blur-md h-16 relative border-b border-[#2a3b52]">
                 {/* Botón volver */}
                 <button
                     onClick={() => navigate('/')}
-                    className="text-blue-500 font-bold absolute left-4 top-1/2 -translate-y-1/2"
-                >
+                    className="text-[#66c0f4] font-bold absolute left-4 top-1/2 -translate-y-1/2">
                     ← Volver
                 </button>
 
-                {/* Logo centrado */}
-                <img
-                    src="/logo.jpg"
-                    alt="Logo"
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-16 object-contain"
-                />
             </div>
 
             {/* 🔥 CONTENIDO PRINCIPAL */}
             <div className="p-4 flex flex-col items-center">
                 {/* Imagen */}
-                <div className="w-full h-[60vh] bg-white flex items-center justify-center rounded-lg shadow-lg mb-4">
+                <div className="w-full h-[60vh] bg-[#1b2838] flex items-center justify-center rounded-lg shadow-[0_0_20px_rgba(102,192,244,0.3)] mb-4">
                     <img
                         src={figure.imageUrl}
                         alt={figure.name}
@@ -131,12 +124,11 @@ function FigureDetail() {
                 {/* Datos alineados a la izquierda */}
                 <div className="w-full max-w-md flex justify-between items-start mb-4">
                     <div className="flex flex-col gap-1">
-                        <h2 className="text-2xl font-bold">{figure.name}</h2>
-                        <p className="text-gray-600">{figure.brandName}</p>
-                        <p className="text-gray-600">Colección: {figure.collection}</p>
-                        <p className="text-gray-600">Serie: {figure.anime}</p>
-                        <p className="text-gray-600">Material: {figure.material}</p>
-
+                        <h2 className="text-2xl font-bold text-[#66c0f4]">{figure.name}</h2>
+                        <p className="text-[#c7d5e0]">{figure.brandName}</p>
+                        <p className="text-[#c7d5e0]">Colección: {figure.collection}</p>
+                        <p className="text-[#c7d5e0]">Serie: {figure.anime}</p>
+                        <p className="text-[#c7d5e0]">Material: {figure.material}</p>
                     </div>
 
                     {/* Botón pequeño de favorito */}
@@ -171,7 +163,7 @@ function FigureDetail() {
                                 console.error("Error actualizando favorito:", err);
                             }
                         }}
-                        className="text-blue-500 text-2xl"
+                        className="text-[#66c0f4] text-2xl"
                         whileTap={{ scale: 1.3 }}
                         animate={{ scale: favorite ? 1.2 : 1 }}
                         transition={{ type: "spring", stiffness: 500, damping: 20 }}
@@ -183,7 +175,7 @@ function FigureDetail() {
 
                 {/* ✨ DESCRIPCIÓN */}
                 {figure.description && (
-                    <div className="w-full max-w-md bg-white rounded-lg shadow p-4 mb-6 text-gray-700 text-sm sm:text-base leading-relaxed">
+                    <div className="w-full max-w-md bg-[#1b2838] rounded-lg shadow-[0_0_15px_rgba(102,192,244,0.3)] p-4 mb-6 text-[#c7d5e0] text-sm sm:text-base leading-relaxed">
                         {figure.description}
                     </div>
                 )}
@@ -194,7 +186,7 @@ function FigureDetail() {
                 {/* Figuras relacionadas */}
                 {related.length > 0 && (
                     <section className="w-full mt-6">
-                        <h3 className="text-lg font-semibold mb-2 ml-2">
+                        <h3 className="text-lg font-semibold mb-2 ml-2 text-[#66c0f4]">
                             Más de {figure.brandName}
                         </h3>
 

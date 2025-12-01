@@ -1,6 +1,7 @@
 // src/pages/SplashScreen.js
 import React, { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import LoadingSpinner from "../componentes/LoadingSpinner";
 
 const SplashScreen = ({ onFinish }) => {
   useEffect(() => {
@@ -11,20 +12,23 @@ const SplashScreen = ({ onFinish }) => {
   }, [onFinish]);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
-  <AnimatePresence>
-    <motion.img
-      src="/logo.jpg"
-      alt="Logo"
-      className="w-96 h-96 sm:w-96 sm:h-96 object-contain mb-40"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 1.2 }}
-      transition={{ duration: 1.5, ease: "easeOut" }}
-    />
-  </AnimatePresence>
-</div>
-  );
+  <div className="w-screen h-screen flex flex-col items-center justify-center bg-[#0d1117] px-4">
+
+    <LoadingSpinner>
+      <motion.img
+        src="/logoOscuro.jpg" 
+        alt="Logo"
+        className="w-56 h-56 sm:w-72 sm:h-72 object-contain mb-10 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]"
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 1.15 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      />
+    </LoadingSpinner>
+
+  </div>
+);
+
 };
 
 export default SplashScreen;

@@ -1,4 +1,4 @@
-// src/componentes/HorizontalScroller.jsx
+// src/componentes/HorizontalScroller.jsx (versión dark estilo Steam)
 import { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -9,7 +9,6 @@ const HorizontalScroller = ({ children }) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
-  /** Actualiza si se puede scroll a izquierda/derecha */
   const updateScrollState = () => {
     const el = ref.current;
     if (!el) return;
@@ -53,29 +52,22 @@ const HorizontalScroller = ({ children }) => {
       {canScrollLeft && (
         <motion.button
           onClick={() => scrollBy(-1)}
-          className="absolute left-0 z-10 p-2 bg-white/80 backdrop-blur rounded-full shadow"
+          className="absolute left-2 z-20 p-3 rounded-full bg-[#1b2838]/80 backdrop-blur-lg shadow-xl border border-[#66c0f4]/20 text-[#66c0f4] hover:text-white hover:bg-[#1b2838]"
           style={{ top: "40%" }}
-          whileTap={{ scale: 0.85, rotate: -10 }}
-          whileHover={{ scale: 1.15, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 500, damping: 20 }}
-          // Añadimos un transform inicial con translateY para centrar verticalmente
-          initial={{ translateY: "-50%" }}
-          animate={{ translateY: "-50%" }}
+          whileTap={{ scale: 0.8 }}
+          whileHover={{ scale: 1.2 }}
+          initial={{ translateY: "-50%", opacity: 0 }}
+          animate={{ translateY: "-50%", opacity: 1 }}
+          transition={{ duration: 0.2 }}
         >
           <ChevronLeft size={28} />
         </motion.button>
       )}
 
-      {/* Scroll principal */}
+      {/* Contenedor del scroll */}
       <div
         ref={ref}
-        className="horizontal-scroll 
-          flex gap-4 overflow-x-auto 
-          no-scrollbar select-none
-          snap-x snap-mandatory
-          touch-pan
-          px-8
-        "
+        className="horizontal-scroll flex gap-4 overflow-x-auto no-scrollbar select-none snap-x snap-mandatory touch-pan px-6 py-2"
       >
         {children}
       </div>
@@ -84,28 +76,26 @@ const HorizontalScroller = ({ children }) => {
       {canScrollRight && (
         <motion.button
           onClick={() => scrollBy(1)}
-          className="absolute right-0 z-10 p-2 bg-white/80 backdrop-blur rounded-full shadow"
+          className="absolute right-2 z-20 p-3 rounded-full bg-[#1b2838]/80 backdrop-blur-lg shadow-xl border border-[#66c0f4]/20 text-[#66c0f4] hover:text-white hover:bg-[#1b2838]"
           style={{ top: "40%" }}
-          whileTap={{ scale: 0.85, rotate: 10 }}
-          whileHover={{ scale: 1.15, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 500, damping: 20 }}
-          // Centrado vertical con Framer Motion
-          initial={{ translateY: "-50%" }}
-          animate={{ translateY: "-50%" }}
+          whileTap={{ scale: 0.8 }}
+          whileHover={{ scale: 1.2 }}
+          initial={{ translateY: "-50%", opacity: 0 }}
+          animate={{ translateY: "-50%", opacity: 1 }}
+          transition={{ duration: 0.2 }}
         >
           <ChevronRight size={28} />
         </motion.button>
-
       )}
 
       {/* Fade izquierda */}
       {canScrollLeft && (
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-gray-100 to-transparent"></div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0b0f15] to-transparent" />
       )}
 
       {/* Fade derecha */}
       {canScrollRight && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-gray-100 to-transparent"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0b0f15] to-transparent" />
       )}
     </div>
   );
