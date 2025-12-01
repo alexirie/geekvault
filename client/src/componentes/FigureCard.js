@@ -55,9 +55,6 @@ const FigureCard = ({ figure, isFavorite, onClick }) => {
                   return;
                 }
 
-                console.log("Token actual:", token);
-                console.log("Figura que intento marcar:", figure.id);
-
                 try {
                   if (!favorite) {
                     // crear favorito

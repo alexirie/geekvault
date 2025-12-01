@@ -11,7 +11,7 @@ import java.util.Set;
 @Data
 public class UserDTO {
 
-    private Long id; // útil para updates y responses
+    private Long id;
 
     @NotBlank
     private String username;
