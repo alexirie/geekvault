@@ -1,11 +1,9 @@
-// src/components/UserForm.jsx
 import { useState } from "react";
 
 export default function UserForm({ initialData = {}, onSubmit, loading, error }) {
     const [username, setUsername] = useState(initialData.username || "");
     const [email, setEmail] = useState(initialData.email || "");
     const [password, setPassword] = useState(initialData.password || "");
-    const [roles, setRoles] = useState(initialData.roles || []); // array de strings
     const [enabled, setEnabled] = useState(initialData.enabled ?? true);
 
     const handleSubmit = (e) => {
@@ -14,94 +12,96 @@ export default function UserForm({ initialData = {}, onSubmit, loading, error })
             username,
             email,
             password,
-            roles,
-            enabled
+            roles: ["ROLE_USER"],
+            enabled: true
         });
     };
 
-    const handleRoleChange = (role) => {
-        const roleWithPrefix = `ROLE_${role}`;
-        if (roles.includes(roleWithPrefix)) {
-            setRoles(roles.filter(r => r !== roleWithPrefix));
-        } else {
-            setRoles([...roles, roleWithPrefix]);
-        }
-    };
-
     return (
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-            {error && <p className="text-red-500 mb-4 bg-red-100 p-2 rounded">{error}</p>}
+        <form
+            className="
+                flex flex-col gap-6 p-6 rounded-2xl 
+                bg-[#0d1117] border border-blue-500/20 
+                shadow-[0_0_25px_rgba(59,130,246,0.15)]
+            "
+            onSubmit={handleSubmit}
+        >
+
+            {/* ERROR */}
+            {error && (
+                <p className="text-red-400 bg-red-900/30 border border-red-500/20 p-3 rounded-xl text-sm">
+                    {error}
+                </p>
+            )}
 
             {/* USERNAME */}
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700">Username</label>
+            <div className="flex flex-col gap-1">
+                <label className="text-blue-300 font-medium tracking-wide text-sm">
+                    Username
+                </label>
                 <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    className="
+                        w-full p-3 rounded-xl bg-[#0f1620] text-blue-100
+                        border border-blue-500/20
+                        focus:outline-none focus:ring-2 focus:ring-blue-500 
+                        shadow-inner shadow-black/40
+                    "
                 />
             </div>
 
             {/* EMAIL */}
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700">Email</label>
+            <div className="flex flex-col gap-1">
+                <label className="text-blue-300 font-medium tracking-wide text-sm">
+                    Email
+                </label>
                 <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    className="
+                        w-full p-3 rounded-xl bg-[#0f1620] text-blue-100
+                        border border-blue-500/20
+                        focus:outline-none focus:ring-2 focus:ring-blue-500
+                        shadow-inner shadow-black/40
+                    "
                 />
             </div>
 
             {/* PASSWORD */}
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700">Password</label>
+            <div className="flex flex-col gap-1">
+                <label className="text-blue-300 font-medium tracking-wide text-sm">
+                    Contraseña
+                </label>
                 <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required={!initialData.id} // obligatorio solo al crear
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    required={!initialData.id}
+                    className="
+                        w-full p-3 rounded-xl bg-[#0f1620] text-blue-100
+                        border border-blue-500/20
+                        focus:outline-none focus:ring-2 focus:ring-blue-500
+                        shadow-inner shadow-black/40
+                    "
                 />
             </div>
 
-            {/* ROLES */}
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700">Roles</label>
-                <div className="flex gap-4">
-                    {["ADMIN", "USER"].map(role => (
-                        <label key={role} className="flex items-center gap-2">
-                            <input
-                                type="checkbox"
-                                checked={roles.includes(`ROLE_${role}`)}
-                                onChange={() => handleRoleChange(role)}
-                                className="w-5 h-5 accent-blue-500"
-                            />
-                            {role}
-                        </label>
-                    ))}
-                </div>
-            </div>
-
-            {/* ENABLED */}
-            <label className="flex items-center gap-2 text-gray-700">
-                <input
-                    type="checkbox"
-                    checked={enabled}
-                    onChange={(e) => setEnabled(e.target.checked)}
-                    className="w-5 h-5 accent-blue-500"
-                />
-                Habilitado
-            </label>
 
             {/* BOTÓN */}
             <button
                 type="submit"
                 disabled={loading}
-                className="bg-blue-600 text-white py-3 px-5 rounded-xl text-lg font-semibold hover:bg-blue-700 transition disabled:bg-blue-300"
+                className="
+                    bg-blue-600/90 hover:bg-blue-500
+                    text-white py-3 px-5 rounded-xl text-lg font-semibold
+                    shadow-[0_0_20px_rgba(59,130,246,0.5)]
+                    transition disabled:bg-blue-300 disabled:shadow-none
+                "
             >
                 {loading ? "Guardando..." : "Guardar Usuario"}
             </button>

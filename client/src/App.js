@@ -20,6 +20,7 @@ import NewStock from './pages/admin/stock/NewStock';
 import EditStock from './pages/admin/stock/EditStock';
 import FavoritesPage from './pages/FavoritesPage';
 import ProfilePage from './pages/ProfilePage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
 
@@ -60,6 +61,10 @@ function App() {
         {/* LOGIN */}
         <Route element={<PublicRoute />}>
           <Route path="/login" element={<LoginPage />} />
+        </Route>
+
+        <Route element={<PublicRoute />}>
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
 
         {/* FAVORITOS */}
