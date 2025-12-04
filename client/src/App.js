@@ -21,6 +21,8 @@ import EditStock from './pages/admin/stock/EditStock';
 import FavoritesPage from './pages/FavoritesPage';
 import ProfilePage from './pages/ProfilePage';
 import RegisterPage from './pages/RegisterPage';
+import CollectionPage from './pages/CollectionPage';
+import { Vitrina, Sets } from './pages/CollectionPage';
 
 function App() {
 
@@ -73,9 +75,17 @@ function App() {
         {/* PERFIL */}
         <Route path="/perfil" element={<ProfilePage />} />
 
+        {/* COLECCIÓN */}
+        <Route path="/coleccion" element={<CollectionPage />}>
+          <Route index element={<Vitrina />} />
+          <Route path="vitrina" element={<Vitrina />} />
+          <Route path="sets" element={<Sets />} />
+        </Route>
+
+
 
         {/* Rutas admin protegidas */}
-        <Route element={<ProtectedRoute />}> 
+        <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} /> {/* Esta es la página por defecto */}
             {/* FIGURAS */}
