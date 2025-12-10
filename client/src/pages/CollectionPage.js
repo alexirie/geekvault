@@ -1,9 +1,13 @@
 import { NavLink, Outlet } from "react-router-dom";
 import BottomNav from "../componentes/BottomNav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useFigures from "../hooks/homePage/useFigures";
+import LoadingSpinner from "../componentes/LoadingSpinner";
+import { FiPlus } from "react-icons/fi"; // icono de + bonito
+import SearchBar from "../componentes/SearchBar";
 
 export default function CollectionPage() {
+
     return (
         <div className="min-h-screen p-6 pb-[90px]  space-y-6 bg-[#0d1117] text-blue-100 ">
 
@@ -58,6 +62,7 @@ export default function CollectionPage() {
 
 // ---------- VITRINA ----------
 export function Vitrina() {
+
     const { figures: figuras } = useFigures();
 
     //Cojo solo las figuras que no valen 0
@@ -74,6 +79,8 @@ export function Vitrina() {
         Set: figuras.filter(f => f.type === "Set").length,
         Limitada: figuras.filter(f => f.type === "Limitada").length,
     };
+
+
 
     return (
         <div className="space-y-6 animate-fadeDown">
@@ -157,21 +164,24 @@ export function Vitrina() {
 
             </div>
 
-            {/* Título */}
-            <h1 className="text-3xl font-bold text-blue-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.4)]">
-                Mi Colección
-            </h1>
+    
+            <div className="flex items-center gap-3 pt-8">
+                {/* Botón añadir pequeño */}
+                <button
+                    onClick={() => console.log("Abrir modal/buscador")}
+                    className="flex items-center justify-center p-3 rounded-xl bg-blue-600/90 hover:bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.6)] transition-all duration-300 ml-1"
+                >
+                    <FiPlus className="w-6 h-6" />
+                </button>
 
-            {/* Botón añadir */}
-            <button
-                onClick={() => console.log("Abrir modal/buscador")}
-                className="w-full py-3 rounded-xl bg-blue-600/90 hover:bg-blue-500 text-white font-semibold shadow-[0_0_20px_rgba(59,130,246,0.6)] transition-all duration-300"
-            >
-                + Añadir figura
-            </button>
+                {/* SearchBar */}
+                <div className="flex-1">
+                    <SearchBar />
+                </div>
+            </div>
 
             {/* Grid de figuras */}
-            <div className="grid grid-cols-2 gap-5 pt-2">
+            <div className="grid grid-cols-2 gap-5 ">
                 {figuras.length === 0 && (
                     <p className="text-gray-400 text-sm italic col-span-2">Todavía no añadiste ninguna figura.</p>
                 )}
