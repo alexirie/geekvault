@@ -25,7 +25,7 @@ const FigureCard = ({ figure, isFavorite, onClick }) => {
       <div className="rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(102,192,244,0.5)] bg-[#1b2838]/60 p-1 backdrop-blur-md border border-[#66c0f4]/20">
 
         {/* Card con imagen */}
-        <div className="w-full h-64 bg-[#0b0f15] rounded-xl overflow-hidden shadow-lg relative flex items-center justify-center">
+        <div className="w-full h-64 bg-white rounded-xl rounded-b-none overflow-hidden shadow-lg relative flex items-center justify-center">
           <img
             src={figure.imageUrl || 'https://via.placeholder.com/300x300.png?text=Figure'}
             alt={figure.name}
@@ -71,7 +71,11 @@ const FigureCard = ({ figure, isFavorite, onClick }) => {
 
           {/* Precio en banda inferior */}
           {figure.stockPrice !== 0 && (
-            <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-[#d7e9ff] text-lg font-bold text-center py-1 backdrop-blur-sm">
+            <div className="absolute bottom-0 left-0 w-full 
+                bg-gradient-to-t from-black/80 to-black/40
+                text-[#eaf3ff] text-xl font-semibold 
+                text-center py-2 
+                backdrop-blur-sm shadow-[0_-4px_10px_rgba(0,0,0,0.25)]">
               {figure.stockPrice ? `${Number(figure.stockPrice).toFixed(2)} €` : `${Number(figure.price).toFixed(2)} €`}
             </div>
           )}

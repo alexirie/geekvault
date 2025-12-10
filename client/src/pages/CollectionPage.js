@@ -111,7 +111,7 @@ export function Vitrina() {
                                 className="w-full h-full object-contain"
                             />
                         </div>
-                        <p className="text-blue-100 text-sm font-semibold leading-tight text-center line-clamp-2">
+                        <p className="text-blue-100 text-sm font-semibold leading-tight text-center line-clamp-2 h-10">
                             {figuraMasBarata.name}
                         </p>
                         <p className="text-blue-400 text-xs font-semibold mt-1 animate-pulse">
@@ -144,7 +144,7 @@ export function Vitrina() {
                                 className="w-full h-full object-contain"
                             />
                         </div>
-                        <p className="text-blue-100 text-sm font-semibold leading-tight text-center line-clamp-2">
+                        <p className="text-blue-100 text-sm font-semibold leading-tight text-center line-clamp-2 h-10">
                             {figuraMasCara.name}
                         </p>
                         <p className="text-blue-400 text-xs font-semibold mt-1 animate-pulse">
@@ -164,7 +164,7 @@ export function Vitrina() {
 
             </div>
 
-    
+
             <div className="flex items-center gap-3 pt-8">
                 {/* Botón añadir pequeño */}
                 <button
