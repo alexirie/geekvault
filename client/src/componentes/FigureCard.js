@@ -7,12 +7,14 @@ import { AuthContext } from '../context/AuthContext';
 import { createUserFavorite, deleteUserFavorite } from "../services/api";
 import useToast from '../hooks/useToast';
 import CustomToast from "../componentes/ui/CustomToast";
+import { useTranslation } from 'react-i18next';
 
 const FigureCard = ({ figure, isFavorite, onClick }) => {
   const [favorite, setFavorite] = useState(isFavorite);
   const { isLogged, token } = useContext(AuthContext);
   const navigate = useNavigate();
   const { toast, showToast } = useToast();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setFavorite(isFavorite);
@@ -35,7 +37,7 @@ const FigureCard = ({ figure, isFavorite, onClick }) => {
           {/* Overlay "En stock" */}
           {figure.inStock && (
             <div className="absolute top-2 left-2 bg-green-500 bg-opacity-80 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-              EN STOCK
+              {t("figura.en_stock")}
             </div>
           )}
 

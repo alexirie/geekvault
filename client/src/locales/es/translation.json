@@ -1,0 +1,40 @@
+{
+  "tabs": {
+    "vitrina": "Tu Vitrina",
+    "sets": "Sets",
+    "estadisticas": "Estadísticas"
+  },
+  "stats": {
+    "valor_total": "Valor total",
+    "num_figuras": "Número de figuras",
+    "mas_barata": "Figura más barata",
+    "mas_cara": "Figura más cara"
+  },
+  "figura": {
+    "en_stock": "EN STOCK"
+  },
+  "filtros": {
+    "marca": "Marca",
+    "coleccion": "Colección",
+    "anime": "Anime"
+  },
+  "buttons": {
+    "añadir": "Añadir",
+    "buscar": "Buscar",
+    "buscar_en": "Buscar en"
+  },
+  "placeholders": {
+    "search": "Mi Colección"
+  },
+  "messages": {
+    "sin_figuras": "Todavía no añadiste ninguna figura",
+    "en_stock": "EN STOCK"
+  },
+  "spinner": {
+    "titulo": "Cargando Waifus..."
+  },
+  "toast": {
+    "agregado_favoritos": "Agregado a favoritos 💙",
+    "eliminado_favoritos": "Eliminado de favoritos 💔"
+  }
+}

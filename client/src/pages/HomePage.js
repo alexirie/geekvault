@@ -11,12 +11,16 @@ import LoadingSpinner from "../componentes/LoadingSpinner";
 import { getUserFavorites } from "../services/api";
 import Footer from "../componentes/Footer";
 
+
 const HomePage = () => {
   const { figures, loading } = useFigures();
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("brand");
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
+  
+  const placeholderText = "GeekVault";
+
 
   useEffect(() => {
     const loadData = async () => {
@@ -43,8 +47,7 @@ const HomePage = () => {
     return acc;
   }, {});
 
-  const placeholderText = "GeekVault";
-
+  
   return (
     <div className="bg-gradient-to-b from-[#0b0f15] via-[#131922] to-[#0b0f15] text-gray-200 p-0 sm:px-8 pb-24 min-h-screen">
       {/* 🔎 NAV */}
