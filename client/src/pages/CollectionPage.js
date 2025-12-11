@@ -1,12 +1,22 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import BottomNav from "../componentes/BottomNav";
 import { useState, useEffect } from "react";
 import useFigures from "../hooks/homePage/useFigures";
 import LoadingSpinner from "../componentes/LoadingSpinner";
 import { FiPlus } from "react-icons/fi"; // icono de + bonito
 import SearchBar from "../componentes/SearchBar";
+import { motion } from "framer-motion";
 
 export default function CollectionPage() {
+
+    const location = useLocation();
+    const isVitrinaIndex = location.pathname === "/coleccion";
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // va al top al montar el componente
+    }, []);
+
 
     return (
         <div className="min-h-screen p-6 pb-[90px]  space-y-6 bg-[#0d1117] text-blue-100 ">
@@ -15,21 +25,25 @@ export default function CollectionPage() {
             <div className="flex gap-6 border-b border-blue-500/20 pb-1">
                 <NavLink
                     to="vitrina"
-                    className={({ isActive }) =>
-                        `
-            pb-2 text-lg transition-all duration-300 relative
-            ${isActive ? "text-blue-400 font-semibold" : "text-gray-400 hover:text-blue-300"}
-            `
-                    }
+                    className={({ isActive }) => {
+                        const active = isActive || isVitrinaIndex;
+
+                        return `pb-2 text-lg transition-all duration-300 relative
+                        ${active ? "text-blue-400 font-semibold" : "text-gray-400 hover:text-blue-300"}`;
+                    }}
                 >
-                    {({ isActive }) => (
-                        <span className="relative">
-                            Tu Vitrina
-                            {isActive && (
-                                <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
-                            )}
-                        </span>
-                    )}
+                    {({ isActive }) => {
+                        const active = isActive || isVitrinaIndex;
+
+                        return (
+                            <span className="relative">
+                                Tu Vitrina
+                                {active && (
+                                    <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
+                                )}
+                            </span>
+                        );
+                    }}
                 </NavLink>
 
                 <NavLink
@@ -64,6 +78,8 @@ export default function CollectionPage() {
 export function Vitrina() {
 
     const { figures: figuras } = useFigures();
+    const [search, setSearch] = useState("");
+    const placeholderText = "Mi Colección";
 
     //Cojo solo las figuras que no valen 0
     const figurasConPrecio = figuras.filter(f => f.price > 0);
@@ -80,6 +96,10 @@ export function Vitrina() {
         Limitada: figuras.filter(f => f.type === "Limitada").length,
     };
 
+    const figurasFiltradas = figuras.filter(f =>
+        f.name.toLowerCase().includes(search.toLowerCase())
+    );
+
 
 
     return (
@@ -88,21 +108,32 @@ export function Vitrina() {
 
             {/* Stats generales */}
             <div className="grid grid-cols-2 gap-4">
-                <div className="p-5 rounded-2xl bg-[#161b22] border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                    className="p-5 rounded-2xl bg-[#161b22] border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+                >
                     <p className="text-sm text-blue-300">Valor total</p>
                     <p className="text-2xl font-bold mt-1 text-blue-100">{valorTotal} €</p>
-                </div>
-                <div className="p-5 rounded-2xl bg-[#161b22] border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.4 }}
+                    className="p-5 rounded-2xl bg-[#161b22] border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+                >
                     <p className="text-sm text-blue-300">Número de figuras</p>
                     <p className="text-2xl font-bold mt-1 text-blue-100">{figuras.length}</p>
-                </div>
+                </motion.div>
                 {figuraMasBarata && (
                     <div className="
-        relative bg-[#161b22]/80 backdrop-blur-sm border border-blue-500/20 
-        rounded-xl p-3 flex flex-col items-center
-        shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:shadow-[0_0_35px_rgba(59,130,246,0.9)]
-        transition-all duration-500
-      ">
+                        relative bg-[#161b22]/80 backdrop-blur-sm border border-blue-500/20 
+                        rounded-xl p-3 flex flex-col items-center
+                        shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:shadow-[0_0_35px_rgba(59,130,246,0.9)]
+                        transition-all duration-500
+                    ">
                         <p className="text-sm text-blue-300 mb-2">Figura más barata</p>
                         <div className="w-full aspect-[3/4] rounded-lg overflow-hidden bg-black/20 mb-2">
                             <img
@@ -120,22 +151,22 @@ export function Vitrina() {
 
                         {/* Glow azul neón animado */}
                         <span className="
-          absolute -inset-1 rounded-xl
-          border border-blue-500/30
-          shadow-[0_0_25px_rgba(59,130,246,0.7)]
-          animate-pulse
-          pointer-events-none
-        "></span>
+                            absolute -inset-1 rounded-xl
+                            border border-blue-500/30
+                            shadow-[0_0_25px_rgba(59,130,246,0.7)]
+                            animate-pulse
+                            pointer-events-none
+                        "></span>
                     </div>
                 )}
 
                 {figuraMasCara && (
                     <div className="
-        relative bg-[#161b22]/80 backdrop-blur-sm border border-blue-500/20 
-        rounded-xl p-3 flex flex-col items-center
-        shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:shadow-[0_0_35px_rgba(59,130,246,0.9)]
-        transition-all duration-500
-      ">
+                        relative bg-[#161b22]/80 backdrop-blur-sm border border-blue-500/20 
+                        rounded-xl p-3 flex flex-col items-center
+                        shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:shadow-[0_0_35px_rgba(59,130,246,0.9)]
+                        transition-all duration-500
+                    ">
                         <p className="text-sm text-blue-300 mb-2">Figura más cara</p>
                         <div className="w-full aspect-[3/4] rounded-lg overflow-hidden bg-black/20 mb-2">
                             <img
@@ -153,12 +184,12 @@ export function Vitrina() {
 
                         {/* Glow azul neón animado */}
                         <span className="
-          absolute -inset-1 rounded-xl
-          border border-blue-500/30
-          shadow-[0_0_25px_rgba(59,130,246,0.7)]
-          animate-pulse
-          pointer-events-none
-        "></span>
+                            absolute -inset-1 rounded-xl
+                            border border-blue-500/30
+                            shadow-[0_0_25px_rgba(59,130,246,0.7)]
+                            animate-pulse
+                            pointer-events-none
+                        "></span>
                     </div>
                 )}
 
@@ -176,17 +207,17 @@ export function Vitrina() {
 
                 {/* SearchBar */}
                 <div className="flex-1">
-                    <SearchBar />
+                    <SearchBar search={search} setSearch={setSearch} placeholderText={placeholderText} />
                 </div>
             </div>
 
             {/* Grid de figuras */}
-            <div className="grid grid-cols-2 gap-5 ">
+            <div className="grid grid-cols-2 gap-5">
                 {figuras.length === 0 && (
                     <p className="text-gray-400 text-sm italic col-span-2">Todavía no añadiste ninguna figura.</p>
                 )}
 
-                {figuras.map((fig) => (
+                {figurasFiltradas.map((fig) => (
                     <div
                         key={fig.id}
                         className="bg-[#161b22]/80 backdrop-blur-sm border border-blue-500/20 rounded-xl p-3 flex flex-col shadow-[0_0_15px_rgba(59,130,246,0.15)] hover:shadow-[0_0_25px_rgba(59,130,246,0.35)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
