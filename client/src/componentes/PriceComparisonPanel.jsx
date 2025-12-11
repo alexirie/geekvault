@@ -1,8 +1,16 @@
+import { useTranslation } from 'react-i18next';
+
+
 function PriceComparisonPanel({ prices }) {
+
+  const { t } = useTranslation();
+
   if (!prices || prices.length === 0) return null;
 
   const sortedPrices = [...prices].sort((a, b) => Number(a.price) - Number(b.price));
   const bestPrice = Number(sortedPrices[0]?.price);
+
+  
 
   return (
     <section className="w-full max-w-md mt-6 px-2">
@@ -41,14 +49,14 @@ function PriceComparisonPanel({ prices }) {
                   rel="noopener noreferrer"
                   className="bg-[#66c0f4] text-[#0b0f15] py-1 px-3 rounded-lg text-sm hover:bg-[#559acb] transition"
                 >
-                  Ver
+                  {t("buttons.ver")}
                 </a>
               </div>
 
               {/* Badge "MEJOR PRECIO" */}
               {isBest && (
                 <span className="absolute -top-3 left-2 bg-green-500 text-white font-bold text-xs px-3 py-1 rounded-full shadow-lg flex items-center gap-1 border border-white">
-                  🏆 Mejor Precio
+                  🏆 {t("comparador.mejor_precio")}
                 </span>
               )}
 

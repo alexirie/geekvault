@@ -1,16 +1,13 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import BottomNav from "../componentes/BottomNav";
-import { useState, useEffect } from "react";
-import useFigures from "../hooks/homePage/useFigures";
-import LoadingSpinner from "../componentes/LoadingSpinner";
-import { FiPlus } from "react-icons/fi"; // icono de + bonito
-import SearchBar from "../componentes/SearchBar";
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
 export default function CollectionPage() {
 
     const location = useLocation();
     const isVitrinaIndex = location.pathname === "/coleccion";
+    const { t } = useTranslation();
 
 
     useEffect(() => {
@@ -37,7 +34,7 @@ export default function CollectionPage() {
 
                         return (
                             <span className="relative">
-                                Tu Colección
+                                {t("tabs.tu_coleccion")}
                                 {active && (
                                     <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
                                 )}
@@ -57,7 +54,7 @@ export default function CollectionPage() {
                 >
                     {({ isActive }) => (
                         <span className="relative">
-                            Estadísticas
+                            {t("tabs.estadisticas")}
                             {isActive && (
                                 <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
                             )}
@@ -76,7 +73,7 @@ export default function CollectionPage() {
                 >
                     {({ isActive }) => (
                         <span className="relative">
-                            Sets
+                            {t("tabs.sets")}
                             {isActive && (
                                 <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
                             )}

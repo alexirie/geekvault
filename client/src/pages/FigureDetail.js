@@ -13,6 +13,7 @@ import HorizontalScroller from "../componentes/HorizontalScroller";
 import { getUserFavorites, createUserFavorite, deleteUserFavorite } from "../services/api";
 import { AuthContext } from '../context/AuthContext';
 import Footer from "../componentes/Footer";
+import { useTranslation } from 'react-i18next';
 
 function FigureDetail() {
     const { id } = useParams();
@@ -24,6 +25,7 @@ function FigureDetail() {
     const { stocks } = useStocks();
     const [favorites, setFavorites] = useState([]);
     const { isLogged, token } = useContext(AuthContext);
+    const { t } = useTranslation();
 
     // Filtramos los precios de la figura actual
     const figureStocks = stocks
@@ -126,9 +128,9 @@ function FigureDetail() {
                     <div className="flex flex-col gap-1">
                         <h2 className="text-2xl font-bold text-[#66c0f4]">{figure.name}</h2>
                         <p className="text-[#c7d5e0]">{figure.brandName}</p>
-                        <p className="text-[#c7d5e0]">Colección: {figure.collection}</p>
-                        <p className="text-[#c7d5e0]">Serie: {figure.anime}</p>
-                        <p className="text-[#c7d5e0]">Material: {figure.material}</p>
+                        <p className="text-[#c7d5e0]">{t("figura.coleccion")}: {figure.collection}</p>
+                        <p className="text-[#c7d5e0]">{t("figura.serie")}: {figure.anime}</p>
+                        <p className="text-[#c7d5e0]">{t("figura.material")}: {figure.material}</p>
                     </div>
 
                     {/* Botón pequeño de favorito */}
@@ -187,7 +189,7 @@ function FigureDetail() {
                 {related.length > 0 && (
                     <section className="w-full mt-6">
                         <h3 className="text-lg font-semibold mb-2 ml-2 text-[#66c0f4]">
-                            Más de {figure.brandName}
+                            {t("titulos.mas_de")} {figure.brandName}
                         </h3>
 
                         <HorizontalScroller>

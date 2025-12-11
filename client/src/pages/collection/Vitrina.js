@@ -1,26 +1,17 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useFigures from "../../hooks/homePage/useFigures";
-import LoadingSpinner from "../../componentes/LoadingSpinner";
 import { FiPlus } from "react-icons/fi"; // icono de + bonito
 import SearchBar from "../../componentes/SearchBar";
-import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 
 
 export function Vitrina() {
 
     const { figures: figuras } = useFigures();
     const [search, setSearch] = useState("");
-    const placeholderText = "Mi Colección";
-
-    //Cojo solo las figuras que no valen 0
-    const figurasConPrecio = figuras.filter(f => f.price > 0);
-
-    // Estadísticas derivadas
-    const valorTotal = figurasConPrecio.reduce((acc, f) => acc + f.price, 0).toFixed(2);
-    const figuraMasCara = figurasConPrecio.reduce((max, f) => (f.price > max.price ? f : max), { price: 0 });
-    const figuraMasBarata = figurasConPrecio.reduce((min, f) => (f.price < min.price ? f : min), { price: Infinity });
-
+    const { t } = useTranslation();
+ 
     // Categorías (ejemplo simple)
     const categorias = {
         Personaje: figuras.filter(f => f.type === "Personaje").length,
@@ -31,7 +22,6 @@ export function Vitrina() {
     const figurasFiltradas = figuras.filter(f =>
         f.name.toLowerCase().includes(search.toLowerCase())
     );
-
 
 
     return (
@@ -49,7 +39,7 @@ export function Vitrina() {
 
                 {/* SearchBar */}
                 <div className="flex-1">
-                    <SearchBar search={search} setSearch={setSearch} placeholderText={placeholderText} />
+                    <SearchBar search={search} setSearch={setSearch} placeholderText={t("placeholders.mi_coleccion")} />
                 </div>
             </div>
 
