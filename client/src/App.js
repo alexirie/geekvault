@@ -22,7 +22,9 @@ import FavoritesPage from './pages/FavoritesPage';
 import ProfilePage from './pages/ProfilePage';
 import RegisterPage from './pages/RegisterPage';
 import CollectionPage from './pages/CollectionPage';
-import { Vitrina, Sets } from './pages/CollectionPage';
+import { Vitrina } from './pages/collection/Vitrina';
+import { Sets } from './pages/CollectionPage';
+import { Estadisticas } from './pages/collection/Estadisticas';
 
 function App() {
 
@@ -79,6 +81,7 @@ function App() {
         <Route path="/coleccion" element={<CollectionPage />}>
           <Route index element={<Vitrina />} />
           <Route path="vitrina" element={<Vitrina />} />
+          <Route path="estadisticas" element={<Estadisticas />} />
           <Route path="sets" element={<Sets />} />
         </Route>
 
