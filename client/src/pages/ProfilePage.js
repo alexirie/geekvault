@@ -6,10 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../constantes";
 import { updateUser } from "../services/api";
 import BottomNav from "../componentes/BottomNav";
+import { useTranslation } from 'react-i18next';
+import ButtonNavBack from "../componentes/ButtonNavBack";
 
 export default function ProfilePage() {
   const { user, logout, setUser, token } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleUploadProfilePic = async (file) => {
     try {
@@ -48,14 +51,7 @@ export default function ProfilePage() {
   <div className="min-h-screen bg-[#0b0f15] pb-24 text-[#c7d5e0]">
 
     {/* === HEADER VOLVER === */}
-    <div className="sticky top-0 z-30 bg-[#1b2838] flex items-center p-4">
-      <button
-        onClick={() => navigate("/")}
-        className="text-[#66c0f4] font-bold mr-4"
-      >
-        ← Volver
-      </button>
-    </div>
+    <ButtonNavBack />
 
     {/* Banner perfil */}
     <div className="h-40 bg-gradient-to-r from-[#66c0f4] to-[#1b2838] rounded-b-3xl relative">
@@ -106,12 +102,12 @@ export default function ProfilePage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
-        className="grid grid-cols-3 gap-4"
+        className="grid grid-cols-2 gap-4"
       >
         {[
-          { label: "Favoritos", value: user?.stats?.favorites || 0 },
-          { label: "Colección", value: user?.stats?.collection || 0 },
-          { label: "Compras", value: user?.stats?.purchases || 0 },
+          { label: t("perfil.favoritos"), value: user?.stats?.favorites || 0 },
+          { label: t("perfil.coleccion"), value: user?.stats?.collection || 0 },
+  
         ].map((item) => (
           <div
             key={item.label}
@@ -126,11 +122,11 @@ export default function ProfilePage() {
       {/* Opciones */}
       <div className="mt-8 bg-[#1b2838] rounded-2xl shadow-[0_0_10px_rgba(102,192,244,0.3)] divide-y divide-[#2a3b52]">
         {[
-          { label: "Datos personales", icon: Mail },
-          { label: "Cambiar contraseña", icon: Lock },
-          { label: "Idioma", icon: Globe },
-          { label: "Notificaciones", icon: Bell },
-          { label: "Privacidad", icon: Shield },
+          { label: t("perfil.datos_personales"), icon: Mail },
+          { label: t("perfil.cambiar_pass"), icon: Lock },
+          { label: t("perfil.idioma"), icon: Globe },
+          { label: t("perfil.notificaciones"), icon: Bell },
+          { label: t("perfil.privacidad"), icon: Shield },
         ].map((opt) => (
           <button
             key={opt.label}
@@ -151,7 +147,7 @@ export default function ProfilePage() {
           onClick={logout}
           className="w-full bg-red-600 text-white py-4 rounded-2xl shadow-[0_0_15px_rgba(255,0,0,0.5)] flex items-center justify-center gap-2 text-lg font-semibold hover:bg-red-700 transition"
         >
-          <LogOut className="w-5 h-5" /> Cerrar sesión
+          <LogOut className="w-5 h-5" /> {t("perfil.log_out")}
         </button>
       </div>
     </div>

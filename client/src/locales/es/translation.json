@@ -54,5 +54,28 @@
     "monedas": {
         "eu": "€",
         "jp": "¥"
+    },
+    "menu_inferior": {
+        "inicio": "Inicio",
+        "favoritos": "Favoritos",
+        "coleccion": "Colección",
+        "notificaciones": "Notificaciones",
+        "perfil": "Perfil"
+    },
+    "perfil": {
+        "favoritos": "Favoritos",
+        "coleccion": "Colección",
+        "datos_personales": "Datos personales",
+        "cambiar_pass": "Cambiar contraseña",
+        "idioma": "Idioma",
+        "notificaciones": "Notificaciones",
+        "privacidad": "Privacidad",
+        "log_out": "Cerrar sesión"
+    },
+    "footer": {
+        "derechos" : "Todos los derechos reservados.",
+        "nosotros" : "Sobre nosotros",
+        "contacto" : "Contacto",
+        "privacidad" : "Privacidad"
     }
 }

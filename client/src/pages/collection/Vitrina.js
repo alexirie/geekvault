@@ -26,7 +26,7 @@ export function Vitrina() {
 
     return (
         <div className="space-y-6 animate-fadeDown">
-            <h2 className="text-2xl font-bold text-blue-300 tracking-wide">Tu Colección</h2>
+            <h2 className="text-2xl font-bold text-blue-300 tracking-wide">{t("titulos.tu_coleccion")}</h2>
 
             <div className="flex items-center gap-3 pt-2">
                 {/* Botón añadir pequeño */}
@@ -59,7 +59,7 @@ export function Vitrina() {
                         </div>
                         <p className="text-blue-100 text-sm font-semibold leading-tight mt-2 line-clamp-2">{fig.name}</p>
                         {fig.price > 0 && (
-                            <p className="text-blue-300 text-xs opacity-80 mt-1">{fig.price.toFixed(2)}€</p>
+                            <p className="text-blue-300 text-xs opacity-80 mt-1">{fig.price.toFixed(2)} €</p>
                         )}
                     </div>
                 ))}

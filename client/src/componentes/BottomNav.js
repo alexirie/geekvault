@@ -3,19 +3,21 @@ import { Home, Heart, Bell, User, Boxes } from "lucide-react";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { useTranslation } from 'react-i18next';
 
 export default function BottomNav() {
   const [active, setActive] = useState("inicio");
   const navigate = useNavigate();
   const { isLogged } = useContext(AuthContext);
   const location = useLocation();
+  const { t } = useTranslation();
 
   const tabs = [
-    { id: "inicio", label: "Inicio", icon: Home, route: "/" },
-    { id: "favoritos", label: "Favoritos", icon: Heart, route: "/favoritos" },
-    { id: "coleccion", label: "Colección", icon: Boxes, route: "/coleccion" },
-    { id: "notificaciones", label: "Notificaciones", icon: Bell, route: "/notificaciones" },
-    { id: "perfil", label: "Perfil", icon: User, route: "/perfil" },
+    { id: "inicio", label: t("menu_inferior.inicio"), icon: Home, route: "/" },
+    { id: "favoritos", label: t("menu_inferior.favoritos"), icon: Heart, route: "/favoritos" },
+    { id: "coleccion", label: t("menu_inferior.coleccion"), icon: Boxes, route: "/coleccion" },
+    { id: "notificaciones", label: t("menu_inferior.notificaciones"), icon: Bell, route: "/notificaciones" },
+    { id: "perfil", label: t("menu_inferior.perfil"), icon: User, route: "/perfil" },
   ];
 
   useEffect(() => {

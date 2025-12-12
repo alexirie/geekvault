@@ -14,6 +14,7 @@ import { getUserFavorites, createUserFavorite, deleteUserFavorite } from "../ser
 import { AuthContext } from '../context/AuthContext';
 import Footer from "../componentes/Footer";
 import { useTranslation } from 'react-i18next';
+import ButtonNavBack from "../componentes/ButtonNavBack";
 
 function FigureDetail() {
     const { id } = useParams();
@@ -102,20 +103,12 @@ function FigureDetail() {
     return (
         <div className="bg-[#0b0f15] min-h-screen pb-24 text-[#c7d5e0]">
             {/* 🔙 HEADER */}
-            <div className="sticky top-0 z-30 bg-[#0b0f15]/90 backdrop-blur-md h-16 relative border-b border-[#2a3b52]">
-                {/* Botón volver */}
-                <button
-                    onClick={() => navigate('/')}
-                    className="text-[#66c0f4] font-bold absolute left-4 top-1/2 -translate-y-1/2">
-                    ← Volver
-                </button>
-
-            </div>
+            <ButtonNavBack />
 
             {/* 🔥 CONTENIDO PRINCIPAL */}
             <div className="p-4 flex flex-col items-center">
                 {/* Imagen */}
-                <div className="w-full h-[60vh] bg-[#1b2838] flex items-center justify-center rounded-lg shadow-[0_0_20px_rgba(102,192,244,0.3)] mb-4">
+                <div className="w-full h-[60vh] bg-white flex items-center justify-center rounded-lg shadow-[0_0_20px_rgba(102,192,244,0.3)] mb-4">
                     <img
                         src={figure.imageUrl}
                         alt={figure.name}

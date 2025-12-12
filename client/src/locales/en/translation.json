@@ -4,27 +4,23 @@
     "sets": "Sets",
     "estadisticas": "Statistics"
   },
-
   "stats": {
     "valor_total": "Total Value",
     "num_figuras": "Number of Figures",
     "mas_barata": "Cheapest Figure",
     "mas_cara": "Most Expensive Figure"
   },
-
   "figura": {
     "en_stock": "IN STOCK",
     "coleccion": "Collection",
     "serie": "Series",
     "material": "Material"
   },
-
   "filtros": {
     "marca": "Brand",
     "coleccion": "Collection",
     "anime": "Anime"
   },
-
   "buttons": {
     "añadir": "Add",
     "buscar": "Search",
@@ -32,39 +28,54 @@
     "volver": "Back",
     "ver": "View"
   },
-
   "placeholders": {
     "mi_coleccion": "My Collection"
   },
-
   "messages": {
     "sin_figuras": "You haven't added any figures yet",
     "en_stock": "IN STOCK"
   },
-
   "spinner": {
     "titulo": "Loading Waifus..."
   },
-
   "toast": {
     "agregado_favoritos": "Added to favorites 💙",
     "eliminado_favoritos": "Removed from favorites 💔"
   },
-
   "comparador": {
     "titulo": "Price Comparison",
     "mejor_precio": "Best Price"
   },
-
   "titulos": {
     "tu_coleccion": "Your Collection",
     "estadisticas": "Statistics",
     "mas_de": "More than"
   },
-
   "monedas": {
     "eu": "€",
     "jp": "¥"
+  },
+  "menu_inferior": {
+    "inicio": "Home",
+    "favoritos": "Favorites",
+    "coleccion": "Collection",
+    "notificaciones": "Notifications",
+    "perfil": "Profile"
+  },
+  "perfil": {
+    "favoritos": "Favorites",
+    "coleccion": "Collection",
+    "datos_personales": "Personal Data",
+    "cambiar_pass": "Change Password",
+    "idioma": "Language",
+    "notificaciones": "Notifications",
+    "privacidad": "Privacy",
+    "log_out": "Log Out"
+  },
+  "footer": {
+    "derechos": "All rights reserved.",
+    "nosotros": "About us",
+    "contacto": "Contact",
+    "privacidad": "Privacy"
   }
 }
-
