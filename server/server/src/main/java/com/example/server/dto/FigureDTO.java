@@ -38,4 +38,6 @@ public class FigureDTO {
     private String material;
 
     private LocalDateTime lastUpdate;
+
+    private LocalDateTime createdAt;
 }

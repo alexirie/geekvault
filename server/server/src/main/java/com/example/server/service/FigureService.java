@@ -89,6 +89,7 @@ public class FigureService {
         figure.setPrice(dto.getPrice());
         figure.setInStock(dto.getInStock());
         figure.setLastUpdate(dto.getLastUpdate());
+        figure.setCreatedAt(dto.getCreatedAt());
 
         return figure;
     }
@@ -115,6 +116,7 @@ public class FigureService {
         dto.setDescription(figure.getDescription());
         dto.setInStock(figure.getInStock());
         dto.setLastUpdate(figure.getLastUpdate());
+        dto.setCreatedAt(figure.getCreatedAt());
 
         return dto;
     }

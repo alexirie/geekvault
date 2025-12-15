@@ -40,6 +40,9 @@ public class Figure {
 
     private String material;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
     @Column(length = 1000)
     private String description;
 
