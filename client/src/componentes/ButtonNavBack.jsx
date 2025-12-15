@@ -14,7 +14,7 @@ export default function ButtonNavBack() {
             >
                 ← {t("buttons.volver")}
             </button>
-        </div >
+        </div>
     
     )
 }

@@ -1,0 +1,81 @@
+{
+  "tabs": {
+    "tu_coleccion": "あなたのコレクション",
+    "sets": "セット",
+    "estadisticas": "統計"
+  },
+  "stats": {
+    "valor_total": "合計価値",
+    "num_figuras": "フィギュア数",
+    "mas_barata": "最安フィギュア",
+    "mas_cara": "最高額フィギュア"
+  },
+  "figura": {
+    "en_stock": "在庫あり",
+    "coleccion": "コレクション",
+    "serie": "シリーズ",
+    "material": "素材"
+  },
+  "filtros": {
+    "marca": "ブランド",
+    "coleccion": "コレクション",
+    "anime": "アニメ"
+  },
+  "buttons": {
+    "añadir": "追加",
+    "buscar": "検索",
+    "buscar_en": "検索：",
+    "volver": "戻る",
+    "ver": "見る"
+  },
+  "placeholders": {
+    "mi_coleccion": "マイコレクション"
+  },
+  "messages": {
+    "sin_figuras": "まだフィギュアが追加されていません",
+    "en_stock": "在庫あり"
+  },
+  "spinner": {
+    "titulo": "ワイフを読み込み中..."
+  },
+  "toast": {
+    "agregado_favoritos": "お気に入りに追加しました 💙",
+    "eliminado_favoritos": "お気に入りから削除しました 💔"
+  },
+  "comparador": {
+    "titulo": "価格比較",
+    "mejor_precio": "最安値"
+  },
+  "titulos": {
+    "tu_coleccion": "あなたのコレクション",
+    "estadisticas": "統計",
+    "mas_de": "以上"
+  },
+  "monedas": {
+    "eu": "€",
+    "jp": "¥"
+  },
+  "menu_inferior": {
+    "inicio": "ホーム",
+    "favoritos": "お気に入り",
+    "coleccion": "コレクション",
+    "notificaciones": "通知",
+    "perfil": "プロフィール"
+  },
+  "perfil": {
+    "favoritos": "お気に入り",
+    "coleccion": "コレクション",
+    "datos_personales": "個人情報",
+    "cambiar_pass": "パスワード変更",
+    "idioma": "言語",
+    "notificaciones": "通知",
+    "privacidad": "プライバシー",
+    "log_out": "ログアウト"
+  },
+  "footer": {
+    "derechos": "全著作権所有。",
+    "nosotros": "私たちについて",
+    "contacto": "お問い合わせ",
+    "privacidad": "プライバシー"
+  }
+}
