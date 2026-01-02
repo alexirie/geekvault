@@ -16,6 +16,7 @@ target/
 *.jar
 *.war
 *.ear
+**/application.properties
 
 # ============================
 # IDEs
@@ -37,3 +38,6 @@ firebase-debug.log
 .firerc
 hosting.*
 client/.firebase/hosting.YnVpbGQ.cache
+
+
+
