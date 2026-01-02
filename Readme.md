@@ -1,6 +1,6 @@
 # Colección de Figuras
 
-Aplicación fullstack para gestionar una colección personal de figuras.
+Aplicación fullstack diseñada para moviles para gestionar una colección personal de figuras.
 
 ## Stack
 - Frontend: React
