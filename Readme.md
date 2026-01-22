@@ -2,7 +2,9 @@
 
 Aplicación fullstack diseñada para moviles para gestionar una colección personal de figuras.
 
-En producción: https://virtual-indexer-478414-r4.web.app/
+* Aun no tiene menu web, solo aparece el menu en pantallas pequeñas.
+
+Demo: https://virtual-indexer-478414-r4.web.app/
 
 ## Stack
 - Frontend: React
